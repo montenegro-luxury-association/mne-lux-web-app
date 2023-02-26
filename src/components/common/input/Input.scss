@@ -1,0 +1,67 @@
+@import "../../../styles/variables";
+
+.input-container {
+	position: relative;
+
+	label {
+		color: $dark-green;
+		font-size: 0.75rem;
+		font-weight: 700;
+	}
+
+	&.input-dark-bg {
+		.input {
+			color: $light-green !important;
+			border-color: $light-green;
+
+			&::placeholder {
+				color: $light-green;
+			}
+		}
+
+		.input-icon {
+			background-color: $light-green;
+		}
+
+		label {
+			color: $light-green;
+		}
+	}
+}
+
+.input {
+	color: $dark-green !important;
+	font-weight: 500;
+	font-size: 0.875rem;
+	height: 2.5rem;
+
+	&::placeholder {
+		color: $middle-gray;
+	}
+
+	&.with-icon {
+		padding-left: 2.5rem;
+	}
+
+	&:focus {
+		border-color: $light-green;
+
+		box-shadow: none;
+	}
+}
+
+.input-icon {
+	background-color: $middle-gray;
+	position: absolute;
+	top: 50%;
+	left: 1.3rem;
+	transform: translate(-50%, -50%);
+	width: 1.4rem;
+	height: 1.4rem;
+	transition: 0.15s ease-in-out;
+	mask-position: center;
+
+	&.focused {
+		background-color: $light-green;
+	}
+}

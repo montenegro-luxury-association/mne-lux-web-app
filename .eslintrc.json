@@ -22,6 +22,7 @@
 		"react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }], //should add ".ts" if typescript project
 		"indent": ["error", "tab"],
 		"quotes": ["error", "double"],
+		"react/no-unescaped-entities": 0,
 		"semi": ["error", "always"]
 	}
 }

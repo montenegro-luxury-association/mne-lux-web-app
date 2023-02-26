@@ -1,0 +1,50 @@
+@import "../../../styles/variables.scss";
+
+.container-onboarding-page {
+	padding: 1.5rem;
+	background-color: $dark-green;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.onboarding-page-logo {
+	display: block;
+	margin: 2.5rem auto 1rem;
+	width: 3.5rem;
+}
+
+.line {
+	position: absolute;
+	width: 100%;
+	background: #f6f9f8;
+	height: 1px;
+	top: 50%;
+	z-index: 0;
+}
+
+.onboarding-login-with-text {
+	position: relative;
+	background: $dark-green;
+	padding: 0 1rem;
+	width: fit-content;
+	margin: 0 auto;
+}
+
+.onboarding-alternate-login-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem;
+	width: 100%;
+
+	img {
+		width: 1.7rem;
+		height: 1.7rem;
+	}
+
+	&::after {
+		content: " ";
+		display: block;
+		width: 1.7rem;
+	}
+}

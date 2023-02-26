@@ -1,9 +1,7 @@
+import OnboardingPage from "./components/onboarding-flow/onboarding-page/OnboardingPage";
+
 function App() {
-	return (
-		<div>
-			<h1>Hello World!</h1>
-		</div>
-	);
+	return <OnboardingPage />;
 }
 
 export default App;
