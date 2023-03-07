@@ -30,7 +30,7 @@ export default function OnboardingLandingPage() {
 				<button className="btn btn-primary w-100 mt-3">Login</button>
 
 				<p className="text-center text-smaller text-light-green mt-3 pb-1">
-					Don't have an account?
+					Don&apos;t have an account?
 					<span className="text-primary fw-bold text-regular ps-2">Sign Up</span>
 				</p>
 			</div>
