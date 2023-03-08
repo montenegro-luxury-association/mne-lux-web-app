@@ -1,0 +1,16 @@
+@import "../../../styles/variables";
+
+.top-nav-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.7rem 1.5rem;
+
+	border-bottom: $light-gray 1px solid;
+
+	&::after {
+		content: " ";
+		height: 1.5rem;
+		width: 1.5rem;
+	}
+}

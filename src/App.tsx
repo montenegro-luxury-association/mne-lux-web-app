@@ -1,8 +1,7 @@
-import OnboardingPage from "./components/onboarding-flow/onboarding-page/OnboardingPage";
-import HomePage from "./components/home-page/HomePage";
+import RegisterPage from "./components/onboarding-flow/register-page/RegisterPage";
 
 function App() {
-	return <HomePage />;
+	return <RegisterPage />;
 }
 
 export default App;

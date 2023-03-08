@@ -6,7 +6,8 @@
 	label {
 		color: $dark-green;
 		font-size: 0.75rem;
-		font-weight: 700;
+		font-weight: 600;
+		margin-bottom: 0.25rem;
 	}
 
 	&.input-dark-bg {
@@ -31,7 +32,7 @@
 
 .input {
 	color: $dark-green !important;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 0.875rem;
 	height: 2.5rem;
 
@@ -63,5 +64,18 @@
 
 	&.focused {
 		background-color: $light-green;
+	}
+}
+
+.show-password-button {
+	left: unset;
+	right: 0;
+
+	&.password-visible {
+		mask-image: url("../../../../public/eye-crossed.svg");
+	}
+
+	&:not(.password-visible) {
+		mask-image: url("../../../../public/eye.svg");
 	}
 }

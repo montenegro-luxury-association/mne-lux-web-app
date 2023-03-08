@@ -13,6 +13,7 @@ type Props = {
 
 export default function Input({ icon, className, label, ...props }: Props) {
 	const [isFocused, setIsFocused] = useState(false);
+	const [passwordVisible, setPasswordVisible] = useState(false);
 
 	function onFocus(e: React.FocusEvent<HTMLInputElement, Element>) {
 		setIsFocused(true);
@@ -28,11 +29,18 @@ export default function Input({ icon, className, label, ...props }: Props) {
 		}
 	}
 
+	function togglePasswordVisible() {
+		setPasswordVisible(prev => !prev);
+	}
+
 	const iconClassName = `input-icon ${isFocused ? "focused" : ""}`;
 	const inputClassName = `form-control input ${icon ? "with-icon" : ""}`;
+	const seePasswordButtonClassName = `input-icon show-password-button ${
+		isFocused ? "focused" : ""
+	} ${passwordVisible ? "password-visible" : ""}`;
 
 	// we need to use this fancy mask property to be able to change SVG colors properly (alternative is exporting them into JSX, which is messy)
-	const iconMaskSource = `url(${icon}`;
+	const iconMaskSource = `url(${icon})`;
 	const iconStyle = {
 		maskImage: iconMaskSource,
 		WebkitMaskImage: iconMaskSource
@@ -44,7 +52,18 @@ export default function Input({ icon, className, label, ...props }: Props) {
 
 			<div className="position-relative">
 				{icon && <span className={iconClassName} style={iconStyle} />}
-				<input {...props} onFocus={onFocus} onBlur={onBlur} className={inputClassName} />
+
+				<input
+					{...props}
+					onFocus={onFocus}
+					onBlur={onBlur}
+					className={inputClassName}
+					type={props.type === "password" && passwordVisible ? "text" : props.type}
+				/>
+
+				{props.type === "password" && (
+					<span onClick={togglePasswordVisible} className={seePasswordButtonClassName} />
+				)}
 			</div>
 		</div>
 	);

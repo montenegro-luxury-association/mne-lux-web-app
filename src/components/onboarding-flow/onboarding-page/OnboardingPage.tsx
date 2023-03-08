@@ -3,7 +3,7 @@ import "./OnboardingPage.scss";
 
 export default function OnboardingLandingPage() {
 	return (
-		<div className="container-onboarding-page">
+		<div className="container-onboarding-page vh-100 p-4 m-0">
 			<img src="/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
 			<h1 className="text-light">Montenegro Luxury Association</h1>
 
@@ -21,9 +21,7 @@ export default function OnboardingLandingPage() {
 					className="input-dark-bg"
 				/>
 
-				<p className="text-end mt-2 pt-1 fw-bold text-light-green text-small">
-					Forgot Password
-				</p>
+				<p className="text-end mt-2 fw-bold text-light-green text-small">Forgot Password</p>
 			</div>
 
 			<div>
