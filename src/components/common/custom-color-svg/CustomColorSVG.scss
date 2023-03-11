@@ -1,0 +1,10 @@
+@import "../../../styles/variables";
+
+.custom-color-svg {
+	mask-position: center;
+	mask-size: contain;
+
+	// NOTE: these properties are defaults and should be overridden
+	background-color: #1a1a1a;
+	width: 1rem;
+}

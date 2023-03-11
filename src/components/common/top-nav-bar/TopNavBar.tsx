@@ -7,7 +7,7 @@ type Props = {
 export default function TopNavBar({ title }: Props) {
 	return (
 		<div className="top-nav-bar">
-			<img src="/arrow-left-dark.svg" />
+			<img src="/arrow-left-dark.svg" alt="Left arrow" />
 
 			<p className="m-0 text-dark-green fw-semibold">{title}</p>
 		</div>

@@ -10,3 +10,14 @@
 	--bs-text-primary: red;
 	--bs-primary-rgb: red;
 }
+
+// TODO: Remove color setting from below, replace --bs variable
+.text-light {
+	color: $light !important;
+}
+.text-primary {
+	color: $primary-tan !important;
+}
+.text-secondary {
+	color: $middle-gray !important;
+}

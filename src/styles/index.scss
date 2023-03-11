@@ -4,6 +4,9 @@ h1 {
 	text-align: center;
 	font-family: Lora;
 }
+h4 {
+	font-size: 1.25rem;
+}
 
 body,
 html {
@@ -11,27 +14,23 @@ html {
 	padding: 0;
 }
 
+/*---------------REUSABLE---------------*/
 .text-light-green {
 	color: $light-green;
 }
-
 .text-small {
 	font-size: 0.875rem;
 }
 .text-smaller {
 	font-size: 0.8rem;
 }
-
-// TODO: Remove color setting from below, replace bs variable
-.text-light {
-	color: $light !important;
-}
-.text-primary {
-	color: $primary-tan !important;
-}
 .text-dark-green {
 	color: $dark-green !important;
 }
+.lh-120 {
+	line-height: 120%;
+}
+
 .btn {
 	border: none;
 	box-shadow: none;
