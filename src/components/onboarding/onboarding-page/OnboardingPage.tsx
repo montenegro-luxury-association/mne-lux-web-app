@@ -1,21 +1,21 @@
 import Input from "../../common/input/Input";
 import "./OnboardingPage.scss";
 
-export default function OnboardingLandingPage() {
+export default function OnboardingPage() {
 	return (
 		<div className="container-onboarding-page vh-100 p-4 m-0">
-			<img src="/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
+			<img src="/images/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
 			<h1 className="text-light">Montenegro Luxury Association</h1>
 
 			<div>
 				<Input
-					icon="/mail.svg"
+					icon="/images/icons/mail.svg"
 					placeholder="E-mail here"
 					label="E-mail"
 					className="input-dark-bg mb-2 mt-4 pt-2"
 				/>
 				<Input
-					icon="/lock.svg"
+					icon="/images/icons/lock.svg"
 					placeholder="Password here"
 					label="Password"
 					className="input-dark-bg"
@@ -42,22 +42,22 @@ export default function OnboardingLandingPage() {
 
 			<div className="pt-2">
 				<button className="btn btn-light onboarding-alternate-login-button">
-					<img src="/login-linkedin-icon.svg" alt="LinkedIn logo" />
+					<img src="/images/icons/login-linkedin-icon.svg" alt="LinkedIn logo" />
 					Continue With LinkedIn
 				</button>
 				<button className="btn btn-light mt-3 onboarding-alternate-login-button">
-					<img src="/login-google-icon.svg" alt="Google logo" />
+					<img src="/images/icons/login-google-icon.svg" alt="Google logo" />
 					Continue With Google
 				</button>
 				<button className="btn btn-light mt-3 onboarding-alternate-login-button">
-					<img src="/phone.svg" alt="Phone icon" />
+					<img src="/images/icons/phone.svg" alt="Phone icon" />
 					Continue With Phone
 				</button>
 			</div>
 
-			<div className="mt-4 d-flex justify-content-center align-items-center">
+			<div className="mt-4 mb-2 d-flex justify-content-center align-items-center">
 				<p className="text-light text-center fw-semibold mb-0">Skip for now</p>
-				<img className="ms-2" src="/arrow-right.svg" alt="Arrow" />
+				<img className="ms-2" src="/images/icons/arrow-right.svg" alt="Arrow" />
 			</div>
 		</div>
 	);

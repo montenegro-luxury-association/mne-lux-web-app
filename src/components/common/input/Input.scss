@@ -72,10 +72,10 @@
 	right: 0;
 
 	&.password-visible {
-		mask-image: url("../../../../public/eye-crossed.svg");
+		mask-image: url("../../../../public/images/icons/eye-crossed.svg");
 	}
 
 	&:not(.password-visible) {
-		mask-image: url("../../../../public/eye.svg");
+		mask-image: url("../../../../public/images/icons/eye.svg");
 	}
 }

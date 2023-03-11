@@ -14,43 +14,43 @@ export default function RegisterPage() {
 						label="Full name"
 						placeholder="Name and surname"
 						className="mb-3 mt-1"
-						icon="/user.svg"
+						icon="/images/icons/user.svg"
 					/>
 					{/* TODO: Make date selector */}
 					<Input
 						label="Birthday"
 						placeholder="mm/dd/yyyy"
 						className="mb-3 mt-1"
-						icon="/calendar.svg"
+						icon="/images/icons/calendar.svg"
 					/>
 					{/* TODO: Make dropdown */}
 					<Input
 						label="Country"
 						placeholder="Your country here"
 						className="mb-3 mt-1"
-						icon="/globe.svg"
+						icon="/images/icons/globe.svg"
 					/>
 					<Input
 						label="E-mail"
 						placeholder="E-mail here"
 						className="mb-3 mt-1"
-						icon="/mail.svg"
+						icon="/images/icons/mail.svg"
 					/>
 					<Input
 						label="Phone number"
 						placeholder="+382"
 						className="mb-3 mt-1"
-						icon="/phone.svg"
+						icon="/images/icons/phone.svg"
 					/>
 					<Input
-						icon="/lock.svg"
+						icon="/images/icons/lock.svg"
 						placeholder="Password here"
 						className="mb-3 mt-1"
 						label="Password"
 						type="password"
 					/>
 					<Input
-						icon="/lock.svg"
+						icon="/images/icons/lock.svg"
 						placeholder="Password here"
 						label="Confirm password"
 						type="password"

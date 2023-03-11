@@ -8,7 +8,7 @@ export default function HomePage() {
 			title: "Ime hotela 1",
 			location: "Lokacija 1",
 			locationDesc: "Opis 1",
-			image: "./images/test-img-0.jpg",
+			image: "./images/dummy/test-img-0.jpg",
 			favored: true
 		},
 		{
@@ -16,7 +16,7 @@ export default function HomePage() {
 			title: "Ime hotela 2",
 			location: "Lokacija 2",
 			locationDesc: "Opis 2",
-			image: "./images/test-img-1.jpg",
+			image: "./images/dummy/test-img-1.jpg",
 			favored: false
 		},
 		{
@@ -24,7 +24,7 @@ export default function HomePage() {
 			title: "Ime hotela 3",
 			location: "Lokacija 3",
 			locationDesc: "Opis 3",
-			image: "./images/test-img-2.jpg",
+			image: "./images/dummy/test-img-2.jpg",
 			favored: false
 		},
 		{
@@ -32,7 +32,7 @@ export default function HomePage() {
 			title: "Ime hotela 4",
 			location: "Lokacija 4",
 			locationDesc: "Opis 4",
-			image: "./images/test-img-3.jpg",
+			image: "./images/dummy/test-img-3.jpg",
 			favored: true
 		},
 		{
@@ -40,7 +40,7 @@ export default function HomePage() {
 			title: "Ime hotela 5",
 			location: "Lokacija 5",
 			locationDesc: "Opis 5",
-			image: "./images/test-img-4.jpg",
+			image: "./images/dummy/test-img-4.jpg",
 			favored: true
 		}
 	];
@@ -69,13 +69,13 @@ export default function HomePage() {
 								{hotel.favored ? (
 									<img
 										className="home-page-un-favor-button"
-										src="./images/hart-icon.svg"
+										src="./images/icons/hart-icon.svg"
 										alt="Unfavor Hotel Button"
 									/>
 								) : (
 									<img
 										className="home-page-favor-button"
-										src="./images/empty-hart.svg"
+										src="./images/icons/empty-hart.svg"
 										alt="Favor Hotel Button"
 									/>
 								)}

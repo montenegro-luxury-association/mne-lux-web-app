@@ -135,10 +135,10 @@ export default function BottomNavbar() {
 						openMenu && "nav-dropdown-menu-open"
 					}`}>
 					<div onClick={handleOptionClick} className="d-flex align-items-center gap-2">
-						<img src="./images/mail.svg" alt="Mail Icon" /> Contact Us
+						<img src="./images/icons/mail.svg" alt="Mail Icon" /> Contact Us
 					</div>
 					<div onClick={handleOptionClick} className="d-flex align-items-center gap-2">
-						<img src="./images/user.svg" alt="Profile Icon" />
+						<img src="./images/icons/user-circled.svg" alt="Profile Icon" />
 						{user ? "My Profile" : "Login"}
 					</div>
 				</div>

@@ -7,7 +7,7 @@ export default function ResetPasswordLinkSentPage() {
 			<div className="flex-fill d-flex flex-column justify-content-center align-items-center">
 				<img
 					className="d-block"
-					src="/password-reset-sent.svg"
+					src="/images/password-reset-sent.svg"
 					alt="Reset password screen preview"
 				/>
 				<h4 className="text-center text-dark-green fw-semibold mt-2 mb-4 lh-120">
@@ -16,7 +16,7 @@ export default function ResetPasswordLinkSentPage() {
 			</div>
 
 			<div className="d-flex justify-content-center">
-				<CustomColorSVG src="/arrow-left-dark.svg" className="back-arrow" />
+				<CustomColorSVG src="/images/icons/arrow-left-dark.svg" className="back-arrow" />
 				<p className="text-secondary m-0 fw-semibold text-small">Back to explore page</p>
 			</div>
 		</div>
