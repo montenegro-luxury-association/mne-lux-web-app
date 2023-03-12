@@ -4,14 +4,31 @@ import { InputHTMLAttributes, useState } from "react";
 
 type Props = {
 	/**
-	 * This is the className passed to the container div of the input. If you want to apply styles to the actual input, feel free to implement that logic
+	 * This is the className passed to the container div of the input. If you want to apply styles to the actual input, use inputClassName
 	 */
 	className?: string;
+	/**
+	 * This is the className passed to the input itself.
+	 */
+	inputClassName?: string;
 	icon?: string;
+	iconPosition?: "left" | "right";
+	/**
+	 * Text label that appears above the input
+	 */
 	label?: string;
+	rounded?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export default function Input({ icon, className, label, ...props }: Props) {
+export default function Input({
+	icon,
+	iconPosition = "left",
+	className,
+	inputClassName,
+	label,
+	rounded,
+	...props
+}: Props) {
 	const [isFocused, setIsFocused] = useState(false);
 	const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -33,11 +50,34 @@ export default function Input({ icon, className, label, ...props }: Props) {
 		setPasswordVisible(prev => !prev);
 	}
 
-	const iconClassName = `input-icon ${isFocused ? "focused" : ""}`;
-	const inputClassName = `form-control input ${icon ? "with-icon" : ""}`;
+	function getInputClassName() {
+		let className = "form-control input";
+
+		if (inputClassName) {
+			className += ` ${inputClassName}`;
+		}
+
+		if (icon) {
+			className += ` with-icon-${iconPosition}`;
+		}
+
+		if (props.type === "password") {
+			className += " with-icon-right";
+		}
+
+		if (rounded) {
+			className += " rounded-pill";
+		}
+
+		return className;
+	}
+
+	const iconClassName = `input-icon ${isFocused ? "focused" : ""} ${iconPosition} ${
+		rounded ? "rounded" : ""
+	}`;
 	const seePasswordButtonClassName = `input-icon show-password-button ${
 		isFocused ? "focused" : ""
-	} ${passwordVisible ? "password-visible" : ""}`;
+	} ${passwordVisible ? "password-visible" : ""} ${rounded ? "rounded" : ""}`;
 
 	// we need to use this fancy mask property to be able to change SVG colors properly (alternative is exporting them into JSX, which is messy)
 	const iconMaskSource = `url(${icon})`;
@@ -57,7 +97,7 @@ export default function Input({ icon, className, label, ...props }: Props) {
 					{...props}
 					onFocus={onFocus}
 					onBlur={onBlur}
-					className={inputClassName}
+					className={getInputClassName()}
 					type={props.type === "password" && passwordVisible ? "text" : props.type}
 				/>
 

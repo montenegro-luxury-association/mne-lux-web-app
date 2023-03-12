@@ -40,8 +40,22 @@
 		color: $middle-gray;
 	}
 
-	&.with-icon {
+	&.with-icon-left {
 		padding-left: 2.5rem;
+	}
+	&.with-icon-right {
+		padding-right: 2.5rem;
+	}
+
+	&.rounded-pill {
+		padding: 1rem;
+
+		&.with-icon-left {
+			padding-left: 2.6rem;
+		}
+		&.with-icon-right {
+			padding-right: 2.8rem;
+		}
 	}
 
 	&:focus {
@@ -55,12 +69,27 @@
 	background-color: $middle-gray;
 	position: absolute;
 	top: 50%;
-	left: 1.3rem;
-	transform: translate(-50%, -50%);
 	width: 1.4rem;
 	height: 1.4rem;
 	transition: 0.15s ease-in-out;
 	mask-position: center;
+
+	&.left {
+		transform: translate(-50%, -50%);
+		left: 1.3rem;
+
+		&.rounded {
+			left: 1.6rem;
+		}
+	}
+	&.right {
+		transform: translate(50%, -50%);
+		right: 1.3rem;
+
+		&.rounded {
+			right: 1.8rem;
+		}
+	}
 
 	&.focused {
 		background-color: $light-green;
@@ -68,8 +97,12 @@
 }
 
 .show-password-button {
-	left: unset;
 	right: 0;
+	transform: translate(-50%, -50%);
+
+	&.rounded {
+		right: 0.3rem;
+	}
 
 	&.password-visible {
 		mask-image: url("../../../../public/images/icons/eye-crossed.svg");

@@ -1,7 +1,7 @@
-import RegisterPage from "./components/onboarding/register-page/RegisterPage";
+import CountrySelectionPage from "./components/onboarding/country-selection-page/CountrySelectionPage";
 
 function App() {
-	return <RegisterPage />;
+	return <CountrySelectionPage />;
 }
 
 export default App;

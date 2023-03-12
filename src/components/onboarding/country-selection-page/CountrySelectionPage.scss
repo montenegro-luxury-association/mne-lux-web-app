@@ -1,0 +1,28 @@
+@import "../../../styles/variables.scss";
+
+.countries-list-container {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	flex-grow: 1;
+
+	.country-selection-item {
+		display: flex;
+		align-items: center;
+		padding: 0.8rem 1rem;
+		margin: 0;
+		border-bottom: 1px solid $lightest-gray;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		.country-name-and-code {
+			overflow: hidden;
+
+			& > span:first-child {
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
+	}
+}

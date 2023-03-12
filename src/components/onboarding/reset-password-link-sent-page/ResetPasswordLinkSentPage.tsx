@@ -7,7 +7,7 @@ export default function ResetPasswordLinkSentPage() {
 			<div className="flex-fill d-flex flex-column justify-content-center align-items-center">
 				<img
 					className="d-block"
-					src="/images/password-reset-sent.svg"
+					src="/images/girl-with-password-screen.svg"
 					alt="Reset password screen preview"
 				/>
 				<h4 className="text-center text-dark-green fw-semibold mt-2 mb-4 lh-120">
