@@ -1,0 +1,25 @@
+{
+  "name": "montenegro-luxury-association-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quarkdigital/montenegro-luxury-association-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quarkdigital/montenegro-luxury-association-backend/issues"
+  },
+  "homepage": "https://github.com/quarkdigital/montenegro-luxury-association-backend#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.0"
+  }
+}
