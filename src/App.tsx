@@ -1,7 +1,7 @@
-import CountrySelectionPage from "./components/onboarding/country-selection-page/CountrySelectionPage";
+import ProfilePage from "./components/profile-page/ProfilePage";
 
 function App() {
-	return <CountrySelectionPage />;
+	return <ProfilePage />;
 }
 
 export default App;

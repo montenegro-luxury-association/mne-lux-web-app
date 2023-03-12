@@ -1,0 +1,38 @@
+@import "../../styles/variables.scss";
+
+.profile-image {
+	width: 11rem;
+	height: 11rem;
+}
+
+.change-password-blur-background-container {
+	width: 100vw;
+	height: 100vh;
+	backdrop-filter: blur(5px);
+	position: fixed;
+	left: 0;
+	top: 0;
+
+	.change-password-prompt {
+		position: absolute;
+		width: 90%;
+		background-color: #fff;
+		border-radius: 0.5rem;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		padding: 1.8rem 2rem;
+		box-shadow: 0 3px 25px 0 rgba(0, 0, 0, 0.08);
+
+		& > div {
+			width: 80%;
+			margin: 0 auto;
+		}
+
+		.password-prompt-close-icon {
+			position: absolute;
+			right: 1rem;
+			top: 1rem;
+		}
+	}
+}
