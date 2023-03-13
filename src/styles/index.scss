@@ -7,6 +7,9 @@ h1 {
 h4 {
 	font-size: 1.25rem;
 }
+textarea {
+	resize: vertical;
+}
 
 body,
 html {
@@ -15,6 +18,9 @@ html {
 }
 
 /*---------------REUSABLE---------------*/
+.text-justify {
+	text-align: justify;
+}
 .text-small {
 	font-size: 0.875rem;
 }
