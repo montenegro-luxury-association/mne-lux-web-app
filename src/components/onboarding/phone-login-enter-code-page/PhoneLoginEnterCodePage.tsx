@@ -1,8 +1,11 @@
 import "./PhoneLoginEnterCodePage.scss";
 import VerificationInput from "react-verification-input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
+import { useNavigate } from "react-router";
 
 export default function PhoneLoginEnterCodePage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Login code"} />
@@ -32,7 +35,11 @@ export default function PhoneLoginEnterCodePage() {
 					/>
 				</div>
 
-				<button className="btn btn-primary btn-disabled-gray w-100 mt-4">Verify</button>
+				<button
+					onClick={() => navigate("/")}
+					className="btn btn-primary btn-disabled-gray w-100 mt-4">
+					Verify
+				</button>
 			</div>
 		</div>
 	);

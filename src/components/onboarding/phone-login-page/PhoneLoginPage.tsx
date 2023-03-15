@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 
 export default function PhoneLoginPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Login with phone number"} />
@@ -20,7 +23,13 @@ export default function PhoneLoginPage() {
 
 				<Input placeholder="+382" label="Phone number" icon="/images/icons/phone.svg" />
 
-				<button className="btn btn-primary btn-disabled-gray w-100 mt-4">Login</button>
+				{/* TODO: Add a condition that user can't click on Login if the inputted number is invalid in any way */}
+
+				<button
+					onClick={() => navigate("/login/country/phone/code")}
+					className="btn btn-primary btn-disabled-gray w-100 mt-4">
+					Login
+				</button>
 			</div>
 		</div>
 	);

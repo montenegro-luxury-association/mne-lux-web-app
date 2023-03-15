@@ -25,6 +25,7 @@
 	.nav-buttons {
 		min-width: 4.5rem;
 		z-index: 5;
+		text-decoration: none;
 	}
 
 	.bottom-navbar-icons {
@@ -54,6 +55,11 @@
 		transition-property: transform, opacity, display;
 		transition-duration: 0.4s;
 		z-index: -2;
+
+		.nav-link-text {
+			text-decoration: none;
+			color: inherit;
+		}
 	}
 
 	.nav-dropdown-select {

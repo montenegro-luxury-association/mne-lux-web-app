@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router";
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 import "./RegisterPage.scss";
 
 export default function RegisterPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Finish Signing Up"} />
@@ -58,7 +61,11 @@ export default function RegisterPage() {
 				</div>
 
 				<div>
-					<button className="btn btn-primary btn-disabled-gray w-100 mt-3">
+					{/* TODO: Add a condition that user can't click on Sign up if the inputted info is invalid in any way */}
+
+					<button
+						onClick={() => navigate("/")}
+						className="btn btn-primary btn-disabled-gray w-100 mt-3">
 						Sign Up
 					</button>
 				</div>

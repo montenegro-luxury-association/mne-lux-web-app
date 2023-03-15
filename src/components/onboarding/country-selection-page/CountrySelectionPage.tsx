@@ -1,9 +1,18 @@
+import { useNavigate } from "react-router";
 import { COUNTRY_CODES } from "../../../util/countryCodesList";
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 import "./CountrySelectionPage.scss";
 
 export default function CountrySelectionPage() {
+	const navigate = useNavigate();
+
+	const handleCountryClick = () => {
+		// TODO: Save which country was chosen somewhere
+
+		navigate("/login/country/phone");
+	};
+
 	return (
 		<div className="vh-100 pt-4 m-0 d-flex flex-column">
 			<TopNavBar title={"Select Country"} />
@@ -19,7 +28,10 @@ export default function CountrySelectionPage() {
 			<div className="countries-list-container">
 				{/* TODO: There may be a few extra countries in here */}
 				{COUNTRY_CODES.map(country => (
-					<div key={country.code} className="country-selection-item">
+					<div
+						onClick={handleCountryClick}
+						key={country.code}
+						className="country-selection-item">
 						<img
 							src={`https://flagcdn.com/${country.code.toLowerCase()}.svg`}
 							alt={`${country.name} flag`}

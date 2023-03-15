@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router";
 import CustomColorSVG from "../../common/custom-color-svg/CustomColorSVG";
 import "./ResetPasswordLinkSentPage.scss";
 
 export default function ResetPasswordLinkSentPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="vh-100 p-4 m-0 d-flex flex-column">
 			<div className="flex-fill d-flex flex-column justify-content-center align-items-center">
@@ -15,7 +18,7 @@ export default function ResetPasswordLinkSentPage() {
 				</h4>
 			</div>
 
-			<div className="d-flex justify-content-center">
+			<div onClick={() => navigate("/")} className="d-flex justify-content-center">
 				<CustomColorSVG src="/images/icons/arrow-left-dark.svg" className="back-arrow" />
 				<p className="text-secondary m-0 fw-semibold text-small">Back to explore page</p>
 			</div>

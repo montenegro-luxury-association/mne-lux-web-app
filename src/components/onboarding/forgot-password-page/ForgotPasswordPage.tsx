@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router";
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 
 export default function ForgotPasswordPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Forgot Password"} />
@@ -20,7 +23,13 @@ export default function ForgotPasswordPage() {
 
 				<Input placeholder="Email here" label="E-mail" icon="/images/icons/mail.svg" />
 
-				<button className="btn btn-primary btn-disabled-gray w-100 mt-4">Send</button>
+				{/* TODO: Add a condition that user can't click on Send if the inputted email is invalid in any way */}
+
+				<button
+					onClick={() => navigate("/password-reset/link-sent")}
+					className="btn btn-primary btn-disabled-gray w-100 mt-4">
+					Send
+				</button>
 			</div>
 		</div>
 	);

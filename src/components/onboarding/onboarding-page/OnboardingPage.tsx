@@ -1,7 +1,10 @@
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../common/input/Input";
 import "./OnboardingPage.scss";
 
 export default function OnboardingPage() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="container-onboarding-page vh-100 p-4 m-0">
 			<img src="/images/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
@@ -21,7 +24,11 @@ export default function OnboardingPage() {
 					className="input-dark-bg"
 				/>
 
-				<p className="text-end mt-2 fw-bold text-light-green text-small">Forgot Password</p>
+				<p
+					onClick={() => navigate("/password-reset")}
+					className="text-end mt-2 fw-bold text-light-green text-small">
+					Forgot Password
+				</p>
 			</div>
 
 			<div>
@@ -29,7 +36,11 @@ export default function OnboardingPage() {
 
 				<p className="text-center text-smaller text-light-green mt-3 pb-1">
 					Don&apos;t have an account?
-					<span className="text-primary fw-bold text-regular ps-2">Sign Up</span>
+					<span
+						onClick={() => navigate("/sign-up")}
+						className="text-primary fw-bold text-regular ps-2 text-decoration-none">
+						Sign Up
+					</span>
 				</p>
 			</div>
 
@@ -49,15 +60,20 @@ export default function OnboardingPage() {
 					<img src="/images/icons/login-google-icon.svg" alt="Google logo" />
 					Continue With Google
 				</button>
-				<button className="btn btn-light mt-3 onboarding-alternate-login-button">
+
+				<button
+					onClick={() => navigate("/login/country")}
+					className="btn btn-light mt-3 onboarding-alternate-login-button">
 					<img src="/images/icons/phone.svg" alt="Phone icon" />
 					Continue With Phone
 				</button>
 			</div>
 
-			<div className="mt-4 mb-2 d-flex justify-content-center align-items-center">
+			<div
+				onClick={() => navigate("/")}
+				className="mt-4 d-flex justify-content-center align-items-center text-decoration-none">
 				<p className="text-light text-center fw-semibold mb-0">Skip for now</p>
-				<img className="ms-2" src="/images/icons/arrow-right.svg" alt="Arrow" />
+				<img className="ms-2" src="./images/icons/arrow-right.svg" alt="Arrow" />
 			</div>
 		</div>
 	);
