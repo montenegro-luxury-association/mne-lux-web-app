@@ -29,7 +29,7 @@ export type Listing = {
 	shortDescription?: string; // TODO: Is this required?
 	fullDescription?: string; // TODO: Is this required?
 	experiences: ListingExperience[];
-	location: GeoJSONPoint;
+	// location: GeoJSONPoint;
 	cityName: string;
 	cityDescription?: string; // TODO: We probably want some sort of standardization here later
 	/**

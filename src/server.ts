@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import listingRoutes from "./routes/listingRoutes";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ if (process.env.MONGODB_URI) {
 } else {
 	console.error("Cannot connect to database: env variable MONGODB_URI is not defined.");
 }
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Hook up routes
 app.use("/listings", listingRoutes);

@@ -1,6 +1,6 @@
 import { Response, Router } from "express";
 import { wrapAuthAdmin, wrapAuthUser } from "../middleware/authMiddleware";
-import { Listing } from "../models/listing.model";
+import { Listing, Test } from "../models/listing.model";
 
 const router = Router();
 
@@ -25,6 +25,19 @@ router.get("/id/:id", async (req, res) => {
 		});
 	} catch (err) {
 		res.status(500).send("There was an unexpected error.");
+	}
+});
+
+router.post("/:id", async (req: any, res: any) => {
+	try {
+		const newHotel = new Listing(req.body);
+		console.log(req.body);
+
+		await newHotel.save().then((item: any) => {
+			res.send("Item is saved in Database");
+		});
+	} catch (err: any) {
+		console.log(err);
 	}
 });
 
