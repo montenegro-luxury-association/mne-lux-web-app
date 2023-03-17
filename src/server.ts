@@ -1,12 +1,15 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import listingRoutes from "./routes/listingRoutes";
+import cors from "cors";
 
 dotenv.config();
+const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
-const PORT = process.env.PORT || 3001;
+
+app.use(cors());
 
 // Set up MongoDB connection
 if (process.env.MONGODB_URI) {
