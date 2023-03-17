@@ -37,7 +37,7 @@ router.post("/:id", async (req: any, res: any) => {
 			res.send("Item is saved in Database");
 		});
 	} catch (err: any) {
-		console.log(err);
+		res.status(500).send();
 	}
 });
 
