@@ -1,6 +1,6 @@
 import { Response, Router } from "express";
 import { wrapAuthAdmin, wrapAuthUser } from "../middleware/authMiddleware";
-import { Listing, Test } from "../models/listing.model";
+import { Listing } from "../models/listing.model";
 
 const router = Router();
 
