@@ -22,10 +22,19 @@ html {
 	text-align: justify;
 }
 .text-small {
-	font-size: 0.875rem;
+	font-size: 0.875rem; //14px
 }
 .text-smaller {
-	font-size: 0.8rem;
+	font-size: 0.8rem; //12.8px
+}
+.text-regular {
+	font-size: 1rem;
+}
+.text-big {
+	font-size: 1.5rem; //24px
+}
+.text-bigger {
+	font-size: 2rem; //32px
 }
 .text-dark-green {
 	color: $dark-green !important;
@@ -38,6 +47,18 @@ html {
 }
 .lh-120 {
 	line-height: 120%;
+}
+.lh-22 {
+	line-height: 22px;
+}
+.fw-700 {
+	font-weight: 700;
+}
+.fw-600 {
+	font-weight: 600;
+}
+.fw-500 {
+	font-weight: 500;
 }
 
 .btn {

@@ -11,8 +11,13 @@ export default function BottomNavbar() {
 	);
 	const [openMenu, setOpenMenu] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
-
+	// TODO: Nesto mi ne radi ova funkcija moram to bacit pogled posle
 	const handleClickOutside = (e: MouseEvent) => {
+		console.log({
+			ref: dropdownRef.current,
+			menu: openMenu,
+			contain: !dropdownRef.current?.contains(e.target as Node)
+		});
 		if (dropdownRef.current && openMenu && !dropdownRef.current.contains(e.target as Node)) {
 			setOpenMenu(false);
 		}
