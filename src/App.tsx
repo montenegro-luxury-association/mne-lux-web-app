@@ -1,5 +1,5 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./util/axiosConfig";
 
 import HomePage from "./components/home-page/HomePage";
 import Favorites from "./components/favorites-page/Favorites";
@@ -10,7 +10,6 @@ import PhoneLoginPage from "./components/onboarding/phone-login-page/PhoneLoginP
 import ForgotPasswordPage from "./components/onboarding/forgot-password-page/ForgotPasswordPage";
 import ResetPasswordLinkSentPage from "./components/onboarding/reset-password-link-sent-page/ResetPasswordLinkSentPage";
 import CountrySelectionPage from "./components/onboarding/country-selection-page/CountrySelectionPage";
-
 
 function App() {
 	return (
@@ -30,7 +29,6 @@ function App() {
 			</Routes>
 		</BrowserRouter>
 	);
-
 }
 
 export default App;

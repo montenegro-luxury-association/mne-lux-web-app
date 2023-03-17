@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect } from "react";
 import BottomNavbar from "../bottom-navbar/BottomNavbar";
 import "./homePage.scss";
 
@@ -44,6 +46,15 @@ export default function HomePage() {
 			favored: true
 		}
 	];
+
+	useEffect(() => {
+		textAxios();
+	}, []);
+
+	async function textAxios() {
+		const response = await axios.get("/listings");
+		console.log({ response });
+	}
 
 	return (
 		<>
