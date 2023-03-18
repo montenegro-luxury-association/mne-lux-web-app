@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 // Hook up routes
 app.use("/listings", listingRoutes);
-app.use("admin", adminRoutes);
+app.use("/admin", adminRoutes);
 // Start the server
 app.listen(PORT, () => {
 	console.log(`Server started on port ${PORT}`);
