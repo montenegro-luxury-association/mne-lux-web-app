@@ -1,59 +1,69 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BottomNavbar from "../bottom-navbar/BottomNavbar";
 import "./homePage.scss";
 
 export default function HomePage() {
-	const dummyData = [
+	const navigate = useNavigate();
+
+	// NOTE: This data is currently hard-coded purely for testing purposes. In the final product, it will be coming from the backend.
+	const testingData = [
 		{
 			id: 0,
-			title: "Ime hotela 1",
-			location: "Lokacija 1",
-			locationDesc: "Opis 1",
+			title: "Splendid Hotel",
+			location: "Becici, Montenegro",
+			locationDesc: "A lovely location next to the beach",
 			image: "./images/dummy/test-img-0.jpg",
 			favored: true
 		},
 		{
 			id: 1,
-			title: "Ime hotela 2",
-			location: "Lokacija 2",
-			locationDesc: "Opis 2",
+			title: "Dukley Gardens",
+			location: "Budva, Montenegro",
+			locationDesc: "A lovely location next to the beach",
 			image: "./images/dummy/test-img-1.jpg",
 			favored: false
 		},
 		{
 			id: 2,
-			title: "Ime hotela 3",
-			location: "Lokacija 3",
-			locationDesc: "Opis 3",
+			title: "Hotel #3 Name",
+			location: "Budva, Montenegro",
+			locationDesc: "A lovely location next to the beach",
 			image: "./images/dummy/test-img-2.jpg",
 			favored: false
 		},
 		{
 			id: 3,
-			title: "Ime hotela 4",
-			location: "Lokacija 4",
-			locationDesc: "Opis 4",
+			title: "Hotel #4 Name",
+			location: "Budva, Montenegro",
+			locationDesc: "A lovely location next to the beach",
 			image: "./images/dummy/test-img-3.jpg",
 			favored: true
 		},
 		{
 			id: 4,
-			title: "Ime hotela 5",
-			location: "Lokacija 5",
-			locationDesc: "Opis 5",
+			title: "Hotel #5 Name",
+			location: "Budva, Montenegro",
+			locationDesc: "A lovely location next to the beach",
 			image: "./images/dummy/test-img-4.jpg",
 			favored: true
 		}
 	];
 
 	useEffect(() => {
-		textAxios();
+		fetchAndSetListings();
 	}, []);
 
-	async function textAxios() {
+	// NOTE: This function is still under development.
+	async function fetchAndSetListings() {
 		const response = await axios.get("/listings");
 		console.log({ response });
+		// TODO: Save the listings we received to state.
+	}
+
+	function onClickHotel(id: number) {
+		navigate(`/hotel-page?id=${id}`);
 	}
 
 	return (
@@ -68,8 +78,9 @@ export default function HomePage() {
 					<h1 className="home-page-title">Luxury Quality</h1>
 				</div>
 				<div className="home-page-cards-container d-flex flex-column">
-					{dummyData.map(hotel => (
+					{testingData.map(hotel => (
 						<div
+							onClick={() => onClickHotel(hotel.id)}
 							key={hotel.id}
 							style={{
 								background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 58.74%, rgba(0, 0, 0, 0.5) 70.78%),

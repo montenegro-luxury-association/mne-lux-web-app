@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Input from "../../common/input/Input";
 import "./OnboardingPage.scss";
 
@@ -21,6 +21,7 @@ export default function OnboardingPage() {
 					icon="/images/icons/lock.svg"
 					placeholder="Password here"
 					label="Password"
+					type="password"
 					className="input-dark-bg"
 				/>
 
@@ -38,7 +39,7 @@ export default function OnboardingPage() {
 					Don&apos;t have an account?
 					<span
 						onClick={() => navigate("/sign-up")}
-						className="text-primary fw-bold text-regular ps-2 text-decoration-none">
+						className="text-primary fw-500 text-regular ps-2 text-decoration-none">
 						Sign Up
 					</span>
 				</p>

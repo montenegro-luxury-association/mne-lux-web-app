@@ -2,6 +2,7 @@ import CheckBoxInput from "../common/check-box-input/CheckBoxInput";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminPage.scss";
+
 const AdminPage = () => {
 	return (
 		<div className="pt-4 mb-3">
