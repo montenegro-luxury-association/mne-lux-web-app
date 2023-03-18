@@ -5,8 +5,8 @@ const router = Router();
 
 router.post("/:id", async (req: Request, res: Response) => {
 	try {
-		const newHotel = new Listing(req.body);
-		await newHotel.save().then((item: any) => {
+		const newListing = new Listing(req.body);
+		await newListing.save().then((item: any) => {
 			res.send("Item is saved in Database");
 		});
 	} catch (err: any) {
