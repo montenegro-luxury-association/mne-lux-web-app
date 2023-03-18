@@ -7,6 +7,12 @@ h1 {
 h4 {
 	font-size: 1.25rem;
 }
+label {
+	color: $dark-green;
+	font-size: 0.75rem;
+	font-weight: 600;
+	margin-bottom: 0.25rem;
+}
 textarea {
 	resize: vertical;
 }
@@ -25,11 +31,9 @@ html {
 	font-size: 0.875rem; //14px
 }
 .text-smaller {
-
 	font-size: 0.8rem; //12.8px
 }
 .text-regular {
-
 	font-size: 1rem;
 }
 .text-big {

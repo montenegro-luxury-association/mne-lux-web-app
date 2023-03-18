@@ -3,13 +3,6 @@
 .input-container {
 	position: relative;
 
-	label {
-		color: $dark-green;
-		font-size: 0.75rem;
-		font-weight: 600;
-		margin-bottom: 0.25rem;
-	}
-
 	&.input-dark-bg {
 		.input {
 			color: $light-green !important;

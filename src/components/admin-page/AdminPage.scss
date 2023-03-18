@@ -1,0 +1,45 @@
+@import "../../styles/variables.scss";
+
+.experiences-container {
+	display: flex;
+	overflow-x: auto;
+	flex-wrap: nowrap;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	& > div {
+		width: 13rem;
+		min-width: 13rem;
+		margin-left: 1rem;
+
+		&:last-child {
+			margin-right: 1rem;
+		}
+	}
+}
+
+.experience-image-placeholder {
+	border: 1px solid $light-gray;
+	height: 16rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 0.7rem;
+}
+
+.check-in-time-container {
+	margin-bottom: 0.7rem;
+
+	.input {
+		width: 5.5rem;
+		text-align: center;
+	}
+}
+
+.separator-line {
+	height: 1px;
+	width: 100%;
+	background-color: $light-gray;
+}
