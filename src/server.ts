@@ -2,12 +2,9 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import listingRoutes from "./routes/listingRoutes";
-<<<<<<< HEAD
 import adminRoutes from "./routes/adminRoutes";
 import bodyParser from "body-parser";
-=======
 import cors from "cors";
->>>>>>> main
 
 dotenv.config();
 const PORT = process.env.PORT || 3001;
