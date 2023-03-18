@@ -1,79 +1,38 @@
-.title {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 24px;
-	line-height: 120%;
-	color: #000000;
-}
-
 .location-icon {
 	height: 18px;
 }
 
-.location-text {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 120%;
+.location-text-color {
 	color: #000000;
 }
 
 .hotel-desc {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 120%;
 	text-align: justify;
 	color: #a1a1a1;
 }
 
 .about-us-desc {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 12px;
 	line-height: 130%;
+
 	text-align: justify;
 	color: #283837;
 }
 
 .read-more-text {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 12px;
-	line-height: 120%;
 	color: #91a09f;
 }
 
 .read-more-icon {
 	width: 20px;
 	padding: 0px;
+	transition: transform 1s;
 }
 
 .read-less-icon {
-	width: 20px;
 	transform: rotate(180deg);
-	padding: 0px;
-}
-
-.location-desc {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 120%;
-	color: #000000;
 }
 
 .town-desc {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 12px;
 	line-height: 130%;
 	text-align: justify;
 	color: #000000;

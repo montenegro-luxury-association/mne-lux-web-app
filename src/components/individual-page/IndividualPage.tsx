@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from "react-router";
 
 interface Image {
 	src: string;
@@ -18,6 +19,7 @@ const IndividualPage = () => {
 		setShowFullText(!showFullText);
 	}
 
+	const navigate = useNavigate();
 	const images: Image[] = [{ src: "/image.png" }, { src: "/image.png" }];
 	const luxuryExperienceImages: Image[] = [
 		{ src: "/massage.png" },
@@ -37,20 +39,20 @@ const IndividualPage = () => {
 	};
 
 	const hotelTextDescription =
-		"Located in the UNESCO-listed Boka Bay within a luxury Porto Montenegro Village in the town of Tivat, Regent Porto Montenegro offers an outdoor pool, as well as a spa and wellness centre... Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,";
+		"Located in the UNESCO-listed Boka Bay within a luxury Porto Montenegro Village in the town of Tivat, Regent Porto Montenegro offers an outdoor pool, as well as a spa and wellness centre Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,";
 	const deductedText = showFullText
 		? hotelTextDescription
-		: `${hotelTextDescription.slice(0, 190)}`;
+		: `${hotelTextDescription.slice(0, 190) + "..."}`;
 
 	const HotelPolicies = () => {
 		return (
 			<div className="col">
 				<div className="col pt-2">
-					<div className="row">
+					<div className="d-flex">
 						<p className="col-3 hotel-policies-bold-text">Check-in:</p>
 						<p className="col-9 hotel-policies-light-text">from 14:30PM</p>
 					</div>
-					<div className="row pt-2">
+					<div className="d-flex pt-2">
 						<p className="col-3 hotel-policies-bold-text">Check-out:</p>
 						<p className="col-9 hotel-policies-light-text">until 11:30AM</p>
 					</div>
@@ -88,6 +90,7 @@ const IndividualPage = () => {
 	return (
 		<div className="col overflow-x-hidden">
 			<img
+				onClick={() => navigate(-1)}
 				src="./images/icons/back-button-hotel.svg"
 				className="hotel-back-button position-absolute"
 				alt="Back Button"
@@ -125,33 +128,27 @@ const IndividualPage = () => {
 
 			<div className="p-3 mb-5 pb-5">
 				<div className="">
-					<p className="title">Regent Porto Montenegro</p>
-					<div className="row align-items-center pt-2">
-						<div className="col-1">
-							<img
-								src="/location.svg"
-								className="location-icon"
-								alt="Location icon"
-							/>
-						</div>
-						<p className="location-text col-11 pt-1 ps-1 mb-0">Tivat, Montenegro</p>
+					<p className="location-text-color fw-700 text-big lh-120">
+						Regent Porto Montenegro
+					</p>
+					<div className="d-flex align-items-center pt-2">
+						<img src="/location.svg" className="location-icon" alt="Location icon" />
+						<p className="location-text-color fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+							Tivat, Montenegro
+						</p>
 					</div>
-					<div className="row align-items-center">
-						<div className="col-1">
-							<img
-								src="/building.svg"
-								className="location-icon"
-								alt="Building icon"
-							/>
-						</div>
-						<p className="location-text col-11 pt-1 ps-1 mb-0">5 stars Hotel</p>
+					<div className="d-flex align-items-center">
+						<img src="/building.svg" className="location-icon" alt="Building icon" />
+						<p className="location-text-color fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+							5 stars Hotel
+						</p>
 					</div>
-					<p className="pt-3 hotel-desc">
+					<p className="pt-3 hotel-desc fw-500 text-smaller lh-120">
 						Experience luxurious seaside living at Hotel Regent Porto Montenegro.
 					</p>
 				</div>
 				<div className="col pt-4">
-					<p className="title">Luxury Experience</p>
+					<p className="location-text-color fw-700 text-big lh-120">Luxury Experience</p>
 					<div className="images-container">
 						{luxuryExperienceImages.map(image => (
 							<div key={image.src} className="image-wrapper ">
@@ -162,38 +159,29 @@ const IndividualPage = () => {
 					</div>
 				</div>
 				<div className="col ">
-					<p className="title pt-4">About us</p>
-					<div className="about-us-desc pt-2">{deductedText}</div>
-					<div className="row justify-content-center">
-						{!showFullText && (
-							<div
-								className="row align-items-center justify-content-end"
-								onClick={toggleFullText}>
-								<p className="row justify-content-end read-more-text">Read More</p>
-								<img src="/chevron-down.svg" className="read-more-icon" />
-							</div>
-						)}
-						{showFullText && (
-							<div
-								className="row align-items-center justify-content-end pt-2"
-								onClick={toggleFullText}>
-								<div className="row justify-content-end read-more-text">
-									Read Less
-								</div>
-								<img src="/chevron-down.svg" className="read-less-icon" />
-							</div>
-						)}
+					<p className="location-text-color fw-700 text-big lh-120 pt-4">About us</p>
+					<div className="about-us-desc pt-2 fw-500 text-smaller ">{deductedText}</div>
+					<div onClick={toggleFullText}>
+						<div className="d-flex align-items-center pt-2">
+							<p className="m-0 read-more-text fw-700 text-smaller lh-120 pe-1">
+								{!showFullText ? "Read More" : "Read Less"}
+							</p>
+							<img
+								src="/chevron-down.svg"
+								className={`read-more-icon ${showFullText && "read-less-icon"}`}
+							/>
+						</div>
 					</div>
 					<div className="col pt-4">
 						<img src="/mapa.png" className="hotel-image" />
-						<p className="pt-3 location-desc">
+						<p className="pt-3 location-text-color fw-700 text-small lh-120">
 							Porto Montenegro, Obala bb, Tivat 85320, Montenegro
 						</p>
 					</div>
 				</div>
 				<div className="col pt-4">
-					<div className="title">About the town</div>
-					<p className="town-desc pt-2">
+					<div className="location-text-color fw-700 text-big lh-120">About the town</div>
+					<p className="town-desc fw-500 text-smaller pt-2">
 						Tivat is a relatively small town, but it offers a wide range of activities
 						and attractions for visitors, such as water sports, hiking, and cultural
 						events. It has a pleasant Mediterranean climate with mild winters and warm
@@ -205,7 +193,9 @@ const IndividualPage = () => {
 				</div>
 				<div className="col pt-3">
 					<div className="hotel-policies-container pb-2">
-						<p className="title mb-0" onClick={toggleHotelPolicies}>
+						<p
+							className="location-text-color fw-700 text-big lh-120 mb-0"
+							onClick={toggleHotelPolicies}>
 							Hotel Policies
 						</p>
 						<div className="ps-1">
