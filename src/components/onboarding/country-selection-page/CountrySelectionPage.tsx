@@ -10,7 +10,7 @@ export default function CountrySelectionPage() {
 	const handleCountryClick = () => {
 		// TODO: Save which country was chosen somewhere
 
-		navigate("/login/country/phone");
+		navigate("/login/phone");
 	};
 
 	return (

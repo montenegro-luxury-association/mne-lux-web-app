@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 type Props = {
 	title: string;
+	borderBottom?: boolean;
 };
 
-export default function TopNavBar({ title }: Props) {
+export default function TopNavBar({ title, borderBottom = true }: Props) {
 	const navigate = useNavigate();
 
 	return (
-		<div className="top-nav-bar">
+		<div
+			className="top-nav-bar"
+			style={{ borderBottom: `${borderBottom ? "#e6e6e6 1px solid" : "none"}` }}>
 			<img
 				onClick={() => navigate(-1)}
 				src="/images/icons/arrow-left-dark.svg"

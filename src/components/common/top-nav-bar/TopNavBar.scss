@@ -5,8 +5,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0.7rem 1.5rem;
+	background: #ffffff;
 
-	border-bottom: $light-gray 1px solid;
+	// border-bottom: $light-gray 1px solid;
 
 	&::after {
 		content: " ";

@@ -26,7 +26,7 @@ export default function PhoneLoginPage() {
 				{/* TODO: Add a condition that user can't click on Login if the inputted number is invalid in any way */}
 
 				<button
-					onClick={() => navigate("/login/country/phone/code")}
+					onClick={() => navigate("/login/phone/code")}
 					className="btn btn-primary btn-disabled-gray w-100 mt-4">
 					Login
 				</button>
