@@ -64,7 +64,7 @@ export default function ProfilePage() {
 				<button
 					onClick={onClickUpdate}
 					className="btn btn-primary btn-disabled-gray w-100 mt-3">
-					Update
+					Save Changes
 				</button>
 
 				{/* TODO: Add bottom nav bar */}

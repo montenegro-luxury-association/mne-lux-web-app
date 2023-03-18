@@ -11,7 +11,7 @@ import ForgotPasswordPage from "./components/onboarding/forgot-password-page/For
 import ResetPasswordLinkSentPage from "./components/onboarding/reset-password-link-sent-page/ResetPasswordLinkSentPage";
 import CountrySelectionPage from "./components/onboarding/country-selection-page/CountrySelectionPage";
 import ExploreManagement from "./components/admin-page/explore-managment/ExploreManagement";
-
+import IndividualPage from "./components/individual-page/IndividualPage";
 
 function App() {
 	return (
@@ -29,6 +29,7 @@ function App() {
 				<Route path="/password-reset/link-sent" element={<ResetPasswordLinkSentPage />} />
 				<Route path="/sign-up" element={<RegisterPage />} />
 				<Route path="/admin" element={<ExploreManagement />} />
+				<Route path="/hotel-page" element={<IndividualPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

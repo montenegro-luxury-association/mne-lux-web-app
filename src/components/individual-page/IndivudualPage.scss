@@ -1,0 +1,207 @@
+.title {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 120%;
+	color: #000000;
+}
+
+.location-icon {
+	height: 18px;
+}
+
+.location-text {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 120%;
+	color: #000000;
+}
+
+.hotel-desc {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 120%;
+	text-align: justify;
+	color: #a1a1a1;
+}
+
+.about-us-desc {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 130%;
+	text-align: justify;
+	color: #283837;
+}
+
+.read-more-text {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 120%;
+	color: #91a09f;
+}
+
+.read-more-icon {
+	width: 20px;
+	padding: 0px;
+}
+
+.read-less-icon {
+	width: 20px;
+	transform: rotate(180deg);
+	padding: 0px;
+}
+
+.location-desc {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 120%;
+	color: #000000;
+}
+
+.town-desc {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 130%;
+	text-align: justify;
+	color: #000000;
+}
+
+.more-button {
+	width: 24px;
+}
+
+.less-button {
+	width: 24px;
+	transform: rotate(180deg);
+}
+
+.hotel-policies-container {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	flex-direction: row;
+}
+
+.hotel-policies-bold-text {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 800;
+	font-size: 12px;
+	line-height: 120%;
+	color: #000000;
+}
+
+.hotel-policies-light-text {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 120%;
+	color: #000000;
+}
+
+.divider {
+	border: 1px solid #e6e6e6;
+}
+
+.image-counter-wrapper {
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 6px;
+	max-width: 48px;
+	top: 21.2rem;
+}
+
+.image-counter-numbers {
+	font-family: "Manrope";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 120%;
+	letter-spacing: 0.1em;
+
+	color: #ffffff;
+}
+
+.hotel-back-button {
+	z-index: 1;
+	top: 0.85rem;
+	left: 0.85rem;
+}
+
+.hotel-share-button {
+	z-index: 1;
+
+	top: 20.9rem;
+	right: 4rem;
+}
+
+.hotel-share-button-icon {
+	z-index: 1;
+	top: 21.35rem;
+	right: 4.45rem;
+}
+
+.hotel-favor-button {
+	z-index: 1;
+
+	top: 20.9rem;
+	right: 0.85rem;
+}
+
+.icons-wrapper {
+	width: 70px;
+}
+
+.hotel-image {
+	width: 100%;
+}
+
+.icons-container {
+	max-width: 25.8%;
+	display: flex;
+	justify-content: end;
+}
+
+.check-availability-container {
+	position: fixed;
+	bottom: 0%;
+	width: 100%;
+	padding: 1rem;
+
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+	background: #ffffff;
+}
+
+.images-container {
+	display: flex;
+	flex-direction: row;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}
+
+.image-wrapper {
+	padding-right: 20px;
+	padding-top: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.images-container::-webkit-scrollbar {
+	display: none;
+}
