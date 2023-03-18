@@ -3,7 +3,7 @@ import { Listing } from "../models/listing.model";
 
 const router = Router();
 
-router.post("/addListing", async (req: Request, res: Response) => {
+router.post("/add-listing", async (req: Request, res: Response) => {
 	try {
 		const newListing = new Listing(req.body);
 		await newListing.save().then((item: any) => {
