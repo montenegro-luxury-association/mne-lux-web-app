@@ -1,4 +1,4 @@
-import { Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import { wrapAuthAdmin, wrapAuthUser } from "../middleware/authMiddleware";
 import { Listing } from "../models/listing.model";
 
