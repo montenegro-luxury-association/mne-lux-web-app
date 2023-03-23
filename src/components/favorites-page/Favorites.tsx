@@ -19,14 +19,6 @@ export default function Favorites() {
 			favored: true
 		},
 		{
-			id: 1,
-			title: "Ime hotela 2",
-			location: "Lokacija 2",
-			locationDesc: "Opis 2",
-			image: "./images/dummy/test-img-1.jpg",
-			favored: true
-		},
-		{
 			id: 2,
 			title: "Ime hotela 3",
 			location: "Lokacija 3",

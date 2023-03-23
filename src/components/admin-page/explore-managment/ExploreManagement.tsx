@@ -89,9 +89,9 @@ export default function ExploreManagement() {
 	};
 
 	return (
-		<div className="admin-explore-page-container vh-100">
+		<div className="pt-4 admin-explore-page-container vh-100">
 			<TopNavBar title={"Explore management"} borderBottom={false} />
-			<div className="admin-explore-header-container d-flex fw-700 lh-120 text-smaller w-100 justify-content-between align-content-center px-4 py-2">
+			<div className="admin-explore-header-container d-flex fw-700 lh-120 text-smaller w-100 justify-content-between align-content-center px-4 pt-2 mb-2 pb-1">
 				<div className="d-flex flex-column align-items-center admin-explore-header-active text-dark-green">
 					<img src="./images/icons/hotels-icon.svg" alt="Hotel Icon" /> Hotels
 				</div>
@@ -109,8 +109,8 @@ export default function ExploreManagement() {
 					<img src="./images/icons/yacht-icon.svg" alt="Yacht Icon" /> Yachts
 				</div>
 			</div>
-			<div className="px-4">
-				<div className="d-flex gap-3 my-4">
+			<div className="px-4 main-content-container pt-1">
+				<div className="d-flex gap-3 mb-4 mt-3">
 					<Input
 						placeholder="Country"
 						icon="/images/icons/dropdown-icon.svg"

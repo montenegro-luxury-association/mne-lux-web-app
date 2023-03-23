@@ -1,6 +1,4 @@
 .admin-explore-page-container {
-	background-color: #f5f5f5;
-
 	.admin-explore-header-container {
 		background: #ffffff;
 		box-shadow: 0px 4px 12px -12px rgba(0, 0, 0, 0.04);
@@ -39,6 +37,10 @@
 			}
 		}
 	}
+}
+
+.main-content-container {
+	background-color: #f5f5f5;
 }
 
 .admin-explore-dropdown-menu {

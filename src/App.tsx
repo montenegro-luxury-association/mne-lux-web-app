@@ -13,6 +13,7 @@ import CountrySelectionPage from "./components/onboarding/country-selection-page
 import ExploreManagement from "./components/admin-page/explore-managment/ExploreManagement";
 import IndividualPage from "./components/individual-page/IndividualPage";
 import AdminPage from "./components/admin-page/AdminPage";
+import ContactUsPage from "./components/contact-us-page/ContactUsPage";
 
 function App() {
 	return (
@@ -29,6 +30,7 @@ function App() {
 				<Route path="/password-reset" element={<ForgotPasswordPage />} />
 				<Route path="/password-reset/link-sent" element={<ResetPasswordLinkSentPage />} />
 				<Route path="/sign-up" element={<RegisterPage />} />
+				<Route path="/contact-us" element={<ContactUsPage />} />
 				<Route path="/admin" element={<ExploreManagement />} />
 				<Route path="/admin/create-listing" element={<AdminPage />} />
 				<Route path="/hotel-page" element={<IndividualPage />} />
