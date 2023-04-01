@@ -6,70 +6,70 @@ import "./ExploreManagement.scss";
 export default function ExploreManagement() {
 	const [dummyData, setDummyData] = useState([
 		{
-			hotelPic: "./images/dummy/Frame-3.svg",
+			hotelPic: "/images/dummy/Frame-3.svg",
 			dateAdded: "21/02/2023",
 			status: true,
 			id: 1,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-2.svg",
+			hotelPic: "/images/dummy/Frame-2.svg",
 			dateAdded: "05/01/2023",
 			status: false,
 			id: 2,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "29/12/2022",
 			status: true,
 			id: 3,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "30/10/2022",
 			status: false,
 			id: 4,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-2.svg",
+			hotelPic: "/images/dummy/Frame-2.svg",
 			dateAdded: "05/01/2023",
 			status: false,
 			id: 5,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "29/12/2022",
 			status: true,
 			id: 6,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "30/10/2022",
 			status: false,
 			id: 7,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-2.svg",
+			hotelPic: "/images/dummy/Frame-2.svg",
 			dateAdded: "05/01/2023",
 			status: false,
 			id: 8,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "29/12/2022",
 			status: true,
 			id: 9,
 			isOpen: false
 		},
 		{
-			hotelPic: "./images/dummy/Frame-1.svg",
+			hotelPic: "/images/dummy/Frame-1.svg",
 			dateAdded: "30/10/2022",
 			status: false,
 			id: 10,
@@ -93,20 +93,20 @@ export default function ExploreManagement() {
 			<TopNavBar title={"Explore management"} borderBottom={false} />
 			<div className="admin-explore-header-container d-flex fw-700 lh-120 text-smaller w-100 justify-content-between align-content-center px-4 pt-2 mb-2 pb-1">
 				<div className="d-flex flex-column align-items-center admin-explore-header-active text-dark-green">
-					<img src="./images/icons/hotels-icon.svg" alt="Hotel Icon" /> Hotels
+					<img src="/images/icons/hotels-icon.svg" alt="Hotel Icon" /> Hotels
 				</div>
 				<div className="d-flex flex-column align-items-center">
-					<img src="./images/icons/restaurants-icon.svg" alt="Restaurant Icon" />
+					<img src="/images/icons/restaurants-icon.svg" alt="Restaurant Icon" />
 					Restaurants
 				</div>
 				<div className="d-flex flex-column align-items-center">
-					<img src="./images/icons/villas-icon.svg" alt="Villa Icon" /> Villas
+					<img src="/images/icons/villas-icon.svg" alt="Villa Icon" /> Villas
 				</div>
 				<div className="d-flex flex-column align-items-center">
-					<img src="./images/icons/resorts-icon.svg" alt="Resort Icon" /> Resorts
+					<img src="/images/icons/resorts-icon.svg" alt="Resort Icon" /> Resorts
 				</div>
 				<div className="d-flex flex-column align-items-center">
-					<img src="./images/icons/yacht-icon.svg" alt="Yacht Icon" /> Yachts
+					<img src="/images/icons/yacht-icon.svg" alt="Yacht Icon" /> Yachts
 				</div>
 			</div>
 			<div className="px-4 main-content-container pt-1">
@@ -141,19 +141,19 @@ export default function ExploreManagement() {
 									{hotel.status ? (
 										<img
 											className="me-3"
-											src="./images/icons/active-icon.svg"
+											src="/images/icons/active-icon.svg"
 											alt="Active Status Icon"
 										/>
 									) : (
 										<img
-											src="./images/icons/non-active-icon.svg"
+											src="/images/icons/non-active-icon.svg"
 											alt="Inactive Status Icon"
 										/>
 									)}
 									<div className="position-relative">
 										<img
 											onClick={() => handleOpenMenu(index)}
-											src="./images/icons/more-vertical.svg"
+											src="/images/icons/more-vertical.svg"
 											alt="More Options Icon"
 										/>
 
@@ -164,21 +164,21 @@ export default function ExploreManagement() {
 											<div className="d-flex flex-column gap-3 text-nowrap fw-700 text-smaller lh-120">
 												<div className="d-flex align-items-center gap-2">
 													<img
-														src="./images/icons/edit.svg"
+														src="/images/icons/edit.svg"
 														alt="Edit Icon"
 													/>
 													Edit
 												</div>
 												<div className="d-flex align-items-center gap-2">
 													<img
-														src="./images/icons/view-globe-icon.svg"
+														src="/images/icons/view-globe-icon.svg"
 														alt="View Icon"
 													/>
 													View
 												</div>
 												<div className="d-flex align-items-center gap-2">
 													<img
-														src="./images/icons/bar-chart.svg"
+														src="/images/icons/bar-chart.svg"
 														alt="Analytics Icon"
 													/>
 													Analytics
