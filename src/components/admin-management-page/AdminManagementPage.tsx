@@ -2,8 +2,11 @@ import { useState } from "react";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminManagementPage.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminManagementPage() {
+	const navigate = useNavigate();
+
 	const [dummyData, setDummyData] = useState([
 		{
 			hotelPic: "/images/dummy/Frame-3.svg",
@@ -86,6 +89,10 @@ export default function AdminManagementPage() {
 			}
 		});
 		setDummyData(newData);
+	};
+
+	const onClickAddNew = () => {
+		navigate("/admin/create-listing");
 	};
 
 	return (
@@ -191,7 +198,11 @@ export default function AdminManagementPage() {
 						))}
 					</div>
 				</div>
-				<button className="btn btn-primary btn-disabled-gray w-100 mt-4 ">Add new</button>
+				<button
+					onClick={onClickAddNew}
+					className="btn btn-primary btn-disabled-gray w-100 mt-4 ">
+					Add new
+				</button>
 			</div>
 		</div>
 	);
