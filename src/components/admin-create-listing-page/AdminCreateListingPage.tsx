@@ -1,9 +1,9 @@
 import CheckBoxInput from "../common/check-box-input/CheckBoxInput";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
-import "./AdminPage.scss";
+import "./AdminCreateListingPage.scss";
 
-const AdminPage = () => {
+export default function AdminCreateListingPage() {
 	return (
 		<div className="pt-4 mb-3">
 			<TopNavBar title="Administrator" />
@@ -73,6 +73,4 @@ const AdminPage = () => {
 			</div>
 		</div>
 	);
-};
-
-export default AdminPage;
+}

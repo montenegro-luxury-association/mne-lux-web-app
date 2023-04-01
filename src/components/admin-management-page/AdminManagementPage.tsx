@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Input from "../../common/input/Input";
-import TopNavBar from "../../common/top-nav-bar/TopNavBar";
-import "./ExploreManagement.scss";
+import Input from "../common/input/Input";
+import TopNavBar from "../common/top-nav-bar/TopNavBar";
+import "./AdminManagementPage.scss";
 
-export default function ExploreManagement() {
+export default function AdminManagementPage() {
 	const [dummyData, setDummyData] = useState([
 		{
 			hotelPic: "/images/dummy/Frame-3.svg",

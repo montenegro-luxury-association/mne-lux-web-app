@@ -10,9 +10,9 @@ import PhoneLoginPage from "./components/onboarding/phone-login-page/PhoneLoginP
 import ForgotPasswordPage from "./components/onboarding/forgot-password-page/ForgotPasswordPage";
 import ResetPasswordLinkSentPage from "./components/onboarding/reset-password-link-sent-page/ResetPasswordLinkSentPage";
 import CountrySelectionPage from "./components/onboarding/country-selection-page/CountrySelectionPage";
-import ExploreManagement from "./components/admin-page/explore-managment/ExploreManagement";
+import AdminManagementPage from "./components/admin-management-page/AdminManagementPage";
 import IndividualPage from "./components/individual-page/IndividualPage";
-import AdminPage from "./components/admin-page/AdminPage";
+import AdminCreateListingPage from "./components/admin-create-listing-page/AdminCreateListingPage";
 import ContactUsPage from "./components/contact-us-page/ContactUsPage";
 
 function App() {
@@ -31,8 +31,8 @@ function App() {
 				<Route path="/password-reset/link-sent" element={<ResetPasswordLinkSentPage />} />
 				<Route path="/sign-up" element={<RegisterPage />} />
 				<Route path="/contact-us" element={<ContactUsPage />} />
-				<Route path="/admin" element={<ExploreManagement />} />
-				<Route path="/admin/create-listing" element={<AdminPage />} />
+				<Route path="/admin" element={<AdminManagementPage />} />
+				<Route path="/admin/create-listing" element={<AdminCreateListingPage />} />
 				<Route path="/hotel-page" element={<IndividualPage />} />
 			</Routes>
 		</BrowserRouter>
