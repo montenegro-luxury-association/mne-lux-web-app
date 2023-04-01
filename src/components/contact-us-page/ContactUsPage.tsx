@@ -1,4 +1,3 @@
-import React from "react";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 

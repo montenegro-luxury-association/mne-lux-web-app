@@ -49,39 +49,57 @@ const IndividualPage = () => {
 			<div className="col">
 				<div className="col pt-2">
 					<div className="d-flex">
-						<p className="col-3 hotel-policies-bold-text">Check-in:</p>
-						<p className="col-9 hotel-policies-light-text">from 14:30PM</p>
+
+						<p className="col-3 fw-800 text-smaller lh-120 text-color-black">
+							Check-in:
+						</p>
+						<p className="col-9 fw-500 text-smaller lh-120 text-color-black">
+							from 14:30PM
+						</p>
 					</div>
 					<div className="d-flex pt-2">
-						<p className="col-3 hotel-policies-bold-text">Check-out:</p>
-						<p className="col-9 hotel-policies-light-text">until 11:30AM</p>
+						<p className="col-3 fw-800 text-smaller lh-120 text-color-black">
+							Check-out:
+						</p>
+						<p className="col-9 fw-500 text-smaller lh-120 text-color-black">
+							until 11:30AM
+						</p>
+
 					</div>
 				</div>
 				<div className="pt-3">
 					<div className="divider"></div>
 				</div>
 				<div className="col pt-3">
-					<p className="hotel-policies-bold-text">Payment Options:</p>
-					<p className="hotel-policies-light-text pt-1">Cash</p>
-					<p className="hotel-policies-light-text pt-2">Debit card</p>
-					<p className="hotel-policies-light-text pt-2">Credit card</p>
-					<p className="hotel-policies-light-text pt-2">Electronic bank transfer</p>
-					<p className="hotel-policies-light-text pt-2">Paypal</p>
-					<p className="hotel-policies-light-text pt-2 ">Crypto payments</p>
+					<p className="fw-800 text-smaller lh-120 text-color-black">Payment Options:</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-1">Cash</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-2">Debit card</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-2">Credit card</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-2">
+						Electronic bank transfer
+					</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-2">Paypal</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-2 ">
+						Crypto payments
+					</p>
 				</div>
 				<div className="pt-3">
 					<div className="divider"></div>
 				</div>
 				<div className="col pt-3">
-					<p className="hotel-policies-bold-text">Children:</p>
-					<p className="hotel-policies-light-text pt-1">Children are welcome</p>
+					<p className="fw-800 text-smaller lh-120 text-color-black">Children:</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-1">
+						Children are welcome
+					</p>
 				</div>
 				<div className="pt-3">
 					<div className="divider"></div>
 				</div>
 				<div className="col pt-3">
-					<p className="hotel-policies-bold-text">Check in age restriction:</p>
-					<p className="hotel-policies-light-text pt-1">18 and above</p>
+					<p className="fw-800 text-smaller lh-120 text-color-black">
+						Check in age restriction:
+					</p>
+					<p className="fw-500 text-smaller lh-120 text-color-black pt-1">18 and above</p>
 				</div>
 			</div>
 		);
@@ -114,7 +132,7 @@ const IndividualPage = () => {
 				alt="Favor Button"
 			/>
 			<div className="image-counter-wrapper position-absolute ms-4 p-1">
-				<div className="image-counter-numbers text-center px-1">
+				<div className="image-counter-numbers fw-500 text-small lh-120 text-center px-1">
 					{currentSlide}/{images.length}
 				</div>
 			</div>
@@ -128,27 +146,35 @@ const IndividualPage = () => {
 
 			<div className="p-3 mb-5 pb-5">
 				<div className="">
-					<p className="location-text-color fw-700 text-big lh-120">
+
+					<p className="text-color-black fw-700 text-big lh-120">
+
 						Regent Porto Montenegro
 					</p>
 					<div className="d-flex align-items-center pt-2">
 						<img src="/location.svg" className="location-icon" alt="Location icon" />
-						<p className="location-text-color fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+
+						<p className="text-color-black fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+
 							Tivat, Montenegro
 						</p>
 					</div>
 					<div className="d-flex align-items-center">
 						<img src="/building.svg" className="location-icon" alt="Building icon" />
-						<p className="location-text-color fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+
+						<p className="text-color-black fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
 							5 stars Hotel
 						</p>
 					</div>
-					<p className="pt-3 hotel-desc fw-500 text-smaller lh-120">
+					<p className="pt-3 text-middle-gray text-justify fw-500 text-smaller lh-120">
+
 						Experience luxurious seaside living at Hotel Regent Porto Montenegro.
 					</p>
 				</div>
 				<div className="col pt-4">
-					<p className="location-text-color fw-700 text-big lh-120">Luxury Experience</p>
+
+					<p className="text-color-black fw-700 text-big lh-120">Luxury Experience</p>
+
 					<div className="images-container">
 						{luxuryExperienceImages.map(image => (
 							<div key={image.src} className="image-wrapper ">
@@ -159,8 +185,12 @@ const IndividualPage = () => {
 					</div>
 				</div>
 				<div className="col ">
-					<p className="location-text-color fw-700 text-big lh-120 pt-4">About us</p>
-					<div className="about-us-desc pt-2 fw-500 text-smaller ">{deductedText}</div>
+
+					<p className="text-color-black fw-700 text-big lh-120 pt-4">About us</p>
+					<div className="about-us-desc text-justify lh-130 pt-2 fw-500 text-smaller ">
+						{deductedText}
+					</div>
+
 					<div onClick={toggleFullText}>
 						<div className="d-flex align-items-center pt-2">
 							<p className="m-0 read-more-text fw-700 text-smaller lh-120 pe-1">
@@ -174,14 +204,18 @@ const IndividualPage = () => {
 					</div>
 					<div className="col pt-4">
 						<img src="/mapa.png" className="hotel-image" />
-						<p className="pt-3 location-text-color fw-700 text-small lh-120">
+
+						<p className="pt-3 text-color-black fw-700 text-small lh-120">
+
 							Porto Montenegro, Obala bb, Tivat 85320, Montenegro
 						</p>
 					</div>
 				</div>
 				<div className="col pt-4">
-					<div className="location-text-color fw-700 text-big lh-120">About the town</div>
-					<p className="town-desc fw-500 text-smaller pt-2">
+
+					<div className="text-color-black fw-700 text-big lh-120">About the town</div>
+					<p className="text-justify text-color-black fw-500 text-smaller lh-130 pt-2">
+
 						Tivat is a relatively small town, but it offers a wide range of activities
 						and attractions for visitors, such as water sports, hiking, and cultural
 						events. It has a pleasant Mediterranean climate with mild winters and warm
@@ -192,9 +226,11 @@ const IndividualPage = () => {
 					</p>
 				</div>
 				<div className="col pt-3">
-					<div className="hotel-policies-container pb-2">
+
+					<div className="hotel-policies-container d-flex justify-content-start align-items-center pb-2">
 						<p
-							className="location-text-color fw-700 text-big lh-120 mb-0"
+							className="text-color-black fw-700 text-big lh-120 mb-0"
+
 							onClick={toggleHotelPolicies}>
 							Hotel Policies
 						</p>

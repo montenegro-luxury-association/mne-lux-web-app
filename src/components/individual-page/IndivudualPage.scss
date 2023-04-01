@@ -2,19 +2,9 @@
 	height: 18px;
 }
 
-.location-text-color {
-	color: #000000;
-}
-
-.hotel-desc {
-	text-align: justify;
-	color: #a1a1a1;
-}
 
 .about-us-desc {
-	line-height: 130%;
 
-	text-align: justify;
 	color: #283837;
 }
 
@@ -30,12 +20,8 @@
 
 .read-less-icon {
 	transform: rotate(180deg);
-}
 
-.town-desc {
-	line-height: 130%;
-	text-align: justify;
-	color: #000000;
+
 }
 
 .more-button {
@@ -45,31 +31,6 @@
 .less-button {
 	width: 24px;
 	transform: rotate(180deg);
-}
-
-.hotel-policies-container {
-	display: flex;
-	justify-content: start;
-	align-items: center;
-	flex-direction: row;
-}
-
-.hotel-policies-bold-text {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 800;
-	font-size: 12px;
-	line-height: 120%;
-	color: #000000;
-}
-
-.hotel-policies-light-text {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 120%;
-	color: #000000;
 }
 
 .divider {
@@ -85,11 +46,6 @@
 }
 
 .image-counter-numbers {
-	font-family: "Manrope";
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 120%;
 	letter-spacing: 0.1em;
 
 	color: #ffffff;
@@ -110,7 +66,7 @@
 
 .hotel-share-button-icon {
 	z-index: 1;
-	top: 21.35rem;
+	top: 21.3rem;
 	right: 4.45rem;
 }
 
