@@ -43,3 +43,17 @@
 	width: 100%;
 	background-color: $light-gray;
 }
+
+.add-media-container {
+	border: 1px solid $middle-gray;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem 3rem;
+}
+
+button.btn.add-media-btn {
+	font-weight: 500 !important;
+	// color: black !important;
+}

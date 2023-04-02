@@ -1,6 +1,6 @@
 @import "../../../styles/variables.scss";
 
-.checkbox-container {
+.radio-container {
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -19,26 +19,31 @@
 		width: 0;
 	}
 
-	.checkmark-box {
+	.radio {
 		position: absolute;
 		top: 0;
 		left: 0;
 		height: 1.5rem;
 		width: 1.5rem;
 		border: $middle-gray 1px solid;
-		border-radius: 2px;
+		border-radius: 100%;
 		display: flex;
 	}
 
-	.checkmark {
+	.radio:after {
+		content: "";
 		position: absolute;
-		display: none;
+		top: 50%;
 		left: 50%;
-		top: 49%;
 		transform: translate(-50%, -50%);
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 50%;
+		background: $light-green;
+		display: none;
 	}
 
-	input:checked ~ .checkmark-box .checkmark {
+	input:checked ~ .radio:after {
 		display: block;
 	}
 }

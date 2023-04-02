@@ -1,15 +1,19 @@
+import { InputHTMLAttributes } from "react";
 import "./CheckBoxInput.scss";
 
 type Props = {
 	title: string;
-};
+	className?: string;
+} & InputHTMLAttributes<HTMLInputElement>;
 
-// WIP
-export default function CheckBoxInput({ title }: Props) {
+export default function CheckBoxInput({ title, className, ...props }: Props) {
 	return (
-		<div className="d-flex align-items-center">
-			<input type="checkbox" className="checkbox" />
-			<p className="mb-0 ms-2">{title}</p>
-		</div>
+		<label className={`checkbox-container ${className}`}>
+			{title}
+			<input type="checkbox" {...props} />
+			<div className="checkmark-box">
+				<img src="/images/icons/checkmark.svg" className="checkmark" />
+			</div>
+		</label>
 	);
 }

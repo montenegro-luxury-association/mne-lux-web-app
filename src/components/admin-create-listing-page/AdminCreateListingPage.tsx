@@ -1,5 +1,6 @@
 import CheckBoxInput from "../common/check-box-input/CheckBoxInput";
 import Input from "../common/input/Input";
+import RadioButtonInput from "../common/radio-button-input/RadioButtonInput";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminCreateListingPage.scss";
 
@@ -65,11 +66,40 @@ export default function AdminCreateListingPage() {
 
 				<div className="separator-line mt-4 mb-4" />
 
-				<label>Payment options:</label>
+				<label className="mb-3">Payment options:</label>
 
-				<CheckBoxInput title={"Cash"} />
+				<CheckBoxInput className="mb-2" title={"Cash"} />
+				<CheckBoxInput className="mb-2" title={"Debit Card"} />
+				<CheckBoxInput className="mb-2" title={"Electronic Bank Transfer"} />
 
-				{/* TODO: This is still WIP. The rest of the page is under development. */}
+				<div className="separator-line mt-4 mb-4" />
+
+				<label className="mb-3">Children:</label>
+
+				<RadioButtonInput title="Children are welcome" name="children-welcome" />
+				<RadioButtonInput title="Adults only" name="children-welcome" />
+
+				<div className="separator-line mt-4 mb-4" />
+
+				<RadioButtonInput title="No restriction" name="age-restriction" />
+				<RadioButtonInput title="18 and above" name="age-restriction" />
+				<RadioButtonInput title="21 and above" name="age-restriction" />
+				<RadioButtonInput title="25 and above" name="age-restriction" />
+
+				<label className="mt-3 mb-3">Media</label>
+
+				<div className="add-media-container rounded-3">
+					<img src="/images/icons/upload-media.svg" />
+					<p className="text-middle-gray text-smaller mb-0 mt-2">
+						Drag and drop file here
+					</p>
+					<p className="text-middle-gray text-smaller mb-2">or</p>
+					<button className="add-media-btn btn btn-primary btn-disabled-gray rounded-pill h-auto px-3 text-black">
+						Browse here
+					</button>
+				</div>
+
+				<button className="btn btn-primary btn-disabled-gray w-100 mt-5">Submit</button>
 			</div>
 		</div>
 	);
