@@ -1,17 +1,25 @@
+import axios from "axios";
 import "./IndivudualPage.scss";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import { Listing } from "../../types/apiTypes";
+
 
 interface Image {
 	src: string;
 }
 const IndividualPage = () => {
+	const location = useLocation();
+	const id = new URLSearchParams(location.search).get("id");
+
 	const [showFullText, setShowFullText] = useState<boolean>(false);
 	const [showHotelPolicies, setShowHotelPolicies] = useState<boolean>(false);
 	const [currentSlide, setCurrentSlide] = useState<number>(1);
+	const [listingDetails, setListingDetails] = useState<Listing | undefined>(undefined);
 	function toggleHotelPolicies() {
 		setShowHotelPolicies(!showHotelPolicies);
 	}
@@ -44,6 +52,17 @@ const IndividualPage = () => {
 		? hotelTextDescription
 		: `${hotelTextDescription.slice(0, 190) + "..."}`;
 
+
+	useEffect(() => {
+		fetchAndSetListingDetails();
+	}, []);
+
+	async function fetchAndSetListingDetails() {
+		const response = await axios.get("/listings/id/6410bea41770f40260d3fe93");
+		setListingDetails(response.data.listing);
+	}
+
+
 	const HotelPolicies = () => {
 		return (
 			<div className="col">
@@ -64,7 +83,6 @@ const IndividualPage = () => {
 						<p className="col-9 fw-500 text-smaller lh-120 text-color-black">
 							until 11:30AM
 						</p>
-
 					</div>
 				</div>
 				<div className="pt-3">
@@ -107,56 +125,58 @@ const IndividualPage = () => {
 
 	return (
 		<div className="col overflow-x-hidden">
-			<img
-				onClick={() => navigate(-1)}
-				src="./images/icons/back-button-hotel.svg"
-				className="hotel-back-button position-absolute"
-				alt="Back Button"
-			/>
-			<div>
-				<img
-					src="./images/icons/share-button-hotel.svg"
-					className="hotel-share-button position-absolute"
-					alt="Share Button"
-				/>
-				<img
-					src="./images/icons/share.svg"
-					className="hotel-share-button-icon position-absolute"
-					alt="Share Button"
-				/>
-			</div>
+			<div className="position-relative">
 
-			<img
-				src="./images/icons/favor-button-hotel.svg"
-				className="hotel-favor-button position-absolute"
-				alt="Favor Button"
-			/>
-			<div className="image-counter-wrapper position-absolute ms-4 p-1">
-				<div className="image-counter-numbers fw-500 text-small lh-120 text-center px-1">
-					{currentSlide}/{images.length}
+				<img
+					onClick={() => navigate(-1)}
+					src="./images/icons/back-button-hotel.svg"
+					className="hotel-back-button position-absolute"
+					alt="Back Button"
+				/>
+				<div>
+					<img
+						src="./images/icons/share-button-hotel.svg"
+						className="hotel-share-button position-absolute"
+						alt="Share Button"
+					/>
+					<img
+						src="./images/icons/share.svg"
+						className="hotel-share-button-icon position-absolute"
+						alt="Share Button"
+					/>
 				</div>
-			</div>
-			<Slider {...settings}>
-				{images.map(image => (
-					<div key={image.src}>
-						<img src={image.src} alt="Hotel Image" className="hotel-image" />
+
+				<img
+					src="./images/icons/favor-button-hotel.svg"
+					className="hotel-favor-button position-absolute"
+					alt="Favor Button"
+				/>
+				<div className="image-counter-wrapper position-absolute ms-4 p-1">
+					<div className="image-counter-numbers fw-500 text-small lh-120 text-center px-1">
+						{currentSlide}/{images.length}
 					</div>
-				))}
-			</Slider>
+
+				</div>
+				<Slider {...settings}>
+					{images.map(image => (
+						<div key={image.src}>
+							<img src={image.src} alt="Hotel Image" className="w-100" />
+						</div>
+					))}
+				</Slider>
+			</div>
 
 			<div className="p-3 mb-5 pb-5">
 				<div className="">
 
 					<p className="text-color-black fw-700 text-big lh-120">
-
-						Regent Porto Montenegro
+						{listingDetails?.name}
 					</p>
 					<div className="d-flex align-items-center pt-2">
 						<img src="/location.svg" className="location-icon" alt="Location icon" />
-
 						<p className="text-color-black fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
+							{listingDetails?.address}
 
-							Tivat, Montenegro
 						</p>
 					</div>
 					<div className="d-flex align-items-center">
@@ -172,7 +192,6 @@ const IndividualPage = () => {
 					</p>
 				</div>
 				<div className="col pt-4">
-
 					<p className="text-color-black fw-700 text-big lh-120">Luxury Experience</p>
 
 					<div className="images-container">
@@ -203,8 +222,8 @@ const IndividualPage = () => {
 						</div>
 					</div>
 					<div className="col pt-4">
-						<img src="/mapa.png" className="hotel-image" />
 
+						<img src="/mapa.png" className="w-100" />
 						<p className="pt-3 text-color-black fw-700 text-small lh-120">
 
 							Porto Montenegro, Obala bb, Tivat 85320, Montenegro
