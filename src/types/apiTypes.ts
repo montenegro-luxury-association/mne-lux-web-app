@@ -26,6 +26,7 @@ export type Listing = {
 	// TODO: Make these (type, category) of type: "typeof LISTING_CATEGORIES[number]" instead of 'string'.
 	// I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
 	// for remaining properties stopped working. Maybe will use "mongoose discriminators" or something
+	_id: string;
 	type: string; // TODO: verify which types we want here, add enumm
 	category: string; // TODO: verify what this is, make enum
 	name: string;
