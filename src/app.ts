@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import listingRoutes from "./routes/listingRoutes";
-import adminRoutes from "./routes/adminRoutes";
 import bodyParser from "body-parser";
 import cors from "cors";
+import path from "path";
+import allApiRoutes from "./api";
 
 dotenv.config();
 const PORT = process.env.PORT || 3001;
@@ -30,8 +30,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Hook up routes
-app.use("/listings", listingRoutes);
-app.use("/admin", adminRoutes);
+app.use("/api", allApiRoutes);
+
+// Server react files for frontend if on production
+if (process.env.NODE_ENV !== "production") {
+	const frontendBuildDir = path.resolve(
+		__dirname, // /backend/build/
+		"..",
+		"..",
+		"montenegro-luxury-association-frontend",
+		"build"
+	);
+
+	app.use(express.static(frontendBuildDir));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(frontendBuildDir, "index.html"));
+	});
+}
+
 // Start the server
 app.listen(PORT, () => {
 	console.log(`Server started on port ${PORT}`);
