@@ -200,7 +200,7 @@ export default function AdminManagementPage() {
 				</div>
 				<button
 					onClick={onClickAddNew}
-					className="btn btn-primary btn-disabled-gray w-100 mt-4 ">
+					className="btn btn-primary btn-disabled-gray w-100 mt-4 mb-4">
 					Add new
 				</button>
 			</div>
