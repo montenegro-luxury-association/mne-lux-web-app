@@ -1,7 +1,7 @@
 import { model, Schema, Types } from "mongoose";
 import { GeoJSONPoint, pointSchema } from "./common-schemas/pointSchema";
 
-const LISTING_CATEGORIES = ["seaside", "mountain"] as const;
+const LISTING_TYPES = ["hotel"] as const;
 const PAYMENT_OPTIONS = [
 	"cash",
 	"debit-card",
@@ -18,12 +18,22 @@ type ListingExperience = {
 
 type PaymentOption = typeof PAYMENT_OPTIONS[number];
 
+/**
+ * In the future we will add other types of listings, e.g. "apartment", "cabin", etc.
+ */
+type ListingType = typeof LISTING_TYPES[number];
+
+// NOTE: I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
+// for remaining properties stopped working. Maybe will use "mongoose discriminators" or something
 export type Listing = {
-	// TODO: Make these (type, category) of type: "typeof LISTING_CATEGORIES[number]" instead of 'string'.
-	// I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
-	// for remaining properties stopped working. Maybe will use "mongoose discriminators" or something
-	type: string; // TODO: verify which types we want here, add enumm
-	category: string; // TODO: verify what this is, make enum
+	/**
+	 * The type of listing. Currently the only option is "hotel"
+	 */
+	type: ListingType;
+	/**
+	 * Either 4-star or 5-star hotel
+	 */
+	ratingCategory: number;
 	name: string;
 	address: string;
 	shortDescription?: string; // TODO: Is this required?
@@ -42,7 +52,7 @@ export type Listing = {
 	checkOutUntilSeconds: number;
 	paymentOptions: PaymentOption[];
 	areChildrenWelcome: boolean;
-	minimumAge?: number; // TODO:  Ask Stefan how this ties in with 'areChildrenWelcome' property
+	minCheckInAge?: number;
 	mediaURIs: string[];
 	owner: Types.ObjectId;
 };
@@ -57,8 +67,8 @@ const experienceSchema = new Schema<ListingExperience>(
 
 const listingSchema = new Schema<Listing>(
 	{
-		type: { type: String, required: true }, // TODO: Maybe add enum
-		category: { type: String, enum: LISTING_CATEGORIES, required: true },
+		type: { type: String, enum: LISTING_TYPES, required: true },
+		ratingCategory: { type: Number, required: true },
 		name: { type: String, required: true },
 		address: { type: String, required: true },
 		shortDescription: { type: String },
@@ -74,7 +84,7 @@ const listingSchema = new Schema<Listing>(
 		checkOutUntilSeconds: { type: Number, required: true },
 		paymentOptions: { type: [String], enum: PAYMENT_OPTIONS, default: [] },
 		areChildrenWelcome: { type: Boolean, default: true },
-		minimumAge: { type: Number },
+		minCheckInAge: { type: Number },
 		mediaURIs: { type: [String], default: [] },
 		owner: { type: Schema.Types.ObjectId, ref: "Admin", required: true }
 	},
