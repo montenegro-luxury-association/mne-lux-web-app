@@ -1,4 +1,5 @@
-const PAYMENT_OPTIONS = [
+export const LISTING_TYPES = ["hotel"] as const;
+export const PAYMENT_OPTIONS = [
 	"cash",
 	"debit-card",
 	"credit-card",
@@ -20,15 +21,24 @@ export type GeoJSONPoint = {
 	coordinates: [number, number];
 };
 
-type PaymentOption = typeof PAYMENT_OPTIONS[number];
+/**
+ * In the future we will add other types of listings, e.g. "apartment", "cabin", etc.
+ */
+export type ListingType = typeof LISTING_TYPES[number];
+export type PaymentOption = typeof PAYMENT_OPTIONS[number];
 
+// NOTE: I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
+// for remaining properties stopped working. Maybe will use "mongoose discriminators" or something
 export type Listing = {
-	// TODO: Make these (type, category) of type: "typeof LISTING_CATEGORIES[number]" instead of 'string'.
-	// I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
-	// for remaining properties stopped working. Maybe will use "mongoose discriminators" or something
 	_id: string;
-	type: string; // TODO: verify which types we want here, add enumm
-	category: string; // TODO: verify what this is, make enum
+	/**
+	 * The type of listing. Currently the only option is "hotel"
+	 */
+	type: ListingType;
+	/**
+	 * Either 4-star or 5-star hotel
+	 */
+	ratingCategory: number;
 	name: string;
 	address: string;
 	shortDescription?: string; // TODO: Is this required?
@@ -47,7 +57,7 @@ export type Listing = {
 	checkOutUntilSeconds: number;
 	paymentOptions: PaymentOption[];
 	areChildrenWelcome: boolean;
-	minimumAge?: number; // TODO:  Ask Stefan how this ties in with 'areChildrenWelcome' property
+	minCheckInAge?: number;
 	mediaURIs: string[];
 	owner: string;
 };
