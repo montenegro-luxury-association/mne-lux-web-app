@@ -1,12 +1,12 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
 import allApiRoutes from "./api";
 
-dotenv.config();
 const PORT = process.env.PORT || 3001;
 
 const app: Application = express();

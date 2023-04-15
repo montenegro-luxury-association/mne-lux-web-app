@@ -10,6 +10,7 @@ const PAYMENT_OPTIONS = [
 	"paypal",
 	"crypto"
 ] as const;
+export const MAX_LISTING_MEDIA_LENGTH = 20;
 
 type ListingExperience = {
 	imageUri: string;
