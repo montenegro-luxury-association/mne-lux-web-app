@@ -135,7 +135,7 @@ export default function AdminCreateListingPage() {
 				<Input
 					className="mb-2"
 					label="Type:"
-					placeholder="Chose type"
+					placeholder="Chose type (WIP, only 'hotel' works)"
 					onChange={e => onGenericPropertyChange(e, "type")}
 				/>
 				{/* TODO: Convert to drop-down with '4-star' and '5-star' options */}
@@ -143,7 +143,7 @@ export default function AdminCreateListingPage() {
 					className="mb-2"
 					label="Category:"
 					type="number"
-					placeholder="Chose category"
+					placeholder="Chose category (WIP, only '4' or '5' works)"
 					onChange={e => onGenericPropertyChange(e, "ratingCategory")}
 				/>
 				<Input
