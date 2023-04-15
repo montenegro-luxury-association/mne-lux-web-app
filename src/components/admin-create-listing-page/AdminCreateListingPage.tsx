@@ -320,7 +320,7 @@ export default function AdminCreateListingPage() {
 					<div className="admin-create-listing-loading-overlay">
 						<h4 className="text-white">
 							{showImagesUploadedCount
-								? `Uploading images... (${imagesUploadedCount + 5}/${
+								? `Uploading images... (${imagesUploadedCount + 1}/${
 										selectedFiles?.length
 								  })`
 								: "Saving listing..."}
