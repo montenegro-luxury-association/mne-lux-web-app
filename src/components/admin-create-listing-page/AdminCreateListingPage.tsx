@@ -1,3 +1,7 @@
+// TODO: eslint is being annoying, remove when no longer needed
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable indent */
+import axios from "axios";
 import { useState } from "react";
 import CheckBoxInput from "../common/check-box-input/CheckBoxInput";
 import Input from "../common/input/Input";
@@ -5,12 +9,39 @@ import RadioButtonInput from "../common/radio-button-input/RadioButtonInput";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminCreateListingPage.scss";
 import { GeoJSONPoint, Listing, PAYMENT_OPTIONS, PaymentOption } from "../../types/apiTypes";
-import axios from "axios";
 
 export default function AdminCreateListingPage() {
 	const [hotel, setHotel] = useState<Listing>();
+	const [selectedFiles, setSelectedFiles] = useState<File[]>();
+	const [imagesUploadedCount, setImagesUploadedCount] = useState(0);
+	const [showImagesUploadedCount, setShowImagesUploadedCount] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
+	function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+		if (e.target.files) {
+			setSelectedFiles(Array.from(e.target.files));
+		}
+	}
+
+	async function uploadListingImages(listingId: string) {
+		if (selectedFiles) {
+			for (const image of selectedFiles) {
+				const response = await axios.post(`/admin/add-s3-listing-media/${listingId}`);
+				const { uploadURL } = response.data;
+
+				await axios.put(uploadURL, image, {
+					headers: { "Content-Type": "multipart/form-data" }
+				});
+
+				setImagesUploadedCount(prev => prev + 1);
+			}
+		}
+	}
 
 	async function onClickSubmit() {
+		setIsLoading(true);
+		const uploadStartTime = Date.now();
+
 		try {
 			// TODO: Replace with real location and
 			const DUMMY_LOCATION: GeoJSONPoint = { type: "Point", coordinates: [42.288, 18.849] };
@@ -20,11 +51,35 @@ export default function AdminCreateListingPage() {
 				location: DUMMY_LOCATION,
 				experiences: []
 			};
-			await axios.post("/admin/add-listing", hotelApiObject);
+			const response = await axios.post("/admin/add-listing", hotelApiObject);
+
+			showImageUploadCountAfterDelay(Date.now() - uploadStartTime);
+
+			await uploadListingImages(response.data.listingId);
+
 			setHotel(undefined);
 			alert("Success!");
 		} catch (err) {
 			alert("Something went wrong!");
+		} finally {
+			setIsLoading(false);
+			setImagesUploadedCount(0);
+			setShowImagesUploadedCount(false);
+		}
+	}
+
+	// NOTE: once the listing is uploaded to the DB we show the number of images being being uploaded, however
+	// we want to wait at least 800ms before showing the image count to avoid text flickering too fast
+	function showImageUploadCountAfterDelay(timePassedSinceUploadStart: number) {
+		const minDelayMS = 800;
+
+		if (timePassedSinceUploadStart > minDelayMS) {
+			setShowImagesUploadedCount(true);
+		} else {
+			setTimeout(
+				() => setShowImagesUploadedCount(true),
+				minDelayMS - timePassedSinceUploadStart
+			);
 		}
 	}
 
@@ -62,7 +117,6 @@ export default function AdminCreateListingPage() {
 	}
 
 	function onChildrenWelcomeChange(areChildrenWelcome: boolean) {
-		console.log({ areChildrenWelcome });
 		setHotel({
 			...hotel,
 			areChildrenWelcome
@@ -232,16 +286,47 @@ export default function AdminCreateListingPage() {
 
 				<label className="mt-3 mb-3">Media</label>
 
+				{/* TODO: verify if this is fine  */}
+				{selectedFiles && (
+					<div className="d-flex w-100 listing-upload-preview-images">
+						{selectedFiles.map(file => (
+							<img key={file.name} src={URL.createObjectURL(file)} />
+						))}
+					</div>
+				)}
+
 				<div className="add-media-container rounded-3">
 					<img src="/images/icons/upload-media.svg" />
 					<p className="text-middle-gray text-smaller mb-0 mt-2">
 						Drag and drop file here
 					</p>
 					<p className="text-middle-gray text-smaller mb-2">or</p>
-					<button className="add-media-btn btn btn-primary btn-disabled-gray rounded-pill h-auto px-3 text-black">
+
+					<label
+						htmlFor="listing-images"
+						className="add-media-btn btn btn-primary btn-disabled-gray rounded-pill h-auto px-3 text-black">
 						Browse here
-					</button>
+					</label>
+					<input
+						onChange={handleFileSelect}
+						id="listing-images"
+						className="d-none"
+						type="file"
+						multiple
+					/>
 				</div>
+
+				{isLoading && (
+					<div className="admin-create-listing-loading-overlay">
+						<h4 className="text-white">
+							{showImagesUploadedCount
+								? `Uploading images... (${imagesUploadedCount + 5}/${
+										selectedFiles?.length
+								  })`
+								: "Saving listing..."}
+						</h4>
+					</div>
+				)}
 
 				<button
 					className="btn btn-primary btn-disabled-gray w-100 mt-5"

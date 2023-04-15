@@ -8,19 +8,15 @@ import "./homePage.scss";
 export default function HomePage() {
 	const navigate = useNavigate();
 	const [hotels, setHotels] = useState<Listing[]>();
-	
 
 	useEffect(() => {
 		fetchAndSetListings();
 	}, []);
 
-	
 	async function fetchAndSetListings() {
 		const response = await axios.get("/listings");
 		setHotels(response.data.listings);
 		console.log(response.data.listings);
-
-		
 	}
 
 	function onClickHotel(id: string) {
@@ -44,10 +40,10 @@ export default function HomePage() {
 							<div
 								onClick={() => onClickHotel(hotel._id)}
 								key={hotel._id}
-								// TODO: Connect picture hotels
 								style={{
+									// TODO: would prolly be nice to have a separate <img> tag and an overlay above it than this
 									background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 58.74%, rgba(0, 0, 0, 0.5) 70.78%),
-                        url(/images/dummy/test-img-4.jpg), #d9d9d9`
+                        url(${hotel.mediaURIs[0]}), #d9d9d9`
 								}}
 								className="home-page-card-container container-fluid d-flex flex-column justify-content-between">
 								<div className="d-flex justify-content-end">

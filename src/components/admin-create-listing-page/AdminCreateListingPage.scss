@@ -53,12 +53,50 @@
 	padding: 2rem 3rem;
 }
 
-button.btn.add-media-btn {
+.btn.add-media-btn {
 	font-weight: 500 !important;
+	text-align: center !important;
+}
+
+.listing-upload-preview-images {
+	overflow-x: scroll;
+	gap: 0.5rem;
+	margin: 0 0 0.5rem;
+	padding-bottom: 6px;
+
+	// make scrollbar always visible to make it clear that this is scrollable
+	&::-webkit-scrollbar {
+		height: 3px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 2px;
+		background-color: rgba(0, 0, 0, 0.25);
+		-webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+	}
+
+	img {
+		width: 6rem;
+		height: 6rem;
+		border-radius: 4px;
+		object-fit: cover;
+	}
 }
 
 .admin-create-listing-page {
 	label {
 		font-size: 0.9rem;
 	}
+}
+
+.admin-create-listing-loading-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

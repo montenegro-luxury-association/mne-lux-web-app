@@ -1,10 +1,8 @@
 .location-icon {
-
 	height: 1.125rem;
 }
 
 .about-us-desc {
-
 	color: #283837;
 }
 
@@ -20,7 +18,6 @@
 
 .read-less-icon {
 	transform: rotate(180deg);
-
 }
 
 .more-button {
@@ -42,6 +39,14 @@
 	border-radius: 6px;
 	max-width: 3rem;
 	bottom: 1.7rem;
+}
+
+.hotel-images-slider {
+	img {
+		height: 75vw; // creates 4:3 aspect ratio
+		object-fit: cover;
+		background-color: #f3f3f3;
+	}
 }
 
 .image-counter-numbers {

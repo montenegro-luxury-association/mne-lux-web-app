@@ -9,37 +9,14 @@ export default function Favorites() {
 
 	const user = true;
 
+	// TODO: Replace this entire page with a re-usable version of the home page
 	const [dummyData, setDummyData] = useState([
 		{
 			id: 0,
-			title: "Ime hotela 1",
-			location: "Lokacija 1",
-			locationDesc: "Opis 1",
+			title: "TEST HOTEL",
+			location: "TEST HOTEL",
+			locationDesc: "TEST HOTEL",
 			image: "./images/dummy/test-img-0.jpg",
-			favored: true
-		},
-		{
-			id: 2,
-			title: "Ime hotela 3",
-			location: "Lokacija 3",
-			locationDesc: "Opis 3",
-			image: "./images/dummy/test-img-2.jpg",
-			favored: true
-		},
-		{
-			id: 3,
-			title: "Ime hotela 4",
-			location: "Lokacija 4",
-			locationDesc: "Opis 4",
-			image: "./images/dummy/test-img-3.jpg",
-			favored: true
-		},
-		{
-			id: 4,
-			title: "Ime hotela 5",
-			location: "Lokacija 5",
-			locationDesc: "Opis 5",
-			image: "./images/dummy/test-img-4.jpg",
 			favored: true
 		}
 	]);
