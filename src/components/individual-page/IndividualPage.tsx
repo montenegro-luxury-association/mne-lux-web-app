@@ -74,6 +74,7 @@ const IndividualPage = () => {
 						</p>
 						<p className="col-9 fw-500 text-small lh-120 text-color-black">
 							until 11:30AM
+							{/* Dodati checkOutUntilSeconds variablu ovdje */}
 						</p>
 					</div>
 				</div>
@@ -118,7 +119,7 @@ const IndividualPage = () => {
 
 	return (
 		<div className="col overflow-x-hidden">
-			<div className="images-slider-container position-relative">
+			<div className="position-relative">
 				<img
 					onClick={() => navigate(-1)}
 					src="./images/icons/back-button-hotel.svg"
@@ -172,7 +173,6 @@ const IndividualPage = () => {
 					</div>
 					<div className="d-flex align-items-center">
 						<img src="/building.svg" className="location-icon" alt="Building icon" />
-
 						<p className="text-color-black fw-500 text-small lh-120 col-11 pt-1 ps-1 mb-0">
 							{listing?.ratingCategory} stars Hotel
 						</p>
@@ -183,7 +183,6 @@ const IndividualPage = () => {
 				</div>
 				<div className="col pt-4">
 					<p className="text-color-black fw-700 text-big lh-120">Luxury Experience</p>
-
 					<div className="images-container">
 						{luxuryExperienceImages.map(image => (
 							<div key={image.src + Math.random()} className="image-wrapper ">
@@ -198,7 +197,6 @@ const IndividualPage = () => {
 					<div className="about-us-desc text-justify lh-130 pt-2 fw-500 text-small ">
 						{deductedText}
 					</div>
-
 					<div onClick={toggleFullText}>
 						<div className="d-flex align-items-center pt-2">
 							<p className="m-0 read-more-text fw-700 text-small lh-120 pe-1">

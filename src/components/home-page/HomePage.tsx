@@ -16,7 +16,6 @@ export default function HomePage() {
 	async function fetchAndSetListings() {
 		const response = await axios.get("/listings");
 		setHotels(response.data.listings);
-		console.log(response.data.listings);
 	}
 
 	function onClickHotel(id: string) {
