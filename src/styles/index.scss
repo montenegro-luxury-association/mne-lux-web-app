@@ -124,3 +124,19 @@ html {
 		}
 	}
 }
+
+.rotate-180 {
+	transform: rotate(180deg);
+}
+
+.input-base {
+	border: 1px solid $light-gray;
+	border-radius: 5px;
+	color: $middle-gray;
+	font-weight: 400;
+	font-size: 0.875rem;
+	height: $input-height;
+	padding: 0.375rem 0.75rem;
+	display: flex;
+	align-items: center;
+}

@@ -22,8 +22,6 @@ export default function HomePage() {
 		navigate(`/hotel-page?id=${id}`);
 	}
 
-	console.log({ mediaURIS: hotels?.[0].mediaURIs });
-
 	return (
 		<>
 			<div className="home-page-container">

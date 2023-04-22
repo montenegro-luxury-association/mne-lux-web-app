@@ -9,6 +9,7 @@ import RadioButtonInput from "../common/radio-button-input/RadioButtonInput";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminCreateListingPage.scss";
 import { GeoJSONPoint, Listing, PAYMENT_OPTIONS, PaymentOption } from "../../types/apiTypes";
+import SelectDropdown from "../common/select-dropdown/SelectDropdown";
 
 export default function AdminCreateListingPage() {
 	const [hotel, setHotel] = useState<Listing>();
@@ -93,6 +94,12 @@ export default function AdminCreateListingPage() {
 			[property]: e.target.type === "number" ? parseFloat(e.target.value) : e.target.value
 		} as Listing);
 	}
+	function onGenericPropertyChangeRaw(value: number | string, property: keyof Listing) {
+		setHotel({
+			...hotel,
+			[property]: value
+		} as Listing);
+	}
 
 	function onPaymentOptionsChange(
 		e: React.ChangeEvent<HTMLInputElement>,
@@ -124,6 +131,11 @@ export default function AdminCreateListingPage() {
 	}
 
 	const minimumCheckInAge = [undefined, 18, 21, 25];
+	const hotelTypeOptions = [
+		{ value: 4, label: "4 Stars" },
+		{ value: 5, label: "5 Stars" }
+	];
+	const hotelCategoryOptions = [{ value: "hotel", label: "Hotel" }];
 
 	return (
 		<div className="pt-4 mb-3 admin-create-listing-page">
@@ -131,37 +143,42 @@ export default function AdminCreateListingPage() {
 
 			{/* Main inputs */}
 			<div className="p-3">
-				{/* TODO: Convert to drop-down */}
-				<Input
+				<label>Type:</label>
+				<SelectDropdown
 					className="mb-2"
-					label="Type:"
-					placeholder="Chose type (WIP, only 'hotel' works)"
-					onChange={e => onGenericPropertyChange(e, "type")}
+					options={hotelCategoryOptions}
+					placeholder="Choose type"
+					onChange={value => onGenericPropertyChangeRaw(value, "type")}
+					value={hotel?.type}
 				/>
-				{/* TODO: Convert to drop-down with '4-star' and '5-star' options */}
-				<Input
+				<label>Category:</label>
+				<SelectDropdown
 					className="mb-2"
-					label="Category:"
-					type="number"
-					placeholder="Chose category (WIP, only '4' or '5' works)"
-					onChange={e => onGenericPropertyChange(e, "ratingCategory")}
+					options={hotelTypeOptions}
+					placeholder="Chose category"
+					onChange={value => onGenericPropertyChangeRaw(value, "ratingCategory")}
+					value={hotel?.ratingCategory}
 				/>
+
 				<Input
 					className="mb-2"
 					label="Name:"
 					placeholder="Write hotel name"
+					value={hotel?.name}
 					onChange={e => onGenericPropertyChange(e, "name")}
 				/>
 				<Input
 					className="mb-2"
 					label="Address:"
 					placeholder="Write hotel address"
+					value={hotel?.address}
 					onChange={e => onGenericPropertyChange(e, "address")}
 				/>
 				<Input
 					className="mb-2"
 					label="Key one sentence description"
 					placeholder="Write breathtaking punch line"
+					value={hotel?.shortDescription}
 					onChange={e => onGenericPropertyChange(e, "shortDescription")}
 				/>
 				<label className="mb-2">Luxury experience offer</label>
@@ -196,6 +213,7 @@ export default function AdminCreateListingPage() {
 				<textarea
 					placeholder="Write description here"
 					className="form-control input rounded-3 mb-4 h-100"
+					value={hotel?.fullDescription}
 					onChange={e => onGenericPropertyChange(e, "fullDescription")}
 					rows={5}
 				/>
@@ -208,6 +226,7 @@ export default function AdminCreateListingPage() {
 					className="mb-2"
 					label="City name:"
 					placeholder="Write city name"
+					value={hotel?.cityName}
 					onChange={e => onGenericPropertyChange(e, "cityName")}
 				/>
 
@@ -215,6 +234,7 @@ export default function AdminCreateListingPage() {
 				<textarea
 					placeholder="Write description here"
 					className="form-control input rounded-3 mb-2 h-100"
+					value={hotel?.cityDescription}
 					onChange={e => onGenericPropertyChange(e, "cityDescription")}
 					rows={5}
 				/>
@@ -226,6 +246,7 @@ export default function AdminCreateListingPage() {
 					<Input
 						type="number"
 						placeholder="13:30PM"
+						value={hotel?.checkInFromSeconds}
 						onChange={e => onGenericPropertyChange(e, "checkInFromSeconds")}
 					/>
 				</div>
@@ -235,6 +256,7 @@ export default function AdminCreateListingPage() {
 					<Input
 						type="number"
 						placeholder="14:30PM"
+						value={hotel?.checkOutUntilSeconds}
 						onChange={e => onGenericPropertyChange(e, "checkOutUntilSeconds")}
 					/>
 				</div>
