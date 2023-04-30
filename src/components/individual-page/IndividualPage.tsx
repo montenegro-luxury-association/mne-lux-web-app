@@ -58,6 +58,21 @@ const IndividualPage = () => {
 		setListing(response.data.listing);
 	}
 
+	function formatCheckInOutTime(secondsFromMidnight: number) {
+		const hours = Math.floor(secondsFromMidnight / (60 * 60));
+		const minutes = Math.floor(secondsFromMidnight / 60) % 60;
+
+		return `${prefixZeroIfNeeded(hours)}:${prefixZeroIfNeeded(minutes)}`;
+	}
+
+	function prefixZeroIfNeeded(number: number) {
+		return `0${number}`.slice(-2);
+	}
+
+	if (!listing) {
+		return <h4 className="text-center mt-5">Loading...</h4>;
+	}
+
 	const HotelPolicies = () => {
 		return (
 			<div className="col">
@@ -65,7 +80,7 @@ const IndividualPage = () => {
 					<div className="d-flex">
 						<p className="col-3 fw-800 text-small lh-120 text-color-black">Check-in:</p>
 						<p className="col-9 fw-500 text-small lh-120 text-color-black">
-							from 14:30PM
+							from {formatCheckInOutTime(listing.checkInFromSeconds)}
 						</p>
 					</div>
 					<div className="d-flex pt-2">
@@ -73,8 +88,7 @@ const IndividualPage = () => {
 							Check-out:
 						</p>
 						<p className="col-9 fw-500 text-small lh-120 text-color-black">
-							until 11:30AM
-							{/* Dodati checkOutUntilSeconds variablu ovdje */}
+							until {formatCheckInOutTime(listing.checkOutUntilSeconds)}
 						</p>
 					</div>
 				</div>
@@ -222,10 +236,10 @@ const IndividualPage = () => {
 					</p>
 				</div>
 				<div className="col pt-3">
-					<div className="hotel-policies-container d-flex justify-content-start align-items-center pb-2">
-						<p
-							className="text-color-black fw-700 text-big lh-120 mb-0"
-							onClick={toggleHotelPolicies}>
+					<div
+						className="hotel-policies-container d-flex justify-content-start align-items-center pb-2"
+						onClick={toggleHotelPolicies}>
+						<p className="text-color-black fw-700 text-big lh-120 mb-0">
 							Hotel Policies
 						</p>
 						<div className="ps-1">
