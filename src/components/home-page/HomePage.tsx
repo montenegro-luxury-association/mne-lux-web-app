@@ -70,7 +70,6 @@ export default function HomePage() {
 								<div className="d-flex flex-column home-page-card-description">
 									<span className="home-page-hotel-title">{hotel.name}</span>
 									<span>{hotel.cityName}</span>
-									<span>{hotel.cityDescription}</span>
 								</div>
 							</div>
 						))}
