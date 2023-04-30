@@ -1,7 +1,6 @@
 import { config } from "dotenv";
 import { connect } from "mongoose";
 import { Listing } from "../../src/models/listing.model";
-import { User } from "../../src/models/user.model";
 config();
 
 // TODO: This is temporary. Currently this is a 'manual' test. In the future, we need to use a testing framework.

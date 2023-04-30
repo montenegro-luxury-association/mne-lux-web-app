@@ -1,6 +1,6 @@
 // TODO: This is temporary. Currently this is a 'manual' test. In the future, we need to use a testing framework.
 import { config } from "dotenv";
-import { connect, connection } from "mongoose";
+import { connect } from "mongoose";
 import { Admin } from "../../src/models/admin.model";
 import { Listing } from "../../src/models/listing.model";
 config();

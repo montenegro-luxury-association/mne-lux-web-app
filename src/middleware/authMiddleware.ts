@@ -1,5 +1,5 @@
-import { Handler, NextFunction, Request, Response, RequestHandler } from "express";
-import { getDecodedJWTTokenFromRequest, verifyJWTToken } from "../util/jwt";
+import { NextFunction, Request, Response } from "express";
+import { getDecodedJWTTokenFromRequest } from "../util/jwt";
 
 export type AuthenticatedUserRequest = Request & { userId: string };
 export type AuthenticatedAdminRequest = Request & { adminId: string };

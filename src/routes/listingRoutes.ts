@@ -1,7 +1,6 @@
-import { Request, Response, Router } from "express";
-import { wrapAuthAdmin, wrapAuthUser } from "../middleware/authMiddleware";
+import { Router } from "express";
 import { Listing } from "../models/listing.model";
-import { IMAGES_S3_BUCKET_URL, mapListingToIncludeFullMediaURLs } from "../util/s3";
+import { mapListingToIncludeFullMediaURLs } from "../util/s3";
 
 const router = Router();
 
