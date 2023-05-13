@@ -5,12 +5,12 @@ import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import { Listing } from "../../types/apiTypes";
 import "./Favorites.scss";
 import axios from "axios";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 export default function Favorites() {
 	const navigate = useNavigate();
 	const [favorites, setFavorites] = useState<Listing[]>();
-
-	const user = true;
+	const authContext = useAuthContext();
 
 	useEffect(() => {
 		fetchAndSetFavorites();
@@ -35,7 +35,7 @@ export default function Favorites() {
 	return (
 		<>
 			<TopNavBar title={"Favorites"} />
-			{user ? (
+			{authContext.user ? (
 				<>
 					{favorites?.length ? (
 						<div className="home-page-container pt-0">
@@ -75,21 +75,27 @@ export default function Favorites() {
 							You didn't add your favorite spot yet
 						</h4>
 					)}
-					<BottomNavbar />
 				</>
 			) : (
-				<div className="container-fluid d-flex flex-column px-4 align-content-center">
-					<img src="./images/girl-login-screen.svg" alt="Girl Login Icon" />
-					<h2 className="fw-700 font-big lh-120 text-dark-green text-center">
-						Login to view your favorites
-					</h2>
-					<button
-						onClick={() => navigate("/login")}
-						className="btn btn-primary btn-disabled-gray w-100 mt-4">
-						Login
-					</button>
+				<div className="d-flex flex-column px-4 align-content-center bg-white justify-content-center favorites-login-container">
+					{authContext.isLoading ? (
+						<h5 className="text-center">Loading...</h5>
+					) : (
+						<>
+							<img src="./images/girl-login-screen.svg" alt="Girl Login Icon" />
+							<h2 className="fw-700 font-big lh-120 text-dark-green text-center">
+								Login to view your favorites
+							</h2>
+							<button
+								onClick={() => navigate("/login")}
+								className="btn btn-primary btn-disabled-gray w-100 mt-4">
+								Login
+							</button>
+						</>
+					)}
 				</div>
 			)}
+			<BottomNavbar />
 		</>
 	);
 }

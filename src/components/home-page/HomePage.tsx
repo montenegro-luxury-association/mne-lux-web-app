@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { Listing } from "../../types/apiTypes";
 import BottomNavbar from "../bottom-navbar/BottomNavbar";
 import "./homePage.scss";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 export default function HomePage() {
-	const navigate = useNavigate();
 	const [hotels, setHotels] = useState<Listing[]>();
+	const [favoritesToggleInProgress, setFavoritesToggleInProgress] = useState(false);
+	const { user, updateUserFavorites } = useAuthContext();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetchAndSetListings();
@@ -16,7 +19,6 @@ export default function HomePage() {
 	async function fetchAndSetListings() {
 		const response = await axios.get("/listings");
 		setHotels(response.data.listings);
-
 	}
 
 	function onClickHotel(id: string) {
@@ -25,7 +27,31 @@ export default function HomePage() {
 
 	async function onToggleFavorites(id: string, e: React.MouseEvent<HTMLDivElement>) {
 		e.stopPropagation();
-		await axios.post(`/listings/toggle-favorites/${id}`);
+
+		try {
+			if (!user) {
+				return alert("Please login to add to favorites.");
+			}
+
+			if (favoritesToggleInProgress) {
+				return;
+			}
+
+			// optimistically update UI / local state
+			setFavoritesToggleInProgress(true);
+			const newUserFavorites = user.favorites.includes(id)
+				? user.favorites.filter(favId => favId !== id)
+				: [...user.favorites, id];
+			updateUserFavorites(newUserFavorites);
+
+			await axios.post(`/listings/toggle-favorites/${id}`);
+
+			console.log("toggled");
+		} catch (err) {
+			console.error("Oops! Something went wrong.");
+		} finally {
+			setFavoritesToggleInProgress(false);
+		}
 	}
 
 	return (
@@ -52,29 +78,24 @@ export default function HomePage() {
 								}}
 								className="home-page-card-container container-fluid d-flex flex-column justify-content-between">
 								<div className="d-flex justify-content-end">
-									{/*TODO: Add functionality for favorites */}
-									{/* {hotel.favored ? (
-									<img
-										className="home-page-un-favor-button"
-										src="./images/icons/hart-icon.svg"
-										alt="Unfavor Hotel Button"
-									/>
-								) : (
-									<img
-										className="home-page-favor-button"
-										src="./images/icons/empty-hart.svg"
-										alt="Favor Hotel Button"
-									/>
-								)} */}
-									{/* TODO:Remove this when functionality is done */}
-									<img
+									<div
 										onClick={(e: React.MouseEvent<HTMLDivElement>) => {
 											onToggleFavorites(hotel._id, e);
-										}}
-										className="home-page-favor-button"
-										src="./images/icons/empty-hart.svg"
-										alt="Favor Hotel Button"
-									/>
+										}}>
+										{user?.favorites.includes(hotel._id) ? (
+											<img
+												className="home-page-un-favor-button"
+												src="./images/icons/hart-icon.svg"
+												alt="Full heart"
+											/>
+										) : (
+											<img
+												className="home-page-favor-button"
+												src="./images/icons/empty-hart.svg"
+												alt="Empty heart"
+											/>
+										)}
+									</div>
 								</div>
 								<div className="d-flex flex-column home-page-card-description">
 									<span className="home-page-hotel-title">{hotel.name}</span>

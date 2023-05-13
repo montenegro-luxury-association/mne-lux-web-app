@@ -14,28 +14,34 @@ import AdminManagementPage from "./components/admin-management-page/AdminManagem
 import IndividualPage from "./components/individual-page/IndividualPage";
 import AdminCreateListingPage from "./components/admin-create-listing-page/AdminCreateListingPage";
 import ContactUsPage from "./components/contact-us-page/ContactUsPage";
+import { AuthProvider } from "./context/AuthContextProvider";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				{/* TODO: Put the HomePage and Favorites page in a group so that the BottomNavBar doesn't refresh while clicking between these two pages, hope I explained it well for more info call urke */}
-				{/* TODO: Probably need to change the name for some routers */}
-				<Route path="/" element={<HomePage />} />
-				<Route path="/favorites" element={<Favorites />} />
-				<Route path="/login" element={<OnboardingPage />} />
-				<Route path="/login/country" element={<CountrySelectionPage />} />
-				<Route path="/login/phone" element={<PhoneLoginPage />} />
-				<Route path="/login/phone/code" element={<PhoneLoginEnterCodePage />} />
-				<Route path="/password-reset" element={<ForgotPasswordPage />} />
-				<Route path="/password-reset/link-sent" element={<ResetPasswordLinkSentPage />} />
-				<Route path="/register" element={<RegisterPage />} />
-				<Route path="/contact-us" element={<ContactUsPage />} />
-				<Route path="/admin" element={<AdminManagementPage />} />
-				<Route path="/admin/create-listing" element={<AdminCreateListingPage />} />
-				<Route path="/hotel-page" element={<IndividualPage />} />
-			</Routes>
-		</BrowserRouter>
+		<AuthProvider>
+			<BrowserRouter>
+				<Routes>
+					{/* TODO: Put the HomePage and Favorites page in a group so that the BottomNavBar doesn't refresh while clicking between these two pages, hope I explained it well for more info call urke */}
+					{/* TODO: Probably need to change the name for some routers */}
+					<Route path="/" element={<HomePage />} />
+					<Route path="/favorites" element={<Favorites />} />
+					<Route path="/login" element={<OnboardingPage />} />
+					<Route path="/login/country" element={<CountrySelectionPage />} />
+					<Route path="/login/phone" element={<PhoneLoginPage />} />
+					<Route path="/login/phone/code" element={<PhoneLoginEnterCodePage />} />
+					<Route path="/password-reset" element={<ForgotPasswordPage />} />
+					<Route
+						path="/password-reset/link-sent"
+						element={<ResetPasswordLinkSentPage />}
+					/>
+					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/contact-us" element={<ContactUsPage />} />
+					<Route path="/admin" element={<AdminManagementPage />} />
+					<Route path="/admin/create-listing" element={<AdminCreateListingPage />} />
+					<Route path="/hotel-page" element={<IndividualPage />} />
+				</Routes>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }
 

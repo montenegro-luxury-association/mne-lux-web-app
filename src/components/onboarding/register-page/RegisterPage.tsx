@@ -1,5 +1,3 @@
-// TODO: Remove
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 import "./RegisterPage.scss";
@@ -7,11 +5,13 @@ import { useState } from "react";
 import { USER_MODEL_PROPERTIES, User } from "../../../types/apiTypes";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../../context/AuthContextProvider";
 
 export default function RegisterPage() {
-	const navigate = useNavigate();
 	const [user, setUser] = useState<User>();
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const navigate = useNavigate();
+	const authContext = useAuthContext();
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>, property: keyof User) {
 		setUser({ ...user, [property]: e.target.value } as User);
@@ -31,11 +31,9 @@ export default function RegisterPage() {
 				return;
 			}
 
-			console.log("onClickSignup");
+			const response = await axios.post<{ userId: string }>("/auth/register-user", user);
 
-			const response = await axios.post("/auth/register-user", user);
-			// TODO: Save ID to auth context maybe?
-			console.log({ response });
+			authContext.loginUser({ id: response.data?.userId, favorites: [] });
 			navigate("/");
 		} catch (err) {
 			console.error(err);

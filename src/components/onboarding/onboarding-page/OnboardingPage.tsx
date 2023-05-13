@@ -1,9 +1,47 @@
 import { useNavigate } from "react-router-dom";
 import Input from "../../common/input/Input";
 import "./OnboardingPage.scss";
+import { useState } from "react";
+import { useAuthContext } from "../../../context/AuthContextProvider";
+import axios, { AxiosError } from "axios";
 
 export default function OnboardingPage() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const authContext = useAuthContext();
 	const navigate = useNavigate();
+
+	async function onClickLogin() {
+		try {
+			if (!email || !password) {
+				return;
+			}
+
+			const response = await axios.post<{ userId: string; favorites: string[] }>(
+				"/auth/login-user",
+				{
+					email,
+					password
+				}
+			);
+
+			authContext.loginUser({
+				id: response.data?.userId,
+				favorites: response.data?.favorites
+			});
+			navigate("/");
+		} catch (err) {
+			if (err instanceof AxiosError) {
+				if (err.response?.status === 404) {
+					return alert("User with this email does not exist.");
+				} else if (err.response?.status === 401) {
+					return alert("Incorrect password.");
+				}
+			}
+
+			alert("Oops! Something went wrong.");
+		}
+	}
 
 	return (
 		<div className="container-onboarding-page vh-100 p-4 m-0">
@@ -16,6 +54,8 @@ export default function OnboardingPage() {
 					placeholder="E-mail here"
 					label="E-mail"
 					className="input-dark-bg mb-2 mt-4 pt-2"
+					value={email}
+					onChange={e => setEmail(e.target.value)}
 				/>
 				<Input
 					icon="/images/icons/lock.svg"
@@ -23,6 +63,8 @@ export default function OnboardingPage() {
 					label="Password"
 					type="password"
 					className="input-dark-bg"
+					value={password}
+					onChange={e => setPassword(e.target.value)}
 				/>
 
 				<p
@@ -33,7 +75,12 @@ export default function OnboardingPage() {
 			</div>
 
 			<div>
-				<button className="btn btn-primary w-100 mt-3">Login</button>
+				<button
+					disabled={!email || !password}
+					className="btn btn-primary w-100 mt-3"
+					onClick={onClickLogin}>
+					Login
+				</button>
 
 				<p className="text-center text-smaller text-light-green mt-3 pb-1">
 					Don&apos;t have an account?
