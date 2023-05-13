@@ -171,7 +171,8 @@ export default function AdminCreateListingPage() {
 
 			if (e.target.value.length > prevVal.length) {
 				// New character was added
-				const newChar = e.target.value.replace(prevVal, "");
+
+				const newChar = findNewChar(prevVal, e.target.value);
 
 				if (isNaN(parseInt(newChar))) {
 					return prevVal;
@@ -196,6 +197,19 @@ export default function AdminCreateListingPage() {
 		} else {
 			setCheckOutTimeString(onChangeHandler);
 		}
+	}
+
+	function findNewChar(prevVal: string, newVal: string) {
+		console.log({ prevLen: prevVal.length, newLen: newVal.length });
+		if (newVal.length > prevVal.length) {
+			for (let i = 0; i < newVal.length; i++) {
+				if (newVal[i] !== prevVal[i]) {
+					return newVal[i];
+				}
+			}
+		}
+
+		return "";
 	}
 
 	const minimumCheckInAge = [undefined, 18, 21, 25];
