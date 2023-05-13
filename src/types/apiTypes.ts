@@ -72,3 +72,12 @@ export type User = {
 	password: string;
 	// favorites: Types.ObjectId[];
 };
+
+export const USER_MODEL_PROPERTIES: Array<keyof User> = [
+	"fullName",
+	"email",
+	"phoneNumber",
+	"country",
+	"dateOfBirth",
+	"password"
+];

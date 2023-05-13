@@ -1,29 +1,48 @@
+// TODO: Remove
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 import "./RegisterPage.scss";
 import { useState } from "react";
-import { User } from "../../../types/apiTypes";
+import { USER_MODEL_PROPERTIES, User } from "../../../types/apiTypes";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
+	const navigate = useNavigate();
 	const [user, setUser] = useState<User>();
-	// const [confirmPassword, setConfirmPassword] = useState();
+	const [confirmPassword, setConfirmPassword] = useState("");
 
 	function handleChange(e: React.ChangeEvent<HTMLInputElement>, property: keyof User) {
 		setUser({ ...user, [property]: e.target.value } as User);
 	}
 
-	async function onClick() {
-		await axios.post("/auth/register-user", user);
+	function allFieldsFilledOut() {
+		return USER_MODEL_PROPERTIES.every(field => !!user?.[field]);
 	}
 
-	// function checkConfirmedPassword() {
-	// 	if (user?.password === confirmPassword) {
-	// 		return true;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// }
+	function passwordsMatch() {
+		return user?.password === confirmPassword;
+	}
+
+	async function onClickSignUp() {
+		try {
+			if (!passwordsMatch() || !allFieldsFilledOut()) {
+				return;
+			}
+
+			console.log("onClickSignup");
+
+			const response = await axios.post("/auth/register-user", user);
+			// TODO: Save ID to auth context maybe?
+			console.log({ response });
+			navigate("/");
+		} catch (err) {
+			console.error(err);
+			alert("Oops! Something went wrong.");
+		}
+	}
+
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Finish Signing Up"} />
@@ -61,6 +80,7 @@ export default function RegisterPage() {
 						className="mb-3 mt-1"
 						icon="/images/icons/mail.svg"
 						onChange={e => handleChange(e, "email")}
+						type="email"
 					/>
 					<Input
 						label="Phone number"
@@ -82,15 +102,14 @@ export default function RegisterPage() {
 						placeholder="Password here"
 						label="Confirm password"
 						type="password"
-						// onChange={e => handleChange(e, "confirmPassword")}
+						onChange={e => setConfirmPassword(e.target.value)}
 					/>
 				</div>
 
 				<div>
-					{/* TODO: Add a condition that user can't click on Sign up if the inputted info is invalid in any way */}
-
 					<button
-						onClick={onClick}
+						onClick={onClickSignUp}
+						disabled={!allFieldsFilledOut() || !passwordsMatch()}
 						className="btn btn-primary btn-disabled-gray w-100 mt-3">
 						Sign Up
 					</button>
