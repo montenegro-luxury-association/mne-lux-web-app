@@ -22,6 +22,11 @@ export default function HomePage() {
 		navigate(`/hotel-page?id=${id}`);
 	}
 
+	async function onToggleFavorites(id: string, e: React.MouseEvent<HTMLDivElement>) {
+		e.stopPropagation();
+		await axios.post(`/listings/toggle-favorites/${id}`);
+	}
+
 	return (
 		<>
 			<div className="home-page-container">
@@ -62,6 +67,9 @@ export default function HomePage() {
 								)} */}
 									{/* TODO:Remove this when functionality is done */}
 									<img
+										onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+											onToggleFavorites(hotel._id, e);
+										}}
 										className="home-page-favor-button"
 										src="./images/icons/empty-hart.svg"
 										alt="Favor Hotel Button"

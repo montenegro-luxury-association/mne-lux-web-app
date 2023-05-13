@@ -12,30 +12,25 @@ export default function BottomNavbar() {
 	const [openMenu, setOpenMenu] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	// TODO: Nesto mi ne radi ova funkcija moram to bacit pogled posle
-	const handleClickOutside = (e: MouseEvent) => {
-		console.log({
-			ref: dropdownRef.current,
-			menu: openMenu,
-			contain: !dropdownRef.current?.contains(e.target as Node)
-		});
+	const onClickOutside = (e: MouseEvent) => {
 		if (dropdownRef.current && openMenu && !dropdownRef.current.contains(e.target as Node)) {
 			setOpenMenu(false);
 		}
 	};
 	useEffect(() => {
-		document.addEventListener("click", e => handleClickOutside(e));
+		document.addEventListener("click", e => onClickOutside(e));
 		return () => {
-			document.removeEventListener("click", e => handleClickOutside(e));
+			document.removeEventListener("click", e => onClickOutside(e));
 		};
 	}, [dropdownRef]);
 
 	const user = false;
 
-	const handleOptionClick = () => {
+	const onOptionClick = () => {
 		setOpenMenu(false);
 	};
 
-	const handleButtonClick = (buttonId: SetStateAction<"explore" | "favorites">) => {
+	const onButtonClick = (buttonId: SetStateAction<"explore" | "favorites">) => {
 		setActiveButtonId(buttonId);
 		if (buttonId === "explore") {
 			navigate("/");
@@ -47,7 +42,7 @@ export default function BottomNavbar() {
 	return (
 		<div className="bottom-navbar-container container-fluid d-flex justify-content-center">
 			<div
-				onClick={() => handleButtonClick("explore")}
+				onClick={() => onButtonClick("explore")}
 				className="d-flex flex-column align-items-center p-2 nav-buttons">
 				{/* TODO: da se extractuju svg. u novi fajl i importuju ovdje da bi bilo cistije */}
 				<svg
@@ -81,7 +76,7 @@ export default function BottomNavbar() {
 				</span>
 			</div>
 			<div
-				onClick={() => handleButtonClick("favorites")}
+				onClick={() => onButtonClick("favorites")}
 				className="d-flex flex-column align-items-center p-2 nav-buttons">
 				<svg
 					className="bottom-navbar-icons p-1"
@@ -152,13 +147,13 @@ export default function BottomNavbar() {
 					}`}>
 					<Link
 						to={"/contact-us"}
-						onClick={handleOptionClick}
+						onClick={onOptionClick}
 						className="nav-link-text d-flex align-items-center gap-2">
 						<img src="./images/mail.svg" alt="Mail Icon" /> Contact Us
 					</Link>
 					<Link
 						to={user ? "/profile" : "/login"}
-						onClick={handleOptionClick}
+						onClick={onOptionClick}
 						className="nav-link-text d-flex align-items-center gap-2">
 						<img src="./images/user.svg" alt="Profile Icon" />
 						{user ? "My Profile" : "Login"}

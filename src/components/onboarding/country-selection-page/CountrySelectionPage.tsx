@@ -7,7 +7,7 @@ import "./CountrySelectionPage.scss";
 export default function CountrySelectionPage() {
 	const navigate = useNavigate();
 
-	const handleCountryClick = () => {
+	const onCountryClick = () => {
 		// TODO: Save which country was chosen somewhere
 
 		navigate("/login/phone");
@@ -29,7 +29,7 @@ export default function CountrySelectionPage() {
 				{/* TODO: There may be a few extra countries in here */}
 				{COUNTRY_CODES.map(country => (
 					<div
-						onClick={handleCountryClick}
+						onClick={onCountryClick}
 						key={country.code}
 						className="country-selection-item">
 						<img

@@ -80,7 +80,7 @@ export default function AdminManagementPage() {
 		}
 	]);
 
-	const handleOpenMenu = (index: number) => {
+	const onOpenMenu = (index: number) => {
 		const newData = dummyData.map((item, i) => {
 			if (i === index) {
 				return { ...item, isOpen: !item.isOpen };
@@ -159,7 +159,7 @@ export default function AdminManagementPage() {
 									)}
 									<div className="position-relative">
 										<img
-											onClick={() => handleOpenMenu(index)}
+											onClick={() => onOpenMenu(index)}
 											src="/images/icons/more-vertical.svg"
 											alt="More Options Icon"
 										/>
