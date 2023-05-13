@@ -11,12 +11,12 @@ const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
 
+// Set up middleware
+app.use(express.json());
 app.use(
 	cors({
 		origin:
-			process.env.NODE_ENV === "production"
-				? "http://mnelux.com" // TODO: change to HTTPS
-				: "http://localhost:3000",
+			process.env.NODE_ENV === "production" ? "https://mnelux.com" : "http://localhost:3000",
 		credentials: true
 	})
 );
@@ -34,8 +34,6 @@ if (process.env.MONGODB_URI) {
 } else {
 	console.error("Cannot connect to database: env variable MONGODB_URI is not defined.");
 }
-// Set up middleware
-app.use(express.json());
 
 // Hook up routes
 app.use("/api", allApiRoutes);
