@@ -2,8 +2,8 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import path from "path";
 import allApiRoutes from "./api";
 
@@ -11,7 +11,16 @@ const PORT = process.env.PORT || 3001;
 
 const app: Application = express();
 
-app.use(cors());
+app.use(
+	cors({
+		origin:
+			process.env.NODE_ENV === "production"
+				? "http://mnelux.com" // TODO: change to HTTPS
+				: "http://localhost:3000",
+		credentials: true
+	})
+);
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Set up MongoDB connection
 if (process.env.MONGODB_URI) {
@@ -25,9 +34,8 @@ if (process.env.MONGODB_URI) {
 } else {
 	console.error("Cannot connect to database: env variable MONGODB_URI is not defined.");
 }
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Set up middleware
+app.use(express.json());
 
 // Hook up routes
 app.use("/api", allApiRoutes);

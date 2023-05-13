@@ -17,12 +17,12 @@ type ListingExperience = {
 	title: string;
 };
 
-type PaymentOption = typeof PAYMENT_OPTIONS[number];
+type PaymentOption = (typeof PAYMENT_OPTIONS)[number];
 
 /**
  * In the future we will add other types of listings, e.g. "apartment", "cabin", etc.
  */
-type ListingType = typeof LISTING_TYPES[number];
+type ListingType = (typeof LISTING_TYPES)[number];
 
 // NOTE: I ran into issues doing this where once I specified the 'category' property in a 'Listing' object, autocomplete
 // for remaining properties stopped working. Maybe will use "mongoose discriminators" or something

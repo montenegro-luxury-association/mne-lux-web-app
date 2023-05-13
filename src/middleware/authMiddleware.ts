@@ -26,7 +26,7 @@ export function wrapAuthUser(mainHandler: AuthenticatedUserRequestHandler) {
 		try {
 			const payload = getDecodedJWTTokenFromRequest(req);
 
-			if (payload.user_id) {
+			if (payload?.user_id) {
 				const authenticatedReq = {
 					...req,
 					userId: payload.user_id
@@ -51,7 +51,7 @@ export function wrapAuthAdmin(mainHandler: AuthenticatedAdminRequestHandler) {
 		try {
 			const payload = getDecodedJWTTokenFromRequest(req);
 
-			if (payload.admin_id) {
+			if (payload?.admin_id) {
 				const authenticatedReq = {
 					...req,
 					adminId: payload.admin_id
