@@ -1,11 +1,29 @@
-import { useNavigate } from "react-router";
 import Input from "../../common/input/Input";
 import TopNavBar from "../../common/top-nav-bar/TopNavBar";
 import "./RegisterPage.scss";
+import { useState } from "react";
+import { User } from "../../../types/apiTypes";
+import axios from "axios";
 
 export default function RegisterPage() {
-	const navigate = useNavigate();
+	const [user, setUser] = useState<User>();
+	// const [confirmPassword, setConfirmPassword] = useState();
 
+	function handleChange(e: React.ChangeEvent<HTMLInputElement>, property: keyof User) {
+		setUser({ ...user, [property]: e.target.value } as User);
+	}
+
+	async function onClick() {
+		await axios.post("/auth/register-user", user);
+	}
+
+	// function checkConfirmedPassword() {
+	// 	if (user?.password === confirmPassword) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 	return (
 		<div className="vh-100 pt-4 m-0">
 			<TopNavBar title={"Finish Signing Up"} />
@@ -18,6 +36,7 @@ export default function RegisterPage() {
 						placeholder="Name and surname"
 						className="mb-3 mt-1"
 						icon="/images/icons/user.svg"
+						onChange={e => handleChange(e, "fullName")}
 					/>
 					{/* TODO: Make date selector */}
 					<Input
@@ -25,6 +44,8 @@ export default function RegisterPage() {
 						placeholder="mm/dd/yyyy"
 						className="mb-3 mt-1"
 						icon="/images/icons/calendar.svg"
+						onChange={e => handleChange(e, "dateOfBirth")}
+						type="date"
 					/>
 					{/* TODO: Make dropdown */}
 					<Input
@@ -32,18 +53,21 @@ export default function RegisterPage() {
 						placeholder="Your country here"
 						className="mb-3 mt-1"
 						icon="/images/icons/globe.svg"
+						onChange={e => handleChange(e, "country")}
 					/>
 					<Input
 						label="E-mail"
 						placeholder="E-mail here"
 						className="mb-3 mt-1"
 						icon="/images/icons/mail.svg"
+						onChange={e => handleChange(e, "email")}
 					/>
 					<Input
 						label="Phone number"
 						placeholder="+382"
 						className="mb-3 mt-1"
 						icon="/images/icons/phone.svg"
+						onChange={e => handleChange(e, "phoneNumber")}
 					/>
 					<Input
 						icon="/images/icons/lock.svg"
@@ -51,12 +75,14 @@ export default function RegisterPage() {
 						className="mb-3 mt-1"
 						label="Password"
 						type="password"
+						onChange={e => handleChange(e, "password")}
 					/>
 					<Input
 						icon="/images/icons/lock.svg"
 						placeholder="Password here"
 						label="Confirm password"
 						type="password"
+						// onChange={e => handleChange(e, "confirmPassword")}
 					/>
 				</div>
 
@@ -64,7 +90,7 @@ export default function RegisterPage() {
 					{/* TODO: Add a condition that user can't click on Sign up if the inputted info is invalid in any way */}
 
 					<button
-						onClick={() => navigate("/")}
+						onClick={onClick}
 						className="btn btn-primary btn-disabled-gray w-100 mt-3">
 						Sign Up
 					</button>

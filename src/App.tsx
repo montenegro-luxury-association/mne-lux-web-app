@@ -29,7 +29,7 @@ function App() {
 				<Route path="/login/phone/code" element={<PhoneLoginEnterCodePage />} />
 				<Route path="/password-reset" element={<ForgotPasswordPage />} />
 				<Route path="/password-reset/link-sent" element={<ResetPasswordLinkSentPage />} />
-				<Route path="/sign-up" element={<RegisterPage />} />
+				<Route path="/register" element={<RegisterPage />} />
 				<Route path="/contact-us" element={<ContactUsPage />} />
 				<Route path="/admin" element={<AdminManagementPage />} />
 				<Route path="/admin/create-listing" element={<AdminCreateListingPage />} />

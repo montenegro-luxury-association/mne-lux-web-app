@@ -1,94 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminManagementPage.scss";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Listing } from "../../types/apiTypes";
 
 export default function AdminManagementPage() {
 	const navigate = useNavigate();
+	const [listings, setListings] = useState<Listing[]>();
+	const [tooltipOpenForHotelId, setTooltipOpenForHotelId] = useState<string>();
 
-	const [dummyData, setDummyData] = useState([
-		{
-			hotelPic: "/images/dummy/Frame-3.svg",
-			dateAdded: "21/02/2023",
-			status: true,
-			id: 1,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-2.svg",
-			dateAdded: "05/01/2023",
-			status: false,
-			id: 2,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "29/12/2022",
-			status: true,
-			id: 3,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "30/10/2022",
-			status: false,
-			id: 4,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-2.svg",
-			dateAdded: "05/01/2023",
-			status: false,
-			id: 5,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "29/12/2022",
-			status: true,
-			id: 6,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "30/10/2022",
-			status: false,
-			id: 7,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-2.svg",
-			dateAdded: "05/01/2023",
-			status: false,
-			id: 8,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "29/12/2022",
-			status: true,
-			id: 9,
-			isOpen: false
-		},
-		{
-			hotelPic: "/images/dummy/Frame-1.svg",
-			dateAdded: "30/10/2022",
-			status: false,
-			id: 10,
-			isOpen: false
-		}
-	]);
+	async function fetchData() {
+		const response = await axios.get("/listings/");
+		setListings(response.data.listings);
+	}
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-	const onOpenMenu = (index: number) => {
-		const newData = dummyData.map((item, i) => {
-			if (i === index) {
-				return { ...item, isOpen: !item.isOpen };
-			} else {
-				return { ...item, isOpen: false };
-			}
-		});
-		setDummyData(newData);
+
+	const onClickListingThreeDots = (hotelId: string) => {
+		setTooltipOpenForHotelId(hotelId);
+
 	};
 
 	const onClickAddNew = () => {
@@ -138,14 +72,17 @@ export default function AdminManagementPage() {
 						<div className="admin-explore-header-status">Status</div>
 					</div>
 					<div className="admin-explore-options-container d-flex flex-column px-2 py-1">
-						{dummyData.map((hotel, index) => (
+						{listings?.map(hotel => (
 							<div
-								key={hotel.id}
-								className="d-flex justify-content-between my-1 align-items-center">
-								<img src={hotel.hotelPic} alt="Hotel Picture" />
-								<div className="fw-500 text-small">{hotel.dateAdded}</div>
+								key={hotel._id}
+								className="d-flex justify-content-between my-1 align-items-center ">
+								<img alt="Hotel" className="admin-management-listing-image" />
+								<div className="fw-500 text-small">
+									{new Date(hotel?.createdAt).toLocaleDateString("en-GB")}
+								</div>
 								<div className="admin-explore-hotels-status d-flex justify-content-end">
-									{hotel.status ? (
+									{/* TODO: Add real status data */}
+									{Math.random() > 0 ? (
 										<img
 											className="me-3"
 											src="/images/icons/active-icon.svg"
@@ -159,14 +96,17 @@ export default function AdminManagementPage() {
 									)}
 									<div className="position-relative">
 										<img
-											onClick={() => onOpenMenu(index)}
+
+											onClick={() => onClickListingThreeDots(hotel._id)}
+
 											src="/images/icons/more-vertical.svg"
 											alt="More Options Icon"
 										/>
 
 										<div
 											className={`admin-explore-dropdown-menu ${
-												hotel.isOpen && "admin-explore-dropdown-menu-open"
+												hotel._id === tooltipOpenForHotelId &&
+												"admin-explore-dropdown-menu-open"
 											}`}>
 											<div className="d-flex flex-column gap-3 text-nowrap fw-700 text-smaller lh-120">
 												<div className="d-flex align-items-center gap-2">
