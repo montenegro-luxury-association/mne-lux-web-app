@@ -61,3 +61,20 @@ export function setAuthTokenCookie(res: Response, token: string) {
 		signed: true
 	});
 }
+
+// we want to be able to set both user_id and admin_id in the same token, hence the need to read the existing value and add to it
+function addFieldToAuthJWTToken(newField: string, newFieldValue: string, req: Request) {
+	const decodedAuthToken = getDecodedJWTTokenFromRequest(req) || {};
+	const updatedAuthToken = createJWTToken({ ...decodedAuthToken, [newField]: newFieldValue });
+	return updatedAuthToken;
+}
+
+export function setAdminIdInCookie(id: string, req: Request, res: Response) {
+	const updatedJWTToken = addFieldToAuthJWTToken("admin_id", id, req);
+	setAuthTokenCookie(res, updatedJWTToken);
+}
+
+export function setUserIdInCookie(id: string, req: Request, res: Response) {
+	const updatedJWTToken = addFieldToAuthJWTToken("user_id", id, req);
+	setAuthTokenCookie(res, updatedJWTToken);
+}

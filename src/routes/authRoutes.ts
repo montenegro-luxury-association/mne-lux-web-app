@@ -1,7 +1,14 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import { User } from "../models/user.model";
-import { createJWTToken, getDecodedJWTTokenFromRequest, setAuthTokenCookie } from "../util/jwt";
+import {
+	createJWTToken,
+	getDecodedJWTTokenFromRequest,
+	setAdminIdInCookie,
+	setAuthTokenCookie,
+	setUserIdInCookie
+} from "../util/jwt";
+import { Admin } from "../models/admin.model";
 
 const router = Router();
 
@@ -17,26 +24,19 @@ export type UserAuthStatusResponse =
 			status: "unauthorized";
 	  };
 
-//   TODO: Handle both admins and users
 router.get("/status", async (req, res) => {
 	try {
-		const userData = getDecodedJWTTokenFromRequest(req);
+		const userOrAdminData = getDecodedJWTTokenFromRequest(req);
 
-		if (userData && userData.user_id) {
-			const user = await User.findById(userData.user_id);
+		const [user, admin] = await Promise.all([
+			User.findById(userOrAdminData?.user_id),
+			Admin.findById(userOrAdminData?.admin_id)
+		]);
 
-			// TODO: clean up this status mess a bit
-			if (!user) {
-				return res.json({ status: "unauthorized" });
-			}
-
-			return res.json({
-				status: "authenticated",
-				user: { id: userData.user_id, favorites: user.favorites }
-			});
-		} else {
-			return res.json({ status: "unauthorized" });
-		}
+		return res.json({
+			user: user && { id: user._id, favorites: user.favorites },
+			admin: admin && { id: admin._id }
+		});
 	} catch (err) {
 		console.error(err);
 		res.sendStatus(500);
@@ -57,12 +57,33 @@ router.post("/login-user", async (req, res) => {
 			return res.sendStatus(401);
 		}
 
-		const authToken = createJWTToken({ user_id: user._id.toString() });
-		setAuthTokenCookie(res, authToken);
+		setUserIdInCookie(user._id.toString(), req, res);
 
 		res.json({ userId: user._id, favorites: user.favorites });
 	} catch (err) {
 		console.error(err);
+		res.sendStatus(500);
+	}
+});
+
+router.post("/login-admin", async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		const admin = await Admin.findOne({ email });
+		if (!admin) {
+			return res.sendStatus(401);
+		}
+
+		const passwordMatches = await bcrypt.compare(password, admin.password);
+		if (!passwordMatches) {
+			return res.sendStatus(401);
+		}
+
+		setAdminIdInCookie(admin._id.toString(), req, res);
+
+		res.json({ adminId: admin._id });
+	} catch (err) {
 		res.sendStatus(500);
 	}
 });

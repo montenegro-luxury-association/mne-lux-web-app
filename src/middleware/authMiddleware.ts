@@ -33,6 +33,8 @@ export function wrapAuthUser(mainHandler: AuthenticatedUserRequestHandler) {
 				} as AuthenticatedUserRequest;
 
 				mainHandler(authenticatedReq, res, next);
+			} else {
+				res.sendStatus(401);
 			}
 		} catch (err) {
 			res.sendStatus(401);
@@ -58,6 +60,8 @@ export function wrapAuthAdmin(mainHandler: AuthenticatedAdminRequestHandler) {
 				} as AuthenticatedAdminRequest;
 
 				mainHandler(authenticatedReq, res, next);
+			} else {
+				res.sendStatus(401);
 			}
 		} catch (err) {
 			res.sendStatus(401);
