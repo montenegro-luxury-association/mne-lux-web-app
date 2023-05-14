@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import Input from "../common/input/Input";
 import TopNavBar from "../common/top-nav-bar/TopNavBar";
 import "./AdminManagementPage.scss";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Listing } from "../../types/apiTypes";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 export default function AdminManagementPage() {
 	const [listings, setListings] = useState<Listing[]>();
 	const [tooltipOpenForHotelId, setTooltipOpenForHotelId] = useState<string>();
+	const { admin, isLoading } = useAuthContext();
 	const navigate = useNavigate();
 
 	async function fetchData() {
@@ -26,6 +28,10 @@ export default function AdminManagementPage() {
 	const onClickAddNew = () => {
 		navigate("/admin/create-listing");
 	};
+
+	if (!admin && !isLoading) {
+		return <Navigate to="/" />;
+	}
 
 	return (
 		<div className="pt-4 admin-explore-page-container vh-100">

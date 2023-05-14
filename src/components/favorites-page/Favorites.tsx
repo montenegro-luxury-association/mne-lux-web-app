@@ -64,7 +64,6 @@ export default function Favorites() {
 												{hotel.name}
 											</span>
 											<span>{hotel.cityName}</span>
-											<span>{hotel.cityDescription}</span>
 										</div>
 									</div>
 								))}
