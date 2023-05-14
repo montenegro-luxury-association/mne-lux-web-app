@@ -14,7 +14,7 @@ export default function CountrySelectionPage() {
 	};
 
 	return (
-		<div className="vh-100 pt-4 m-0 d-flex flex-column">
+		<div className="vh-100 m-0 d-flex flex-column">
 			<TopNavBar title={"Select Country"} />
 
 			<Input

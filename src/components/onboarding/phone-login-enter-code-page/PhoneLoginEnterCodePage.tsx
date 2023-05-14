@@ -7,7 +7,7 @@ export default function PhoneLoginEnterCodePage() {
 	const navigate = useNavigate();
 
 	return (
-		<div className="vh-100 pt-4 m-0">
+		<div className="vh-100 m-0">
 			<TopNavBar title={"Login code"} />
 
 			<div className="p-4">

@@ -222,7 +222,7 @@ export default function AdminCreateListingPage() {
 	console.log({ hotel: listing });
 
 	return (
-		<div className="pt-4 mb-3 admin-create-listing-page">
+		<div className="mb-3 admin-create-listing-page">
 			<TopNavBar title="Administrator" />
 
 			{/* Main inputs */}

@@ -44,7 +44,7 @@ export default function OnboardingPage() {
 	}
 
 	return (
-		<div className="container-onboarding-page vh-100 p-4 m-0">
+		<div className="container-onboarding-page vh-100 m-0">
 			<img src="/images/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
 			<h1 className="text-light">Montenegro Luxury Association</h1>
 

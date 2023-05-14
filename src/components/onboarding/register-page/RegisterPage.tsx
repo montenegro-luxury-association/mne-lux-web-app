@@ -42,7 +42,7 @@ export default function RegisterPage() {
 	}
 
 	return (
-		<div className="vh-100 pt-4 m-0">
+		<div className="vh-100 m-0">
 			<TopNavBar title={"Finish Signing Up"} />
 
 			<div className="p-4">

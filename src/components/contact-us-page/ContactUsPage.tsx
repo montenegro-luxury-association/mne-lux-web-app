@@ -7,7 +7,7 @@ export default function ContactUsPage() {
 	}
 
 	return (
-		<div className="container-onboarding-page vh-100 pt-4 m-0">
+		<div className="container-onboarding-page vh-100 m-0">
 			<TopNavBar title="Contact us" />
 			<div className="p-4 pt-3">
 				<img

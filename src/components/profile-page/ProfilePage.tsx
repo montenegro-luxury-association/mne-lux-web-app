@@ -16,7 +16,7 @@ export default function ProfilePage() {
 	}
 
 	return (
-		<div className="vh-100 pt-4 m-0">
+		<div className="vh-100 m-0">
 			<TopNavBar title={"My profile"} />
 
 			<div className="p-4">
