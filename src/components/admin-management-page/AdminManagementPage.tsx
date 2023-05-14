@@ -7,9 +7,9 @@ import axios from "axios";
 import { Listing } from "../../types/apiTypes";
 
 export default function AdminManagementPage() {
-	const navigate = useNavigate();
 	const [listings, setListings] = useState<Listing[]>();
 	const [tooltipOpenForHotelId, setTooltipOpenForHotelId] = useState<string>();
+	const navigate = useNavigate();
 
 	async function fetchData() {
 		const response = await axios.get("/listings/");
@@ -19,10 +19,8 @@ export default function AdminManagementPage() {
 		fetchData();
 	}, []);
 
-
 	const onClickListingThreeDots = (hotelId: string) => {
 		setTooltipOpenForHotelId(hotelId);
-
 	};
 
 	const onClickAddNew = () => {
@@ -96,9 +94,7 @@ export default function AdminManagementPage() {
 									)}
 									<div className="position-relative">
 										<img
-
 											onClick={() => onClickListingThreeDots(hotel._id)}
-
 											src="/images/icons/more-vertical.svg"
 											alt="More Options Icon"
 										/>

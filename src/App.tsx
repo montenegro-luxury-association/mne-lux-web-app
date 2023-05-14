@@ -15,6 +15,7 @@ import IndividualPage from "./components/individual-page/IndividualPage";
 import AdminCreateListingPage from "./components/admin-create-listing-page/AdminCreateListingPage";
 import ContactUsPage from "./components/contact-us-page/ContactUsPage";
 import { AuthProvider } from "./context/AuthContextProvider";
+import AdminLoginPage from "./components/admin-login/AdminLoginPage";
 
 function App() {
 	return (
@@ -38,6 +39,7 @@ function App() {
 					<Route path="/contact-us" element={<ContactUsPage />} />
 					<Route path="/admin" element={<AdminManagementPage />} />
 					<Route path="/admin/create-listing" element={<AdminCreateListingPage />} />
+					<Route path="/admin/login" element={<AdminLoginPage />} />
 					<Route path="/hotel-page" element={<IndividualPage />} />
 				</Routes>
 			</BrowserRouter>
