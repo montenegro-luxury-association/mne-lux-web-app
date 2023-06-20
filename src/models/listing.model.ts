@@ -53,6 +53,7 @@ export type Listing = {
 	checkOutUntilSeconds: number;
 	paymentOptions: PaymentOption[];
 	areChildrenWelcome: boolean;
+	petFriendly: boolean;
 	minCheckInAge?: number;
 	mediaURIs: string[];
 	owner: Types.ObjectId;
@@ -85,6 +86,7 @@ const listingSchema = new Schema<Listing>(
 		checkOutUntilSeconds: { type: Number, required: true },
 		paymentOptions: { type: [String], enum: PAYMENT_OPTIONS, default: [] },
 		areChildrenWelcome: { type: Boolean, default: true },
+		petFriendly: { type: Boolean, default: true },
 		minCheckInAge: { type: Number },
 		mediaURIs: { type: [String], default: [] },
 		owner: { type: Schema.Types.ObjectId, ref: "Admin", required: true }

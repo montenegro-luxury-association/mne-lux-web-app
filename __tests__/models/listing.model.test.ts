@@ -16,6 +16,7 @@ async function main() {
 		cityName: "Budva",
 		cityDescription: "This is a lovely city",
 		areChildrenWelcome: true,
+		petFriendly: true,
 		experiences: [],
 		fullDescription:
 			"This is a lovely hotel in the middle of the adriatic coast. It is located in the very heart of Budva, a rich tourist attraction with plenty to do for families and couples alike.",
