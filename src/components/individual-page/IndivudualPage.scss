@@ -89,7 +89,7 @@
 
 .check-availability-container {
 	position: fixed;
-	bottom: 0%;
+	bottom: 0;
 	width: 100%;
 	padding: 1rem;
 
@@ -103,10 +103,10 @@
 	overflow-x: scroll;
 	scroll-behavior: smooth;
 	-webkit-overflow-scrolling: touch;
+	gap: 1.25rem;
 }
 
 .image-wrapper {
-	padding-right: 1.25rem;
 	padding-top: 0.9375rem;
 	display: flex;
 	flex-direction: column;
@@ -115,4 +115,40 @@
 
 .images-container::-webkit-scrollbar {
 	display: none;
+}
+
+.availability-modal {
+	background-color: #fff;
+	height: fit-content;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	opacity: 0;
+	transform: translateY(100%);
+	box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.3);
+
+	transition-property: transform, opacity, display;
+	transition-duration: 0.4s;
+	z-index: 3;
+}
+
+.availability-modal-open {
+	opacity: 1;
+	transform: translateY(0%);
+}
+
+.gap-08 {
+	gap: 0.8rem;
+}
+
+.modal-background {
+	background-color: rgba(0, 0, 0, 0.281);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
 }

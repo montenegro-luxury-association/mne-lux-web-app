@@ -7,6 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router";
 import { useSearchParams } from "react-router-dom";
 import { Listing } from "../../types/apiTypes";
+import SelectDropdown from "../common/select-dropdown/SelectDropdown";
+import Input from "../common/input/Input";
 
 interface Image {
 	src: string;
@@ -16,6 +18,8 @@ const IndividualPage = () => {
 	const [showHotelPolicies, setShowHotelPolicies] = useState<boolean>(false);
 	const [currentSlide, setCurrentSlide] = useState<number>(1);
 	const [listing, setListing] = useState<Listing | undefined>(undefined);
+	const [openModal, setOpenModal] = useState(false);
+
 
 	const [queryParams] = useSearchParams();
 	const listingId = queryParams.get("id");
@@ -49,9 +53,25 @@ const IndividualPage = () => {
 		? listing?.fullDescription
 		: `${listing?.fullDescription?.slice(0, 190) + "..."}`;
 
+	const peopleOptions = Array(6).fill(null).map((_, i) => ({ value: i+1, label: i+1 }));
+
+
+	const travelOptions = [
+		{ value: "business", label: "Business" },
+		{ value: "pleasure", label: "Pleasure" }
+	];
 	useEffect(() => {
 		fetchAndSetListingDetails();
 	}, []);
+
+	function onClickAwayFromModal() {
+		setOpenModal(false);
+	}
+
+	function onClickAvailability(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		e.stopPropagation();
+		setOpenModal(true);
+	}
 
 	async function fetchAndSetListingDetails() {
 		const response = await axios.get(`/listings/id/${listingId}`);
@@ -253,10 +273,68 @@ const IndividualPage = () => {
 					{showHotelPolicies && <HotelPolicies />}
 				</div>
 			</div>
-			{/* TODO: Button je fiksiran ali je problem sto ide preko sekcije Hotel Policies i onda se ta sekcija ne vidi uopste i onda user nije u mogucnosti da klikne na nju */}
+			{openModal && <div onClick={onClickAwayFromModal} className="modal-background"></div>}
 			<div className="check-availability-container">
-				<button className="btn btn-primary btn-disabled-gray w-100">
+				<button
+					onClick={onClickAvailability}
+					className="btn btn-primary btn-disabled-gray w-100">
 					Check availability
+				</button>
+			</div>
+
+			<div
+				ref={modalRef}
+				className={`availability-modal p-4  d-flex flex-column gap-08  ${
+					openModal && "availability-modal-open"
+				}`}>
+				<div className="d-flex justify-content-between text-color-black fw-700 text-big lh-120 ">
+					Choose dates{" "}
+					<img onClick={onClickAwayFromModal} src="./images/icons/x.svg" alt="X" />
+				</div>
+				<div className="d-flex gap-08 mt-1">
+					<Input label="Check-in-date" placeholder="Mon 14 Sept 2023" />
+					<Input label="Check-out-date" placeholder="Thur 17 Sept 2023" />
+				</div>
+				<div className="d-flex w-100 gap-08 mt-1">
+					<div className="d-flex flex-column flex-grow-1">
+						<label>Adults</label>
+						<SelectDropdown
+							options={peopleOptions}
+							placeholder="0"
+						/>
+					</div>
+					<div className="d-flex flex-column flex-grow-1">
+						<label>Children</label>
+						<SelectDropdown
+							options={peopleOptions}
+							placeholder="0"
+						/>
+					</div>
+					<div className="d-flex flex-column flex-grow-1">
+						<label>Infants</label>
+						<SelectDropdown
+							options={peopleOptions}
+							placeholder="0"
+						/>
+					</div>
+				</div>
+				<div>
+					<label>Traveling for</label>
+					<SelectDropdown
+						options={travelOptions}
+						placeholder="Business"
+					/>
+				</div>
+				<div>
+					<label>Special request</label>
+					<textarea
+						placeholder="Message here..."
+						className="form-control input rounded-3  h-100"
+						rows={3}
+					/>
+				</div>
+				<button className="btn btn-primary btn-disabled-gray w-100 mt-3">
+					Send Inquiry
 				</button>
 			</div>
 		</div>
