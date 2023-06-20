@@ -10,6 +10,7 @@ import { useAuthContext } from "../../context/AuthContextProvider";
 export default function AdminManagementPage() {
 	const [listings, setListings] = useState<Listing[]>();
 	const [tooltipOpenForHotelId, setTooltipOpenForHotelId] = useState<string>();
+	const [tooltipOpen, setTooltipOpen] = useState(false);
 	const { admin, isLoading } = useAuthContext();
 	const navigate = useNavigate();
 
@@ -21,13 +22,26 @@ export default function AdminManagementPage() {
 		fetchData();
 	}, []);
 
-	const onClickListingThreeDots = (hotelId: string) => {
-		setTooltipOpenForHotelId(hotelId);
-	};
+	useEffect(() => {
+		window.addEventListener("click", onClickAwayFromDropdown);
+	}, []);
 
-	const onClickAddNew = () => {
+	function onClickAwayFromDropdown() {
+		setTooltipOpen(false);
+	}
+	function onOptionClick() {
+		setTooltipOpen(false);
+	}
+
+	function onClickDropdown(e: React.MouseEvent<HTMLDivElement, MouseEvent>, hotelId: string) {
+		setTooltipOpenForHotelId(hotelId);
+		e.stopPropagation();
+		setTooltipOpen(prev => !prev);
+	}
+
+	function onClickAddNew() {
 		navigate("/admin/create-listing");
-	};
+	}
 
 	if (!admin && !isLoading) {
 		return <Navigate to="/" />;
@@ -102,7 +116,7 @@ export default function AdminManagementPage() {
 									)}
 									<div className="position-relative">
 										<img
-											onClick={() => onClickListingThreeDots(hotel._id)}
+											onClick={e => onClickDropdown(e, hotel._id)}
 											src="/images/icons/more-vertical.svg"
 											alt="More Options Icon"
 										/>
@@ -110,24 +124,31 @@ export default function AdminManagementPage() {
 										<div
 											className={`admin-explore-dropdown-menu ${
 												hotel._id === tooltipOpenForHotelId &&
+												tooltipOpen &&
 												"admin-explore-dropdown-menu-open"
 											}`}>
 											<div className="d-flex flex-column gap-3 text-nowrap fw-700 text-smaller lh-120">
-												<div className="d-flex align-items-center gap-2">
+												<div
+													onClick={onOptionClick}
+													className="d-flex align-items-center gap-2">
 													<img
 														src="/images/icons/edit.svg"
 														alt="Edit Icon"
 													/>
 													Edit
 												</div>
-												<div className="d-flex align-items-center gap-2">
+												<div
+													onClick={onOptionClick}
+													className="d-flex align-items-center gap-2">
 													<img
 														src="/images/icons/view-globe-icon.svg"
 														alt="View Icon"
 													/>
 													View
 												</div>
-												<div className="d-flex align-items-center gap-2">
+												<div
+													onClick={onOptionClick}
+													className="d-flex align-items-center gap-2">
 													<img
 														src="/images/icons/bar-chart.svg"
 														alt="Analytics Icon"

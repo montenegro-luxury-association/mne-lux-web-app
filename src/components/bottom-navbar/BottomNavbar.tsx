@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import "./BottomNavbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -10,25 +10,24 @@ export default function BottomNavbar() {
 		location.pathname === "/" ? "explore" : "favorites"
 	);
 	const [openMenu, setOpenMenu] = useState(false);
-	const dropdownRef = useRef<HTMLDivElement>(null);
-	// TODO: Nesto mi ne radi ova funkcija moram to bacit pogled posle
-	const onClickOutside = (e: MouseEvent) => {
-		if (dropdownRef.current && openMenu && !dropdownRef.current.contains(e.target as Node)) {
-			setOpenMenu(false);
-		}
-	};
 	useEffect(() => {
-		document.addEventListener("click", e => onClickOutside(e));
-		return () => {
-			document.removeEventListener("click", e => onClickOutside(e));
-		};
-	}, [dropdownRef]);
+		window.addEventListener("click", onClickAwayFromDropdown);
+	}, []);
+
+	function onClickAwayFromDropdown() {
+		setOpenMenu(false);
+	}
 
 	const user = false;
 
 	const onOptionClick = () => {
 		setOpenMenu(false);
 	};
+
+	function onClickDropdown(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+		e.stopPropagation();
+		setOpenMenu(prev => !prev);
+	}
 
 	const onButtonClick = (buttonId: SetStateAction<"explore" | "favorites">) => {
 		setActiveButtonId(buttonId);
@@ -100,10 +99,10 @@ export default function BottomNavbar() {
 					Favorites
 				</span>
 			</div>
-			<div ref={dropdownRef}>
+			<div>
 				<div className="nav-bar-background"></div>
 				<div
-					onClick={() => setOpenMenu(!openMenu)}
+					onClick={onClickDropdown}
 					className={`nav-buttons d-flex flex-column align-items-center p-2 nav-dropdown-select ${
 						openMenu && "nav-dropdown-select-clicked"
 					}`}>
