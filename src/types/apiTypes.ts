@@ -57,6 +57,7 @@ export type Listing = {
 	checkOutUntilSeconds: number;
 	paymentOptions: PaymentOption[];
 	areChildrenWelcome: boolean;
+	petFriendly: boolean;
 	minCheckInAge?: number;
 	mediaURIs: string[];
 	owner: string;

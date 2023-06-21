@@ -124,7 +124,7 @@ export default function AdminCreateListingPage() {
 			[property]: e.target.type === "number" ? parseFloat(e.target.value) : e.target.value
 		} as Listing);
 	}
-	function onGenericPropertyChangeRaw(value: number | string, property: keyof Listing) {
+	function onGenericPropertyChangeRaw(value: number | string | boolean, property: keyof Listing) {
 		setListing({
 			...listing,
 			[property]: value
@@ -373,6 +373,20 @@ export default function AdminCreateListingPage() {
 					title={"Adults only"}
 					name="children-welcome"
 					onChange={() => onChildrenWelcomeChange(false)}
+				/>
+
+				<div className="separator-line mt-4 mb-4" />
+				<label className="mb-3">Pet friendly:</label>
+
+				<RadioButtonInput
+					title={"Pets are welcome"}
+					name="pet-friendly"
+					onChange={() => onGenericPropertyChangeRaw(true, "petFriendly")}
+				/>
+				<RadioButtonInput
+					title={"No pets"}
+					name="pet-friendly"
+					onChange={() => onGenericPropertyChangeRaw(false, "petFriendly")}
 				/>
 
 				<div className="separator-line mt-4 mb-4" />
