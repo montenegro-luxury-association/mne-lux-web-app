@@ -20,7 +20,6 @@ const IndividualPage = () => {
 	const [listing, setListing] = useState<Listing | undefined>(undefined);
 	const [openModal, setOpenModal] = useState(false);
 
-
 	const [queryParams] = useSearchParams();
 	const listingId = queryParams.get("id");
 
@@ -53,9 +52,20 @@ const IndividualPage = () => {
 		? listing?.fullDescription
 		: `${listing?.fullDescription?.slice(0, 190) + "..."}`;
 
-	const peopleOptions = Array(6).fill(null).map((_, i) => ({ value: i+1, label: i+1 }));
+	// TODO: Ova tvoja Djoka funkcija mi je davala error pa sam je morao vratit u stari izgled
+	// const peopleOptions = Array(6)
+	// 	.fill(null)
+	// 	.map((_, i) => ({ value: i + 1, label: i + 1 }));
 
-
+	const peopleOptions = [
+		{ value: 0, label: "0" },
+		{ value: 1, label: "1" },
+		{ value: 2, label: "2" },
+		{ value: 3, label: "3" },
+		{ value: 4, label: "4" },
+		{ value: 5, label: "5" },
+		{ value: 6, label: "6" }
+	];
 	const travelOptions = [
 		{ value: "business", label: "Business" },
 		{ value: "pleasure", label: "Pleasure" }
@@ -283,7 +293,6 @@ const IndividualPage = () => {
 			</div>
 
 			<div
-				ref={modalRef}
 				className={`availability-modal p-4  d-flex flex-column gap-08  ${
 					openModal && "availability-modal-open"
 				}`}>
@@ -298,32 +307,20 @@ const IndividualPage = () => {
 				<div className="d-flex w-100 gap-08 mt-1">
 					<div className="d-flex flex-column flex-grow-1">
 						<label>Adults</label>
-						<SelectDropdown
-							options={peopleOptions}
-							placeholder="0"
-						/>
+						<SelectDropdown options={peopleOptions} placeholder="0" />
 					</div>
 					<div className="d-flex flex-column flex-grow-1">
 						<label>Children</label>
-						<SelectDropdown
-							options={peopleOptions}
-							placeholder="0"
-						/>
+						<SelectDropdown options={peopleOptions} placeholder="0" />
 					</div>
 					<div className="d-flex flex-column flex-grow-1">
 						<label>Infants</label>
-						<SelectDropdown
-							options={peopleOptions}
-							placeholder="0"
-						/>
+						<SelectDropdown options={peopleOptions} placeholder="0" />
 					</div>
 				</div>
 				<div>
 					<label>Traveling for</label>
-					<SelectDropdown
-						options={travelOptions}
-						placeholder="Business"
-					/>
+					<SelectDropdown options={travelOptions} placeholder="Business" />
 				</div>
 				<div>
 					<label>Special request</label>
