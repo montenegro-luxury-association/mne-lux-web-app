@@ -43,6 +43,10 @@ export default function OnboardingPage() {
 		}
 	}
 
+	function onClickLoginWithGoogle() {
+		window.location.href = axios.defaults.baseURL + "/auth/google";
+	}
+
 	return (
 		<div className="container-onboarding-page vh-100 m-0">
 			<img src="/images/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
@@ -85,7 +89,7 @@ export default function OnboardingPage() {
 				<p className="text-center text-smaller text-light-green mt-3 pb-1">
 					Don&apos;t have an account?
 					<span
-						onClick={() => navigate("/sign-up")}
+						onClick={() => navigate("/register")}
 						className="text-primary fw-500 text-regular ps-2 text-decoration-none">
 						Sign Up
 					</span>
@@ -104,7 +108,9 @@ export default function OnboardingPage() {
 					<img src="/images/icons/login-linkedin-icon.svg" alt="LinkedIn logo" />
 					Continue With LinkedIn
 				</button>
-				<button className="btn btn-light mt-3 onboarding-alternate-login-button">
+				<button
+					className="btn btn-light mt-3 onboarding-alternate-login-button"
+					onClick={onClickLoginWithGoogle}>
 					<img src="/images/icons/login-google-icon.svg" alt="Google logo" />
 					Continue With Google
 				</button>
