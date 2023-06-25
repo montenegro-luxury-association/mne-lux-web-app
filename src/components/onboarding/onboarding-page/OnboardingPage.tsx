@@ -47,6 +47,10 @@ export default function OnboardingPage() {
 		window.location.href = axios.defaults.baseURL + "/auth/google";
 	}
 
+	function onClickLoginWithLinkedIn() {
+		window.location.href = axios.defaults.baseURL + "/auth/linkedin";
+	}
+
 	return (
 		<div className="container-onboarding-page vh-100 m-0">
 			<img src="/images/logo.svg" alt="Company Logo" className="onboarding-page-logo" />
@@ -104,7 +108,9 @@ export default function OnboardingPage() {
 			</div>
 
 			<div className="pt-2">
-				<button className="btn btn-light onboarding-alternate-login-button">
+				<button
+					className="btn btn-light onboarding-alternate-login-button"
+					onClick={onClickLoginWithLinkedIn}>
 					<img src="/images/icons/login-linkedin-icon.svg" alt="LinkedIn logo" />
 					Continue With LinkedIn
 				</button>
