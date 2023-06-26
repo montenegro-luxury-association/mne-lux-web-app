@@ -1,17 +1,18 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as LinkedinStrategy } from "passport-linkedin-oauth2";
 import { User } from "../models/user.model";
+import { createUserFromThirdPartyProvider } from "./thirdPartyAuth";
+
+const baseCallbackUrl =
+	process.env.NODE_ENV === "production" ? "https://mnelux.com" : "http://localhost:3001";
 
 passport.use(
 	new GoogleStrategy(
 		{
 			clientID: process.env.GOOGLE_CLIENT_ID || "",
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-			callbackURL: `${
-				process.env.NODE_ENV === "production"
-					? "https://mnelux.com"
-					: "http://localhost:3001"
-			}/api/auth/google/callback`
+			callbackURL: `${baseCallbackUrl}/api/auth/google/callback`
 		},
 		async (accessToken, refreshToken, profile, done) => {
 			const email = profile.emails && profile.emails[0].value;
@@ -21,7 +22,7 @@ passport.use(
 				// user already exists
 
 				if (!existingUser.googleId) {
-					// we found the user by ID. Associate their google account by updating their googleId
+					// we found the user by email. Associate their google account by updating their googleId
 					existingUser.googleId = profile.id;
 					await existingUser.save();
 				}
@@ -29,21 +30,33 @@ passport.use(
 				done(null, existingUser);
 			} else {
 				// if not, create new user
-				if (!email) {
-					done(new Error("No email found in Google profile"));
-				}
+				const newUser = await createUserFromThirdPartyProvider("Google", profile);
+				done(null, newUser);
+			}
+		}
+	)
+);
 
-				if (!profile.name?.givenName && !profile.name?.familyName) {
-					done(new Error("No name found in Google profile"));
-				}
-
-				const newUser = await new User({
-					googleId: profile.id,
-					email: profile.emails?.[0].value,
-					fullName: (profile.name?.givenName + " " + profile.name?.familyName).trim(),
-					favorites: []
-				}).save();
-
+passport.use(
+	new LinkedinStrategy(
+		{
+			// https://www.linkedin.com/developers/apps/
+			// these need to be updated every 2 months
+			clientID: process.env.LINKEDIN_CLIENT_ID || "",
+			clientSecret: process.env.LINKEDIN_CLIENT_SECRET || "",
+			callbackURL: `${baseCallbackUrl}/api/auth/linkedin/callback`,
+			scope: ["r_emailaddress", "r_liteprofile"]
+		},
+		async (accessToken, refreshToken, profile, done) => {
+			const existingUser = await User.findOne({
+				linkedInId: profile.id
+			});
+			if (existingUser) {
+				// user already exists
+				done(null, existingUser);
+			} else {
+				// if not, create new user
+				const newUser = await createUserFromThirdPartyProvider("LinkedIn", profile);
 				done(null, newUser);
 			}
 		}

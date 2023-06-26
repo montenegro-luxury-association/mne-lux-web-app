@@ -9,6 +9,7 @@ export type User = {
 	dateOfBirth: Date;
 	password?: string;
 	googleId?: string;
+	linkedInId?: string;
 	favorites: Types.ObjectId[];
 };
 
@@ -21,6 +22,7 @@ const userSchema = new Schema<User>(
 		dateOfBirth: { type: Date }, // required for non-google signups
 		password: { type: String }, // required for non-google signups
 		googleId: { type: String, index: true, unique: true, sparse: true },
+		linkedInId: { type: String, index: true, unique: true, sparse: true },
 		favorites: [{ type: Schema.Types.ObjectId, ref: "Listing" }]
 	},
 	{ versionKey: false, timestamps: { createdAt: true, updatedAt: false } }

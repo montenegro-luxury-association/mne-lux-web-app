@@ -10,6 +10,7 @@ import {
 	setUserIdInCookie
 } from "../util/jwt";
 import { Admin } from "../models/admin.model";
+import { handleProviderLoginSuccess } from "../util/thirdPartyAuth";
 
 const router = Router();
 
@@ -43,6 +44,8 @@ router.get("/status", async (req, res) => {
 		res.sendStatus(500);
 	}
 });
+
+// -------------- EMAIL-PASSWORD AUTHENTICATION -------------- //
 
 router.post("/login-user", async (req, res) => {
 	try {
@@ -96,7 +99,13 @@ router.post("/login-admin", async (req, res) => {
 router.post("/register-user", async (req, res) => {
 	try {
 		// Make sure we got all the data we needed from the request
-		const nonRequiredUserProperties = ["favorites", "googleId", "_id", "createdAt"];
+		const nonRequiredUserProperties = [
+			"favorites",
+			"googleId",
+			"linkedInId",
+			"_id",
+			"createdAt"
+		];
 		const requiredUserProperties = Object.keys(User.schema.paths).filter(
 			property => !nonRequiredUserProperties.includes(property)
 		);
@@ -121,6 +130,8 @@ router.post("/register-user", async (req, res) => {
 	}
 });
 
+// -------------- GOOGLE AUTHENTICATION -------------- //
+
 router.get(
 	"/google",
 	passport.authenticate("google", {
@@ -131,29 +142,33 @@ router.get(
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		failureRedirect: "/api/auth/google-failure",
+		failureRedirect: "/api/auth/provider-failure",
 		session: false
 	}),
-	(req, res) => {
-		// req.user gets set by the done() function in the passport google strategy which is configured in passport-setup.js.
-		const user = req.user as User;
-
-		if (!user) {
-			res.sendStatus(401);
-		}
-
-		// create JWT token for google user and save as cookie
-		const token = createJWTToken({ user_id: user.id.toString() });
-
-		setAuthTokenCookie(res, token);
-
-		// redirect to home page
-		const homePage = process.env.NODE_ENV === "production" ? "/" : "http://localhost:3000";
-		res.redirect(homePage);
-	}
+	handleProviderLoginSuccess
 );
 
-router.get("/google-failure", (req, res) => {
+// -------------- LINKEDIN AUTHENTICATION -------------- //
+
+router.get(
+	"/linkedin",
+	passport.authenticate("linkedin", {
+		scope: ["r_emailaddress", "r_liteprofile"]
+	})
+);
+
+router.get(
+	"/linkedin/callback",
+	passport.authenticate("linkedin", {
+		failureRedirect: "/api/auth/provider-failure",
+		session: false
+	}),
+	handleProviderLoginSuccess
+);
+
+// -------------- GENERIC -------------- //
+
+router.get("/provider-failure", (req, res) => {
 	res.send("Whoops! Something went wrong. Please try again.");
 });
 
