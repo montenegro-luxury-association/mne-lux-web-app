@@ -6,6 +6,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 import allApiRoutes from "./api";
+import passport from "passport";
+import "./util/passport-setup";
 
 const PORT = process.env.PORT || 3001;
 
@@ -21,6 +23,7 @@ app.use(
 	})
 );
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(passport.initialize());
 
 // Set up MongoDB connection
 if (process.env.MONGODB_URI) {

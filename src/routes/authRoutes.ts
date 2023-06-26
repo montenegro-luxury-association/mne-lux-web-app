@@ -1,3 +1,4 @@
+import passport from "passport";
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import { User } from "../models/user.model";
@@ -52,6 +53,10 @@ router.post("/login-user", async (req, res) => {
 			return res.sendStatus(404);
 		}
 
+		if (!user.password) {
+			return res.sendStatus(401);
+		}
+
 		const passwordMatches = await bcrypt.compare(password, user.password);
 		if (!passwordMatches) {
 			return res.sendStatus(401);
@@ -91,10 +96,11 @@ router.post("/login-admin", async (req, res) => {
 router.post("/register-user", async (req, res) => {
 	try {
 		// Make sure we got all the data we needed from the request
-		const allRequiredUserProperties = Object.keys(User.schema.paths).filter(
-			property => User.schema.paths[property]?.isRequired
+		const nonRequiredUserProperties = ["favorites", "googleId", "_id", "createdAt"];
+		const requiredUserProperties = Object.keys(User.schema.paths).filter(
+			property => !nonRequiredUserProperties.includes(property)
 		);
-		if (allRequiredUserProperties.some(property => req.body?.[property] === undefined)) {
+		if (requiredUserProperties.some(property => req.body?.[property] === undefined)) {
 			return res.sendStatus(400);
 		}
 
@@ -113,6 +119,42 @@ router.post("/register-user", async (req, res) => {
 		console.error(err);
 		res.status(500).send("There was an unexpected error.");
 	}
+});
+
+router.get(
+	"/google",
+	passport.authenticate("google", {
+		scope: ["profile", "email"]
+	})
+);
+
+router.get(
+	"/google/callback",
+	passport.authenticate("google", {
+		failureRedirect: "/api/auth/google-failure",
+		session: false
+	}),
+	(req, res) => {
+		// req.user gets set by the done() function in the passport google strategy which is configured in passport-setup.js.
+		const user = req.user as User;
+
+		if (!user) {
+			res.sendStatus(401);
+		}
+
+		// create JWT token for google user and save as cookie
+		const token = createJWTToken({ user_id: user.id.toString() });
+
+		setAuthTokenCookie(res, token);
+
+		// redirect to home page
+		const homePage = process.env.NODE_ENV === "production" ? "/" : "http://localhost:3000";
+		res.redirect(homePage);
+	}
+);
+
+router.get("/google-failure", (req, res) => {
+	res.send("Whoops! Something went wrong. Please try again.");
 });
 
 export default router;
