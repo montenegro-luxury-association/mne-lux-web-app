@@ -10,6 +10,7 @@ import {
 	setUserIdInCookie
 } from "../util/jwt";
 import { Admin } from "../models/admin.model";
+import { wrapAuthUser } from "../middleware/authMiddleware";
 import { handleProviderLoginSuccess } from "../util/thirdPartyAuth";
 
 const router = Router();
@@ -129,6 +130,43 @@ router.post("/register-user", async (req, res) => {
 		res.status(500).send("There was an unexpected error.");
 	}
 });
+
+router.get(
+	"/my-profile",
+	wrapAuthUser(async (req, res) => {
+		try {
+			const user = await User.findById(req.userId).select("-password");
+
+			res.json({ user });
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("There was an unexpected error.");
+		}
+	})
+);
+
+router.post(
+	"/update-user",
+	wrapAuthUser(async (req, res) => {
+		try {
+			const updatedUserInfo = req.body;
+			if ("password" in updatedUserInfo) {
+				const { password: rawPassword, ...userData } = updatedUserInfo;
+
+				const updatedUser = {
+					...userData,
+					password: await bcrypt.hash(rawPassword, 10)
+				};
+				await User.findByIdAndUpdate(updatedUser._id, updatedUser);
+			} else {
+				await User.findByIdAndUpdate(updatedUserInfo._id, updatedUserInfo);
+			}
+		} catch (err) {
+			console.error(err);
+			res.status(500).send("There was an unexpected error.");
+		}
+	})
+);
 
 // -------------- GOOGLE AUTHENTICATION -------------- //
 
