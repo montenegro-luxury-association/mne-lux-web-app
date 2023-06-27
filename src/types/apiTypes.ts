@@ -70,7 +70,7 @@ export type User = {
 	phoneNumber: string;
 	country: string;
 	dateOfBirth: Date;
-	password: string;
+	password?: string;
 	// favorites: Types.ObjectId[];
 };
 

@@ -3,6 +3,7 @@
 import { SetStateAction, useEffect, useState } from "react";
 import "./BottomNavbar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 export default function BottomNavbar() {
 	const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function BottomNavbar() {
 		location.pathname === "/" ? "explore" : "favorites"
 	);
 	const [openMenu, setOpenMenu] = useState(false);
+	const authContext = useAuthContext();
 	useEffect(() => {
 		window.addEventListener("click", onClickAwayFromDropdown);
 	}, []);
@@ -18,8 +20,6 @@ export default function BottomNavbar() {
 	function onClickAwayFromDropdown() {
 		setOpenMenu(false);
 	}
-
-	const user = false;
 
 	const onOptionClick = () => {
 		setOpenMenu(false);
@@ -152,11 +152,11 @@ export default function BottomNavbar() {
 						<img src="./images/mail.svg" alt="Mail Icon" /> Contact Us
 					</Link>
 					<Link
-						to={user ? "/profile" : "/login"}
+						to={authContext.user ? "/profile" : "/login"}
 						onClick={onOptionClick}
 						className="nav-link-text d-flex align-items-center gap-2">
 						<img src="./images/user.svg" alt="Profile Icon" />
-						{user ? "My Profile" : "Login"}
+						{authContext.user ? "My Profile" : "Login"}
 					</Link>
 				</div>
 			</div>

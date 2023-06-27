@@ -124,7 +124,10 @@ export default function AdminCreateListingPage() {
 			[property]: e.target.type === "number" ? parseFloat(e.target.value) : e.target.value
 		} as Listing);
 	}
-	function onGenericPropertyChangeRaw(value: number | string | boolean, property: keyof Listing) {
+	function onGenericPropertyChangeRaw(
+		value: number | string | boolean | undefined,
+		property: keyof Listing
+	) {
 		setListing({
 			...listing,
 			[property]: value
@@ -144,20 +147,6 @@ export default function AdminCreateListingPage() {
 		}
 
 		setListing({ ...listing, paymentOptions: updatedPaymentOptions } as Listing);
-	}
-
-	function onMinCheckInAgeChange(minAge: number | undefined) {
-		setListing({
-			...listing,
-			minCheckInAge: minAge
-		} as Listing);
-	}
-
-	function onChildrenWelcomeChange(areChildrenWelcome: boolean) {
-		setListing({
-			...listing,
-			areChildrenWelcome
-		} as Listing);
 	}
 
 	// Handle formatting and allow easy editing of hh:mm format time string
@@ -363,16 +352,14 @@ export default function AdminCreateListingPage() {
 				<label className="mb-3">Children:</label>
 
 				<RadioButtonInput
-					key={"true"}
 					title={"Children are welcome"}
 					name="children-welcome"
-					onChange={() => onChildrenWelcomeChange(true)}
+					onChange={() => onGenericPropertyChangeRaw(true, "areChildrenWelcome")}
 				/>
 				<RadioButtonInput
-					key={"false"}
 					title={"Adults only"}
 					name="children-welcome"
-					onChange={() => onChildrenWelcomeChange(false)}
+					onChange={() => onGenericPropertyChangeRaw(false, "areChildrenWelcome")}
 				/>
 
 				<div className="separator-line mt-4 mb-4" />
@@ -398,7 +385,7 @@ export default function AdminCreateListingPage() {
 						key={age}
 						title={age ? `${age} and above` : "No restriction"}
 						name="age-restriction"
-						onChange={() => onMinCheckInAgeChange(age)}
+						onChange={() => onGenericPropertyChangeRaw(age, "minCheckInAge")}
 					/>
 				))}
 
