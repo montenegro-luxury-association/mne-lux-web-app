@@ -10,6 +10,7 @@ import {
 	setUserIdInCookie
 } from "../util/jwt";
 import { Admin } from "../models/admin.model";
+import { wrapAuthUser } from "../middleware/authMiddleware";
 import { handleProviderLoginSuccess } from "../util/thirdPartyAuth";
 import { wrapAuthUser } from "../middleware/authMiddleware";
 
