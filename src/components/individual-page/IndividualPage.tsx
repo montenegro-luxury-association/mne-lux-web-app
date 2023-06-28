@@ -162,7 +162,8 @@ const IndividualPage = () => {
 	};
 
 	return (
-		<div className="col overflow-x-hidden">
+		<div
+			className={`col overflow-x-hidden position-relative ${openModal && "page-open-modal"}`}>
 			<div className="position-relative">
 				<img
 					onClick={() => navigate(-1)}
