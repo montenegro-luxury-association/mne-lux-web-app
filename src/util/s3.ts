@@ -35,6 +35,10 @@ export async function generateS3UploadURL(filename: string) {
 export function mapListingToIncludeFullMediaURLs(listing: Listing) {
 	return {
 		...listing,
-		mediaURIs: listing.mediaURIs.map(mediaURIKey => `${IMAGES_S3_BUCKET_URL}/${mediaURIKey}`)
+		mediaURIs: listing.mediaURIs.map(mediaURIKey => `${IMAGES_S3_BUCKET_URL}/${mediaURIKey}`),
+		experiences: listing.experiences.map(experience => ({
+			...experience,
+			imageUri: `${IMAGES_S3_BUCKET_URL}/${experience.imageUri}`
+		}))
 	};
 }

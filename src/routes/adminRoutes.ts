@@ -46,6 +46,46 @@ router.post(
 		}
 	})
 );
+router.post(
+	"/add-s3-experience-media",
+	wrapAuthAdmin(async (req, res) => {
+		try {
+			const { listingId, title } = req.query;
+
+			const listingExists = await Listing.exists({
+				_id: listingId,
+				$expr: { $lt: [{ $size: "$experiences" }, MAX_LISTING_MEDIA_LENGTH] }
+			});
+
+			if (!listingExists) {
+				// listing either doesn't exist or has too many images
+				return res.sendStatus(404);
+			}
+
+			const imageKey = `${uuid()}.jpg`;
+			const uploadURL = await generateS3UploadURL(imageKey);
+
+			await Listing.updateOne(
+				{
+					_id: listingId,
+					owner: req.adminId,
+					$expr: { $lt: [{ $size: "$experiences" }, MAX_LISTING_MEDIA_LENGTH] }
+				},
+				{
+					$push: {
+						experiences: { imageUri: imageKey, title }
+
+					}
+				}
+			);
+
+			res.json({ uploadURL });
+		} catch (err) {
+			console.error(err);
+			res.sendStatus(500);
+		}
+	})
+);
 
 router.post(
 	"/add-listing",
