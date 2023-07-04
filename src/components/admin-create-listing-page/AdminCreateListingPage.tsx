@@ -2,7 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable indent */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import CheckBoxInput from "../common/check-box-input/CheckBoxInput";
 import Input from "../common/input/Input";
 import RadioButtonInput from "../common/radio-button-input/RadioButtonInput";
@@ -11,15 +11,24 @@ import "./AdminCreateListingPage.scss";
 import { GeoJSONPoint, Listing, PAYMENT_OPTIONS, PaymentOption } from "../../types/apiTypes";
 import SelectDropdown from "../common/select-dropdown/SelectDropdown";
 
+type ExperienceWithFile = {
+	image: File;
+	title: string;
+};
+
 export default function AdminCreateListingPage() {
 	const [listing, setListing] = useState<Listing>();
 	const [selectedFiles, setSelectedFiles] = useState<File[]>();
+	
+
+	const [experiences, setExperiences] = useState<ExperienceWithFile[]>([]);
 	const [imagesUploadedCount, setImagesUploadedCount] = useState(0);
 	const [showImagesUploadedCount, setShowImagesUploadedCount] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	// NOTE: Technically we could do without these "duplicate" string-based states, but it makes things a bit easier
 	const [checkInTimeString, setCheckInTimeString] = useState("00:00");
 	const [checkOutTimeString, setCheckOutTimeString] = useState("00:00");
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
 		onGenericPropertyChangeRaw(
@@ -49,8 +58,14 @@ export default function AdminCreateListingPage() {
 	}
 
 	function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
-		if (e.target.files) {
-			setSelectedFiles(Array.from(e.target.files));
+		if (selectedFiles === undefined) {
+			if (e.target.files) {
+				setSelectedFiles(Array.from(e.target.files));
+			}
+		} else {
+			if (e.target.files) {
+				setSelectedFiles(prev => prev?.concat(Array.from(e.target.files as FileList)));
+			}
 		}
 	}
 
@@ -61,6 +76,25 @@ export default function AdminCreateListingPage() {
 				const { uploadURL } = response.data;
 
 				await axios.put(uploadURL, image, {
+					withCredentials: false,
+					headers: { "Content-Type": "multipart/form-data" }
+				});
+
+				setImagesUploadedCount(prev => prev + 1);
+			}
+		}
+	}
+
+	async function uploadExperienceImages(listingId: string) {
+		if (experiences) {
+			for (const experience of experiences) {
+				const response = await axios.post(
+					`/admin/add-s3-experience-media?listingId=${listingId}&title=${experience.title}`
+				);
+				const { uploadURL } = response.data;
+
+				await axios.put(uploadURL, experience.image, {
+					withCredentials: false,
 					headers: { "Content-Type": "multipart/form-data" }
 				});
 
@@ -86,7 +120,10 @@ export default function AdminCreateListingPage() {
 
 			showImageUploadCountAfterDelay(Date.now() - uploadStartTime);
 
-			await uploadListingImages(response.data.listingId);
+			await Promise.all([
+				uploadListingImages(response.data.listingId),
+				uploadExperienceImages(response.data.listingId)
+			]);
 
 			setListing(undefined);
 			alert("Success!");
@@ -201,6 +238,36 @@ export default function AdminCreateListingPage() {
 		return "";
 	}
 
+	const handleExperienceFileSelect = () => {
+		fileInputRef.current?.click();
+	};
+
+	function handleExperienceFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+		const files = e.target.files;
+		if (files) {
+			const newExperiences: ExperienceWithFile[] = Array.from(files).map(file => ({
+				image: file,
+				title: ""
+			}));
+			setExperiences(prevExperiences => [...prevExperiences, ...newExperiences]);
+		}
+	}
+
+	function handleTitleChange(index: number, e: ChangeEvent<HTMLInputElement>) {
+		const newExperiences = [...experiences];
+		newExperiences[index].title = e.target.value;
+		setExperiences(newExperiences);
+		console.log(experiences);
+	}
+
+	const removeFile = (file: File | ExperienceWithFile, usage: "exp" | "media") => {
+		if (usage === "exp") {
+			setExperiences(prevSelectedFiles => prevSelectedFiles?.filter(f => f !== file));
+		} else {
+			setSelectedFiles(prevSelectedFiles => prevSelectedFiles?.filter(f => f !== file));
+		}
+	};
+
 	const minimumCheckInAge = [undefined, 18, 21, 25];
 	const hotelTypeOptions = [
 		{ value: 4, label: "4 Stars" },
@@ -255,28 +322,47 @@ export default function AdminCreateListingPage() {
 					onChange={e => onGenericPropertyChange(e, "shortDescription")}
 				/>
 				<label className="mb-2">Luxury experience offer</label>
-			</div>
 
-			{/* Experiences list container */}
-			{/* TODO: Add experience editing */}
-			<div className="experiences-container">
-				<div>
-					<div className="experience-image-placeholder rounded-3">
-						<img src="/images/icons/image-icon.svg" />
+				{/* Experiences list container */}
+				{/* TODO: Add experience editing */}
+				<div className="experiences-container">
+					{experiences?.[0] &&
+						experiences.map((experience, index) => (
+							<div key={index}>
+								<div className="experience-image-placeholder rounded-3 position-relative">
+									<img
+										src={URL.createObjectURL(experience.image)}
+										className="experience-image"
+									/>
+									<img
+										className="x-icon-xp"
+										src="/images/icons/red-X.png"
+										onClick={() => removeFile(experience, "exp")}
+									/>
+								</div>
+								<Input
+									type="text"
+									value={experience.title}
+									onChange={e => handleTitleChange(index, e)}
+									placeholder="Experience Name Here"
+								/>
+							</div>
+						))}
+					<div>
+						<div
+							className="experience-image-placeholder rounded-3"
+							onClick={handleExperienceFileSelect}>
+							<img src="/images/icons/image-icon.svg" />
+							<input
+								onChange={handleExperienceFileUpload}
+								ref={fileInputRef}
+								className="d-none"
+								type="file"
+								multiple
+							/>
+						</div>
+						<Input placeholder="Experience Name Here" disabled={true} />
 					</div>
-					<Input placeholder="Write experience here (WIP)" disabled={true} />
-				</div>
-				<div>
-					<div className="experience-image-placeholder rounded-3">
-						<img src="/images/icons/image-icon.svg" />
-					</div>
-					<Input placeholder="Write experience here (WIP)" disabled={true} />
-				</div>
-				<div>
-					<div className="experience-image-placeholder rounded-3">
-						<img src="/images/icons/image-icon.svg" />
-					</div>
-					<Input placeholder="Write experience here (WIP)" disabled={true} />
 				</div>
 			</div>
 
@@ -389,13 +475,20 @@ export default function AdminCreateListingPage() {
 					/>
 				))}
 
-				<label className="mt-3 mb-3">Media</label>
+				<label className="mt-3">Media</label>
 
 				{/* TODO: verify if this is fine  */}
-				{selectedFiles && (
-					<div className="d-flex w-100 listing-upload-preview-images">
-						{selectedFiles.map(file => (
-							<img key={file.name} src={URL.createObjectURL(file)} />
+				{selectedFiles?.[0] && (
+					<div className="d-flex w-100 listing-upload-preview-images pt-3">
+						{selectedFiles.map((file, index) => (
+							<div key={file.name + index} className="position-relative pr-5">
+								<img src={URL.createObjectURL(file)} />
+								<img
+									className="x-icon"
+									src="/images/icons/red-X.png"
+									onClick={() => removeFile(file, "media")}
+								/>
+							</div>
 						))}
 					</div>
 				)}
@@ -426,7 +519,7 @@ export default function AdminCreateListingPage() {
 						<h4 className="text-white">
 							{showImagesUploadedCount
 								? `Uploading images... (${imagesUploadedCount + 1}/${
-										selectedFiles?.length
+										[selectedFiles, ...experiences].length
 								  })`
 								: "Saving listing..."}
 						</h4>

@@ -97,24 +97,13 @@
 	background: #ffffff;
 }
 
-.images-container {
+.experience-image-container {
+	height: 16rem;
 	display: flex;
-	flex-direction: row;
-	overflow-x: scroll;
-	scroll-behavior: smooth;
-	-webkit-overflow-scrolling: touch;
-	gap: 1.25rem;
-}
-
-.image-wrapper {
-	padding-top: 0.9375rem;
-	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-}
-
-.images-container::-webkit-scrollbar {
-	display: none;
+	margin-top: 1rem;
+	overflow: hidden; /* Hide any overflowing content */
 }
 
 .availability-modal {

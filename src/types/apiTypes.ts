@@ -8,7 +8,7 @@ export const PAYMENT_OPTIONS = [
 	"crypto"
 ] as const;
 
-type ListingExperience = {
+export type ListingExperience = {
 	imageUri: string;
 	title: string;
 };

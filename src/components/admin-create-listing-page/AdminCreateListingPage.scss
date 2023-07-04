@@ -4,6 +4,7 @@
 	display: flex;
 	overflow-x: auto;
 	flex-wrap: nowrap;
+	gap: 1rem;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -12,11 +13,6 @@
 	& > div {
 		width: 13rem;
 		min-width: 13rem;
-		margin-left: 1rem;
-
-		&:last-child {
-			margin-right: 1rem;
-		}
 	}
 }
 
@@ -27,6 +23,13 @@
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 0.7rem;
+	overflow: hidden; /* Hide any overflowing content */
+}
+
+.experience-image {
+	width: 100%; /* Set the image width to fill the container */
+	height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+	object-fit: cover;
 }
 
 .check-in-time-container {
@@ -99,4 +102,21 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.x-icon {
+	position: absolute;
+	height: 30px !important;
+	width: 30px !important;
+	top: -10px;
+	right: -10px;
+	z-index: 1;
+}
+.x-icon-xp {
+	position: absolute;
+	height: 30px !important;
+	width: 30px !important;
+	top: 10px;
+	right: 10px;
+	z-index: 1;
 }

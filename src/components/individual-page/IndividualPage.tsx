@@ -10,9 +10,6 @@ import { Listing } from "../../types/apiTypes";
 import SelectDropdown from "../common/select-dropdown/SelectDropdown";
 import Input from "../common/input/Input";
 
-interface Image {
-	src: string;
-}
 const IndividualPage = () => {
 	const [showFullText, setShowFullText] = useState<boolean>(false);
 	const [showHotelPolicies, setShowHotelPolicies] = useState<boolean>(false);
@@ -31,13 +28,7 @@ const IndividualPage = () => {
 	}
 
 	const navigate = useNavigate();
-	const luxuryExperienceImages: Image[] = [
-		{ src: "/massage.png" },
-		{ src: "/massage.png" },
-		{ src: "/massage.png" },
-		{ src: "/massage.png" },
-		{ src: "/massage.png" }
-	];
+
 	const settings = {
 		dots: false,
 		infinite: false,
@@ -228,11 +219,15 @@ const IndividualPage = () => {
 				</div>
 				<div className="col pt-4">
 					<p className="text-color-black fw-700 text-big lh-120">Luxury Experience</p>
-					<div className="images-container">
-						{luxuryExperienceImages.map(image => (
-							<div key={image.src + Math.random()} className="image-wrapper ">
-								<img src={image.src} />
-								<p>Massages</p>
+					<div className="experiences-container">
+						{listing.experiences.map((image, index) => (
+							<div
+								key={image.imageUri + index}
+								className="d-flex flex-column align-items-center">
+								<div className="experience-image-placeholder m-0 rounded-3 position-relative">
+									<img src={image.imageUri} className="experience-image" />
+								</div>
+								<p>{image.title}</p>
 							</div>
 						))}
 					</div>
@@ -328,7 +323,7 @@ const IndividualPage = () => {
 					<textarea
 						placeholder="Message here..."
 						className="form-control input rounded-3  h-100"
-						rows={3}
+						rows={4}
 					/>
 				</div>
 				<button className="btn btn-primary btn-disabled-gray w-100 mt-3">
