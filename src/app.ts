@@ -42,7 +42,7 @@ if (process.env.MONGODB_URI) {
 app.use("/api", allApiRoutes);
 
 // Server react files for frontend if on production
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
 	const frontendBuildDir = path.resolve(
 		__dirname, // /backend/build/
 		"..",
